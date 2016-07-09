@@ -1,0 +1,50 @@
+#content {
+    margin: 2em 4em;
+    position: relative;
+    top: 10%;
+}
+
+.frame {
+    background-color: $white;
+    position: fixed;
+}
+
+.frame-top,
+.frame-right,
+.frame-left {
+    top: 0;
+}
+
+.frame-top,
+.frame-bottom,
+.frame-left {
+    left: 0;
+}
+
+.frame-top,
+.frame-bottom {
+    height: 2rem;
+    width: 100%;
+}
+
+.frame-right,
+.frame-left {
+    height: 100%;
+    width: 2rem;
+}
+
+.frame-right {
+    right: 0;
+}
+
+.frame-bottom {
+    bottom: 0;
+}
+
+@media (min-width:68em) {
+    #content {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60em;
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "amoscato-client",
+  "license": "MIT",
+  "version": "0.1.0",
+  "description": "Front end client for amoscato.com",
+  "dependencies": {
+    "add-stream": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.4",
+    "jquery": "^3.1.0",
+    "jshint": "^2.9.2",
+    "normalize.css": "^4.2.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/namoscato/amoscato-client.git"
+  }
+}
