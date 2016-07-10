@@ -1,6 +1,6 @@
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     line-height: 1.6em;
     margin: 0.5em 0;
@@ -22,13 +22,26 @@
 
 #photos {
     overflow: hidden;
+    padding: 0;
     position: absolute;
-    top: 55%;
+    top: 65%;
     width: 100%;
 
     > img {
         display: inline-block;
         position: absolute;
+    }
+}
+
+@media (min-width:30em) {
+    .title {
+        font-size: 2em;
+    }
+}
+
+@media (min-height:43em) {
+    #photos {
+        top: 55%;
     }
 }
 

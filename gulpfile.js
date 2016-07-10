@@ -2,10 +2,11 @@
 
 var addStream = require('add-stream');
 var gulp = require('gulp');
-var gulpConcat = require('gulp-concat');
-var gulpJshint = require('gulp-jshint');
 var gulpCleanCss = require('gulp-clean-css');
+var gulpConcat = require('gulp-concat');
 var gulpSass = require('gulp-sass');
+var gulpTslint = require('gulp-tslint');
+var gulpTypescript = require('gulp-typescript');
 var gulpUglify = require('gulp-uglify');
 
 var css = {
@@ -18,11 +19,13 @@ var css = {
 
 var js = {
     src: {
-        app: 'src/js/**/*.js',
+        app: 'src/js/**/*.ts',
         lib: 'node_modules/jquery/dist/jquery.min.js'
     },
     dest: 'static/js'
 };
+
+var tsProject = gulpTypescript.createProject('tsconfig.json');
 
 gulp.task('default', ['all', 'watch']);
 
@@ -38,8 +41,8 @@ gulp.task('js:app', function() {
     var stream = gulp.src(js.src.lib);
 
     stream = stream.pipe(
-        addStream.obj(gulp
-            .src(js.src.app)
+        addStream.obj(tsProject.src()
+            .pipe(gulpTypescript(tsProject))
             .pipe(gulpUglify({
                 compress: false
             }))
@@ -53,8 +56,10 @@ gulp.task('js:app', function() {
 
 gulp.task('js:lint', function() {
     return gulp.src(js.src.app)
-        .pipe(gulpJshint())
-        .pipe(gulpJshint.reporter('default'));
+        .pipe(gulpTslint({
+            formatter: "verbose"
+        }))
+        .pipe(gulpTslint.report());
 });
 
 gulp.task('css', function() {

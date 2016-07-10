@@ -1,0 +1,10 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "forin": false,
+        "max-line-length": false,
+        "no-namespace": false,
+        "no-reference": false,
+        "quotemark": [true, "single"]
+    }
+}
