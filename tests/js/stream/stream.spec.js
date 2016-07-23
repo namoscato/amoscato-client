@@ -35,7 +35,11 @@ describe('Stream', () => {
                     url: 'url2'
                 },
             ],
-            {}
+            {
+                columnHeightMaxFunction: jasmine.createSpy('columnHeightMaxFunction'),
+                columnHeightMinFunction: jasmine.createSpy('columnHeightMinFuncti'),
+                offsetFunction: jasmine.createSpy('offsetFunction'),
+            }
         );
     });
     

@@ -5,19 +5,27 @@ namespace Amo.Client {
     interface ICurrent {
         color?: number;
         columnHeight?: number;
+        columnHeightMax?: number;
         columnWidth?: number;
         imageHeight?: number;
         left: number;
+        offset?: number;
         photo?: IStreamPhoto;
         rowIndex: number;
         top?: number;
+        xCoordinate?: number;
+    }
+
+    interface ICoordinateFunction {
+        (x: number): number;
     }
 
     interface IStreamConfiguration {
         colorMax: number;
         colorMin: number;
-        columnHeightMax: number;
-        columnHeightMin: number;
+        columnHeightMaxFunction: ICoordinateFunction;
+        columnHeightMinFunction: ICoordinateFunction;
+        offsetFunction: ICoordinateFunction;
         photoWidthMax: number;
         photoWidthMin: number;
     }
@@ -50,15 +58,29 @@ namespace Amo.Client {
 
                 potentialHeight = current.top + StreamUtility.getImageHeight(current.photo, current.columnWidth);
 
-                if (typeof current.columnHeight !== 'undefined' && potentialHeight > current.columnHeight) {
+                if (typeof current.columnHeight !== 'undefined' && potentialHeight > current.columnHeight - current.offset) {
                     current.left += current.columnWidth;
                     current.rowIndex = 0;
                 }
 
                 if (++current.rowIndex === 1) {
-                    current.columnHeight = StreamUtility.getRandomNumber(this.config.columnHeightMin, this.config.columnHeightMax);
+                    current.xCoordinate = current.left - this.windowWidth / 2;
+
+                    current.columnHeightMax = this.config.columnHeightMaxFunction(current.xCoordinate);
+
+                    current.columnHeight = StreamUtility.getRandomNumber(
+                        this.config.columnHeightMinFunction(current.xCoordinate),
+                        current.columnHeightMax
+                    );
+
                     current.columnWidth = StreamUtility.getRandomNumber(this.config.photoWidthMin, this.config.photoWidthMax);
-                    current.top = StreamUtility.getRandomNumber(0, this.config.columnHeightMax - current.columnHeight);
+
+                    current.offset = this.config.offsetFunction(current.xCoordinate);
+
+                    current.top = StreamUtility.getRandomNumber(
+                        -current.offset,
+                        current.columnHeightMax - current.columnHeight - current.offset
+                    );
                 }
 
                 current.color = StreamUtility.getRandomNumber(this.config.colorMin, this.config.colorMax);

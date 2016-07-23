@@ -11,34 +11,34 @@
     position: fixed;
 }
 
-.frame-top,
-.frame-right,
-.frame-left {
+#frame-top,
+#frame-right,
+#frame-left {
     top: 0;
 }
 
-.frame-top,
-.frame-bottom,
-.frame-left {
+#frame-top,
+#frame-bottom,
+#frame-left {
     left: 0;
 }
 
-.frame-top,
-.frame-bottom {
+#frame-top,
+#frame-bottom {
     height: 2rem;
     width: 100%;
 }
 
-.frame-right,
-.frame-left {
+#frame-right,
+#frame-left {
     height: 100%;
     width: 2rem;
 }
 
-.frame-right {
+#frame-right {
     right: 0;
 }
 
-.frame-bottom {
+#frame-bottom {
     bottom: 0;
 }

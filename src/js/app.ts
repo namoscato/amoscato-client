@@ -1,12 +1,26 @@
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
-    const $photos: JQuery = $('#photos');
+    const columnHeightMax = 550;
+    const photos: JQuery = $('#photos');
     const streamConfig = {
         colorMax: 300,
         colorMin: 200,
-        columnHeightMax: 500,
-        columnHeightMin: 300,
+        columnHeightMaxFunction: (x: number) => {
+            const absoluteValue = Math.abs(x);
+
+            if (absoluteValue < 300) {
+                return absoluteValue / 2 + 400;
+            }
+
+            return columnHeightMax;
+        },
+        columnHeightMinFunction: (x: number) => {
+            return Math.abs(x) / 3 + 300;
+        },
+        offsetFunction: (x: number) => {
+            return Math.abs(x) / 4 - 90;
+        },
         photoWidthMax: 150,
         photoWidthMin: 50,
     };
@@ -23,8 +37,8 @@ namespace Amo.Client {
         streamConfig
     );
 
-    $photos.html(stream.generateHtml());
-    $photos.css({
-        height: streamConfig.columnHeightMax + 'px',
+    photos.html(stream.generateHtml());
+    photos.css({
+        height: columnHeightMax + 'px',
     });
 }
