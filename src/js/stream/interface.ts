@@ -6,9 +6,9 @@ namespace Amo.Client {
     export interface IStreamConfiguration {
         colorMax: number;
         colorMin: number;
-        columnHeightMaxFunction: ICoordinateFunction;
-        columnHeightMinFunction: ICoordinateFunction;
-        offsetFunction: ICoordinateFunction;
+        getColumnHeightMax: ICoordinateFunction;
+        getColumnHeightMin: ICoordinateFunction;
+        getOffset: ICoordinateFunction;
         photoWidthMax: number;
         photoWidthMin: number;
         windowWidth?: number;

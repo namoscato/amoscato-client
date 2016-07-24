@@ -3,13 +3,7 @@
 
 namespace Amo.Client {
 
-    export interface IStreamColumn {
-        addPhoto(photo: IStreamFlickrPhoto): boolean;
-        getHtml(): string;
-        getWidth(): number;
-    }
-
-    export class StreamColumn implements IStreamColumn {
+    export class StreamColumn {
         private height: number;
         private width: number;
         private html = '';
@@ -21,16 +15,12 @@ namespace Amo.Client {
             private config: IStreamConfiguration,
             photo?: IStreamFlickrPhoto) {
             const xCoordinate = left - config.windowWidth / 2;
-            const heightMax = config.columnHeightMaxFunction(xCoordinate);
-
-            this.offset = config.offsetFunction(xCoordinate);
+            const heightMax = config.getColumnHeightMax(xCoordinate);
 
             this.width = StreamUtility.getRandomNumber(config.photoWidthMin, config.photoWidthMax);
-            this.height = StreamUtility.getRandomNumber(
-                config.columnHeightMinFunction(xCoordinate),
-                heightMax
-            );
+            this.height = StreamUtility.getRandomNumber(config.getColumnHeightMin(xCoordinate), heightMax);
 
+            this.offset = config.getOffset(xCoordinate);
             this.top = StreamUtility.getRandomNumber(-this.offset, heightMax - this.height - this.offset);
 
             if (photo) {
@@ -44,12 +34,6 @@ namespace Amo.Client {
          * @returns {boolean} Whether or not the photo could be added
          */
         public addPhoto(photo: IStreamFlickrPhoto): boolean {
-            const potentialHeight = this.top + StreamUtility.getImageHeight(photo, this.width);
-
-            if (potentialHeight > this.height - this.offset) {
-                return false;
-            }
-
             const image = new StreamImage(
                 photo,
                 {
@@ -59,6 +43,10 @@ namespace Amo.Client {
                 },
                 this.config
             );
+
+            if (this.top + image.getHeight() > this.height - this.offset) {
+                return false;
+            }
 
             this.html += image.getHtml();
             this.top += image.getHeight();

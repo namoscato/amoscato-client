@@ -9,28 +9,15 @@ namespace Amo.Client {
     }
 
     export class StreamImage {
+        private color: number;
         private height: number;
-        private html: string;
 
         constructor(
-            photo: IStreamFlickrPhoto,
-            imageConfig: IImageConfiguration,
-            config: IStreamConfiguration) {
-            const color = StreamUtility.getRandomNumber(config.colorMin, config.colorMax);
-
+            private photo: IStreamFlickrPhoto,
+            private imageConfig: IImageConfiguration,
+            private config: IStreamConfiguration) {
+            this.color = StreamUtility.getRandomNumber(config.colorMin, config.colorMax);
             this.height = StreamUtility.getImageHeight(photo, imageConfig.width);
-
-            this.html = StreamUtility.createImageTag({
-                alt: photo.title,
-                src: photo.url,
-                style: StreamUtility.createStyleAttribute({
-                    'background-color': 'rgb(' + color + ',' + color + ',' + color + ')',
-                    height: this.height + 'px',
-                    left: imageConfig.left + 'px',
-                    top: imageConfig.top + 'px',
-                    width: imageConfig.width + 'px',
-                }),
-            });
         }
 
         /**
@@ -46,7 +33,17 @@ namespace Amo.Client {
          * @returns {string}
          */
         public getHtml(): string {
-            return this.html;
+            return StreamUtility.createImageTag({
+                alt: this.photo.title,
+                src: this.photo.url,
+                style: StreamUtility.createStyleAttribute({
+                    'background-color': 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')',
+                    height: this.height + 'px',
+                    left: this.imageConfig.left + 'px',
+                    top: this.imageConfig.top + 'px',
+                    width: this.imageConfig.width + 'px',
+                }),
+            });
         }
     }
 }

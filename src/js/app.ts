@@ -6,7 +6,7 @@ namespace Amo.Client {
     const streamConfig = {
         colorMax: 300,
         colorMin: 200,
-        columnHeightMaxFunction: (x: number) => {
+        getColumnHeightMax: (x: number) => {
             const absoluteValue = Math.abs(x);
 
             if (absoluteValue < 300) {
@@ -15,10 +15,10 @@ namespace Amo.Client {
 
             return columnHeightMax;
         },
-        columnHeightMinFunction: (x: number) => {
+        getColumnHeightMin: (x: number) => {
             return Math.abs(x) / 3 + 300;
         },
-        offsetFunction: (x: number) => {
+        getOffset: (x: number) => {
             return Math.abs(x) / 4 - 90;
         },
         photoWidthMax: 150,

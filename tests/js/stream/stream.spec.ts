@@ -1,7 +1,8 @@
 describe('Stream', () => {
     let target: Amo.Client.IStream;
 
-    let columnInstanceSpy: Amo.Client.IStreamColumn;
+    let column: Amo.Client.StreamColumn;
+    let columnSpy: Amo.Client.StreamColumn;
     let jQuerySpy: JQuery;
     let windowJQuery: any;
 
@@ -16,8 +17,9 @@ describe('Stream', () => {
 
         spyOn(Amo.Client, 'StreamColumn');
 
-        columnInstanceSpy = Amo.Client.StreamColumn.prototype = jasmine.createSpyObj(
-            'streamColumn',
+        column = Amo.Client.StreamColumn.prototype;
+        columnSpy = Amo.Client.StreamColumn.prototype = jasmine.createSpyObj(
+            'StreamColumn',
             [
                 'addPhoto',
                 'getHtml',
@@ -25,7 +27,7 @@ describe('Stream', () => {
             ]
         );
 
-        columnInstanceSpy.addPhoto.and.returnValues(
+        columnSpy.addPhoto.and.returnValues(
             true,
             true,
             false,
@@ -35,12 +37,12 @@ describe('Stream', () => {
             true
         );
 
-        columnInstanceSpy.getHtml.and.returnValues(
+        columnSpy.getHtml.and.returnValues(
             'c1',
             'c2'
         );
 
-        columnInstanceSpy.getWidth.and.returnValues(
+        columnSpy.getWidth.and.returnValues(
             50,
             51
         );
@@ -63,11 +65,11 @@ describe('Stream', () => {
     });
 
     afterEach(() => {
+        Amo.Client.StreamColumn.prototype = column;
         window.$ = windowJQuery;
     });
 
     describe('When creating a stream', () => {
-
         it('should get window object', () => {
             expect(window.$).toHaveBeenCalledWith(window);
         });
@@ -94,7 +96,7 @@ describe('Stream', () => {
         });
 
         it('should add photos to columns', () => {
-            expect(columnInstanceSpy.addPhoto.calls.allArgs()).toEqual(
+            expect(columnSpy.addPhoto.calls.allArgs()).toEqual(
                 [
                     [
                         'p1',
