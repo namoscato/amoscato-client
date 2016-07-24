@@ -17,7 +17,7 @@ namespace Amo.Client {
             private imageConfig: IImageConfiguration,
             private config: IStreamConfiguration) {
             this.color = StreamUtility.getRandomNumber(config.colorMin, config.colorMax);
-            this.height = StreamUtility.getImageHeight(photo, imageConfig.width);
+            this.height = Number(photo.height) / Number(photo.width) * imageConfig.width;
         }
 
         /**
@@ -33,10 +33,10 @@ namespace Amo.Client {
          * @returns {string}
          */
         public getHtml(): string {
-            return StreamUtility.createImageTag({
+            return this.createImageTag({
                 alt: this.photo.title,
                 src: this.photo.url,
-                style: StreamUtility.createStyleAttribute({
+                style: this.createStyleAttribute({
                     'background-color': 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')',
                     height: this.height + 'px',
                     left: this.imageConfig.left + 'px',
@@ -44,6 +44,36 @@ namespace Amo.Client {
                     width: this.imageConfig.width + 'px',
                 }),
             });
+        }
+
+        /**
+         * @description Creates an image tag from a set of attributes
+         * @param {Object} attributes
+         * @returns {string}
+         */
+        private createImageTag(attributes: Object): string {
+            let tag = '<img';
+
+            for (let i in attributes) {
+                tag += ' ' + i + '="' + (<any> attributes)[i] + '"';
+            }
+
+            return tag + '>';
+        }
+
+        /**
+         * @description Creates a style attribute from a set of properties
+         * @param {Object} properties
+         * @returns {string}
+         */
+        private createStyleAttribute(properties: Object): string {
+            let result = '';
+
+            for (let i in properties) {
+                result += i + ':' + (<any> properties)[i] + ';';
+            }
+
+            return result;
         }
     }
 }
