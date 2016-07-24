@@ -37,7 +37,7 @@ namespace Amo.Client {
         streamConfig
     );
 
-    photos.html(stream.generateHtml());
+    photos.html(stream.getHtml());
     photos.css({
         height: columnHeightMax + 'px',
     });

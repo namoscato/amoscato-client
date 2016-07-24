@@ -20,7 +20,9 @@ var css = {
 var js = {
     src: {
         app: 'src/js/**/*.ts',
-        lib: 'node_modules/jquery/dist/jquery.min.js'
+        lib: 'node_modules/jquery/dist/jquery.min.js',
+        test: 'tests/js/**/*.ts',
+        typings: 'typings/**/*.ts'
     },
     dest: 'static/js'
 };
@@ -41,7 +43,7 @@ gulp.task('js:app', function() {
     var stream = gulp.src(js.src.lib);
 
     stream = stream.pipe(
-        addStream.obj(tsProject.src()
+        addStream.obj(gulp.src([js.src.typings, js.src.app])
             .pipe(gulpTypescript(tsProject))
             .pipe(gulpUglify({
                 compress: false
@@ -55,7 +57,7 @@ gulp.task('js:app', function() {
 });
 
 gulp.task('js:lint', function() {
-    return gulp.src(js.src.app)
+    return gulp.src([js.src.app, js.src.test])
         .pipe(gulpTslint({
             formatter: "verbose"
         }))
@@ -81,10 +83,15 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
     gulp.watch(
         js.src.app,
+        ['js:app']
+    );
+
+    gulp.watch(
         [
-            'js:app',
-            'js:lint'
-        ]
+            js.src.app,
+            js.src.test
+        ],
+        ['js:lint']
     );
 
     gulp.watch(

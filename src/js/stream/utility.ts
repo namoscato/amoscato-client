@@ -34,10 +34,10 @@ namespace Amo.Client {
 
         /**
          * @description Returns the height of the image for the specified width
-         * @param {IStreamPhoto} photo
-         * @param {number} width [description]
+         * @param {IStreamFlickrPhoto} photo
+         * @param {number} width
          */
-        public static getImageHeight(photo: IStreamPhoto, width: number): number {
+        public static getImageHeight(photo: IStreamFlickrPhoto, width: number): number {
             return Number(photo.height) / Number(photo.width) * width;
         }
 

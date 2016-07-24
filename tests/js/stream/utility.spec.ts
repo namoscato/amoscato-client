@@ -5,11 +5,11 @@ describe('StreamUtility', () => {
     beforeEach(() => {
         target = Amo.Client.StreamUtility;
     });
-    
+
     /**
      * createImageTag
      */
-    
+
     describe('When creating an image tag', () => {
         beforeEach(() => {
             result = target.createImageTag({
@@ -26,7 +26,7 @@ describe('StreamUtility', () => {
     /**
      * createStyleAttribute
      */
-    
+
     describe('When creating a style attribute', () => {
         beforeEach(() => {
             result = target.createStyleAttribute({
@@ -43,13 +43,13 @@ describe('StreamUtility', () => {
     /**
      * getImageHeight
      */
-    
+
     describe('When getting the image height', () => {
         beforeEach(() => {
             result = target.getImageHeight(
                 {
                     height: 100,
-                    width: 50
+                    width: 50,
                 },
                 20
             );

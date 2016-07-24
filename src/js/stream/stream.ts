@@ -1,107 +1,56 @@
-/// <reference path="./utility.ts" />
+/// <reference path="./column.ts" />
 
 namespace Amo.Client {
 
-    interface ICurrent {
-        color?: number;
-        columnHeight?: number;
-        columnHeightMax?: number;
-        columnWidth?: number;
-        imageHeight?: number;
-        left: number;
-        offset?: number;
-        photo?: IStreamPhoto;
-        rowIndex: number;
-        top?: number;
-        xCoordinate?: number;
+    export interface IStream {
+        getHtml(): string;
     }
 
-    interface ICoordinateFunction {
-        (x: number): number;
-    }
-
-    interface IStreamConfiguration {
-        colorMax: number;
-        colorMin: number;
-        columnHeightMaxFunction: ICoordinateFunction;
-        columnHeightMinFunction: ICoordinateFunction;
-        offsetFunction: ICoordinateFunction;
-        photoWidthMax: number;
-        photoWidthMin: number;
-    }
-
-    export class Stream {
-        private windowWidth: number;
+    export class Stream implements IStream {
+        private html = '';
 
         constructor(
-            private photos: Array<IStreamPhoto>,
+            photos: Array<IStreamFlickrPhoto>,
             private config: IStreamConfiguration) {
-            this.windowWidth = $(window).width();
-        }
+            let left = 0;
+            let photo: IStreamFlickrPhoto;
 
-        /**
-         * @description Generates the HTML for the initialized photos
-         * @returns {string}
-         */
-        public generateHtml(): string {
-            const current: ICurrent = {
-                left: 0,
-                rowIndex: 0,
-            };
-            let html = '';
-            let potentialHeight: number;
+            config.windowWidth = $(window).width();
 
-            for (current.photo of this.photos) {
-                if (current.left + current.columnWidth > this.windowWidth) {
+            let column = this.createColumn(left);
+
+            for (photo of photos) {
+                if (column.addPhoto(photo)) {
+                    continue;
+                }
+
+                this.html += column.getHtml();
+                left += column.getWidth();
+
+                if (left > config.windowWidth) {
                     break;
                 }
 
-                potentialHeight = current.top + StreamUtility.getImageHeight(current.photo, current.columnWidth);
-
-                if (typeof current.columnHeight !== 'undefined' && potentialHeight > current.columnHeight - current.offset) {
-                    current.left += current.columnWidth;
-                    current.rowIndex = 0;
-                }
-
-                if (++current.rowIndex === 1) {
-                    current.xCoordinate = current.left - this.windowWidth / 2;
-
-                    current.columnHeightMax = this.config.columnHeightMaxFunction(current.xCoordinate);
-
-                    current.columnHeight = StreamUtility.getRandomNumber(
-                        this.config.columnHeightMinFunction(current.xCoordinate),
-                        current.columnHeightMax
-                    );
-
-                    current.columnWidth = StreamUtility.getRandomNumber(this.config.photoWidthMin, this.config.photoWidthMax);
-
-                    current.offset = this.config.offsetFunction(current.xCoordinate);
-
-                    current.top = StreamUtility.getRandomNumber(
-                        -current.offset,
-                        current.columnHeightMax - current.columnHeight - current.offset
-                    );
-                }
-
-                current.color = StreamUtility.getRandomNumber(this.config.colorMin, this.config.colorMax);
-                current.imageHeight = StreamUtility.getImageHeight(current.photo, current.columnWidth);
-
-                html += StreamUtility.createImageTag({
-                    alt: current.photo.title,
-                    src: current.photo.url,
-                    style: StreamUtility.createStyleAttribute({
-                        'background-color': 'rgb(' + current.color + ',' + current.color + ',' + current.color + ')',
-                        height: current.imageHeight + 'px',
-                        left: current.left + 'px',
-                        top: current.top + 'px',
-                        width: current.columnWidth + 'px',
-                    }),
-                });
-
-                current.top += current.imageHeight;
+                column = this.createColumn(left, photo);
             }
+        }
 
-            return html;
+        /**
+         * @description Returns the HTML for the initialized photos
+         * @returns {string}
+         */
+        public getHtml(): string {
+            return this.html;
+        }
+
+        /**
+         * @description Creates a column with the specified left offset
+         * @param {number} left
+         * @param {IStreamFlickrPhoto} [photo]
+         * @returns {StreamColumn}
+         */
+        private createColumn(left: number, photo?: IStreamFlickrPhoto): StreamColumn {
+            return new StreamColumn(left, this.config, photo);
         }
     }
 }

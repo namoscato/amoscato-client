@@ -3,11 +3,11 @@ module.exports = function(config) {
         browsers: ['Chrome'],
         files: [
             'static/js/all.js',
-            'tests/**/*.spec.js',
+            'tests/**/*.spec.ts',
         ],
         frameworks: ['jasmine'],
         preprocessors: {
-          "tests/**/*.spec.js": ["babel"]
+          "tests/**/*.spec.ts": ["typescript"]
         },
     });
 }
