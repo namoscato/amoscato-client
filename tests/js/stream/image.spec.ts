@@ -12,8 +12,8 @@ describe('StreamImage', () => {
 
         target = new Amo.Client.StreamImage(
             {
-                height: 100,
-                width: 50,
+                photo_height: 100,
+                photo_width: 50,
             },
             {
                 width: 3,
@@ -40,9 +40,9 @@ describe('StreamImage', () => {
 
     describe('When getting the HTML', () => {
         beforeEach(() => {
-            target.photo = {
+            target.item = {
+                photo_url: 'URL',
                 title: 'TITLE',
-                url: 'URL',
             };
 
             target.color = 'C';

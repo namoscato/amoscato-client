@@ -13,11 +13,11 @@ namespace Amo.Client {
         private height: number;
 
         constructor(
-            private photo: IStreamFlickrPhoto,
+            private item: IStreamItem,
             private imageConfig: IImageConfiguration,
             private config: IStreamConfiguration) {
             this.color = StreamUtility.getRandomNumber(config.colorMin, config.colorMax);
-            this.height = Number(photo.height) / Number(photo.width) * imageConfig.width;
+            this.height = Number(item.photo_height) / Number(item.photo_width) * imageConfig.width;
         }
 
         /**
@@ -34,8 +34,8 @@ namespace Amo.Client {
          */
         public getHtml(): string {
             return this.createImageTag({
-                alt: this.photo.title,
-                src: this.photo.url,
+                alt: this.item.title,
+                src: this.item.photo_url,
                 style: this.createStyleAttribute({
                     'background-color': 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')',
                     height: this.height + 'px',

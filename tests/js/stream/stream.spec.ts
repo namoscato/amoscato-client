@@ -21,13 +21,13 @@ describe('Stream', () => {
         columnSpy = Amo.Client.StreamColumn.prototype = jasmine.createSpyObj(
             'StreamColumn',
             [
-                'addPhoto',
+                'addItem',
                 'getHtml',
                 'getWidth',
             ]
         );
 
-        columnSpy.addPhoto.and.returnValues(
+        columnSpy.addItem.and.returnValues(
             true,
             true,
             false,
@@ -96,7 +96,7 @@ describe('Stream', () => {
         });
 
         it('should add photos to columns', () => {
-            expect(columnSpy.addPhoto.calls.allArgs()).toEqual(
+            expect(columnSpy.addItem.calls.allArgs()).toEqual(
                 [
                     [
                         'p1',

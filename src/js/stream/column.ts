@@ -13,7 +13,7 @@ namespace Amo.Client {
         constructor(
             private left: number,
             private config: IStreamConfiguration,
-            photo?: IStreamFlickrPhoto) {
+            item?: IStreamItem) {
             const xCoordinate = left - config.windowWidth / 2;
             const heightMax = config.getColumnHeightMax(xCoordinate);
 
@@ -21,21 +21,21 @@ namespace Amo.Client {
             this.height = StreamUtility.getRandomNumber(config.getColumnHeightMin(xCoordinate), heightMax);
 
             this.offset = config.getOffset(xCoordinate);
-            this.top = StreamUtility.getRandomNumber(-this.offset, heightMax - this.height - this.offset);
+            this.top = StreamUtility.getRandomNumber(this.offset, heightMax - this.height + this.offset);
 
-            if (photo) {
-                this.addPhoto(photo);
+            if (item) {
+                this.addItem(item);
             }
         }
 
         /**
-         * @description Adds the specified photo to the stream column
-         * @param {IStreamFlickrPhoto} photo
-         * @returns {boolean} Whether or not the photo could be added
+         * @description Adds the specified item to the stream column
+         * @param {IStreamItem} item
+         * @returns {boolean} Whether or not the item could be added
          */
-        public addPhoto(photo: IStreamFlickrPhoto): boolean {
+        public addItem(item: IStreamItem): boolean {
             const image = new StreamImage(
-                photo,
+                item,
                 {
                     left: this.left,
                     top: this.top,
@@ -44,7 +44,7 @@ namespace Amo.Client {
                 this.config
             );
 
-            if (this.top + image.getHeight() > this.height - this.offset) {
+            if (this.top + image.getHeight() > this.height + this.offset) {
                 return false;
             }
 

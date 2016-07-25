@@ -20,7 +20,7 @@
     }
 }
 
-#photos {
+#stream {
     padding: 0;
     position: absolute;
     top: 65%;
@@ -39,7 +39,7 @@
 }
 
 @media (min-height:43em) {
-    #photos {
+    #stream {
         top: 55%;
     }
 }

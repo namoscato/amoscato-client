@@ -14,10 +14,11 @@ namespace Amo.Client {
         windowWidth?: number;
     }
 
-    export interface IStreamFlickrPhoto {
-        height: number;
+    export interface IStreamItem {
+        photo_height: number;
+        photo_url: string;
+        photo_width: number;
         title: string;
         url: string;
-        width: number;
     }
 }

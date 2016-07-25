@@ -10,17 +10,21 @@ namespace Amo.Client {
         private html = '';
 
         constructor(
-            photos: Array<IStreamFlickrPhoto>,
+            items: Array<IStreamItem>,
             private config: IStreamConfiguration) {
             let left = 0;
-            let photo: IStreamFlickrPhoto;
+            let item: IStreamItem;
 
             config.windowWidth = $(window).width();
 
             let column = this.createColumn(left);
 
-            for (photo of photos) {
-                if (column.addPhoto(photo)) {
+            for (item of items) {
+                if (item.photo_height === null) { // TODO: Add support for photoless items
+                    continue;
+                }
+
+                if (column.addItem(item)) {
                     continue;
                 }
 
@@ -31,12 +35,12 @@ namespace Amo.Client {
                     break;
                 }
 
-                column = this.createColumn(left, photo);
+                column = this.createColumn(left, item);
             }
         }
 
         /**
-         * @description Returns the HTML for the initialized photos
+         * @description Returns the HTML for the initialized stream items
          * @returns {string}
          */
         public getHtml(): string {
@@ -46,11 +50,11 @@ namespace Amo.Client {
         /**
          * @description Creates a column with the specified left offset
          * @param {number} left
-         * @param {IStreamFlickrPhoto} [photo]
+         * @param {IStreamItem} [item]
          * @returns {StreamColumn}
          */
-        private createColumn(left: number, photo?: IStreamFlickrPhoto): StreamColumn {
-            return new StreamColumn(left, this.config, photo);
+        private createColumn(left: number, item?: IStreamItem): StreamColumn {
+            return new StreamColumn(left, this.config, item);
         }
     }
 }

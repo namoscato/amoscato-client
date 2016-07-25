@@ -39,7 +39,7 @@ describe('StreamColumn', () => {
 
     describe('When creating a column', () => {
         beforeEach(() => {
-            spyOn(Amo.Client.StreamColumn.prototype, 'addPhoto');
+            spyOn(Amo.Client.StreamColumn.prototype, 'addItem');
         });
 
         describe('without a photo', () => {
@@ -70,11 +70,11 @@ describe('StreamColumn', () => {
             });
 
             it('should get random top', () => {
-                expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(-14, -2);
+                expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(14, 26);
             });
 
             it('should not add photo', () => {
-                expect(target.addPhoto).not.toHaveBeenCalled();
+                expect(target.addItem).not.toHaveBeenCalled();
             });
         });
 
@@ -83,18 +83,18 @@ describe('StreamColumn', () => {
                 target = new Amo.Client.StreamColumn(
                     500,
                     configSpy,
-                    'PHOTO'
+                    'ITEM'
                 );
             });
 
             it('should add photo', () => {
-                expect(target.addPhoto).toHaveBeenCalledWith('PHOTO');
+                expect(target.addItem).toHaveBeenCalledWith('ITEM');
             });
         });
     });
 
     /**
-     * addPhoto
+     * addItem
      */
 
     describe('When adding a photo', () => {
@@ -114,12 +114,12 @@ describe('StreamColumn', () => {
             imageSpy.getHtml.and.returnValue('i1');
             imageSpy.getHeight.and.returnValue(10);
 
-            result = target.addPhoto('PHOTO');
+            result = target.addItem('ITEM');
         });
 
         it('should create image', () => {
             expect(Amo.Client.StreamImage).toHaveBeenCalledWith(
-                'PHOTO',
+                'ITEM',
                 {
                     left: 1,
                     top: 2,
@@ -144,9 +144,9 @@ describe('StreamColumn', () => {
         describe('and adding another photo that fits', () => {
             beforeEach(() => {
                 imageSpy.getHtml.and.returnValue('i2');
-                imageSpy.getHeight.and.returnValue(38);
+                imageSpy.getHeight.and.returnValue(138);
 
-                result = target.addPhoto('PHOTO');
+                result = target.addItem('ITEM');
             });
 
             it('should update HTML', () => {
@@ -154,7 +154,7 @@ describe('StreamColumn', () => {
             });
 
             it('should update top', () => {
-                expect(target.top).toEqual(50);
+                expect(target.top).toEqual(150);
             });
 
             it('should return true', () => {
@@ -166,7 +166,7 @@ describe('StreamColumn', () => {
                     imageSpy.getHtml.and.returnValue('i3');
                     imageSpy.getHeight.and.returnValue(1);
 
-                    result = target.addPhoto('PHOTO');
+                    result = target.addItem('ITEM');
                 });
 
                 it('should return false', () => {
