@@ -3,8 +3,8 @@
 namespace Amo.Client {
     const columnHeightMax = 550;
     const streamConfig = {
-        colorMax: 300,
-        colorMin: 200,
+        colorBrightnessMax: 0.1,
+        colorBrightnessMin: -0.1,
         getColumnHeightMax: (x: number) => {
             const absoluteValue = Math.abs(x);
 
@@ -22,6 +22,14 @@ namespace Amo.Client {
         },
         photoWidthMax: 150,
         photoWidthMin: 50,
+        typeColorMap: {
+            flickr: '#CF006B',
+            foodspotting: '#BA5D33',
+            goodreads: '#A37134',
+            lastfm: '#C40000',
+            vimeo: '#3490C4',
+            youtube: '#C41C14',
+        },
     };
     const streamElement: JQuery = $('#stream');
 

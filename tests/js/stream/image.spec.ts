@@ -2,36 +2,77 @@ describe('StreamImage', () => {
     let result: any;
     let target: Amo.Client.StreamImage;
 
+    let image: Object;
     let streamUtilitySpy: Amo.Client.StreamUtility;
+    let streamUtilityGetColorSpy: any;
+    let streamUtilityGetColorLightnessSpy: any;
 
     beforeEach(() => {
         streamUtilitySpy = Amo.Client.StreamUtility;
 
-        spyOn(streamUtilitySpy, 'getRandomNumber');
-        streamUtilitySpy.getRandomNumber.and.returnValue(1);
+        spyOn(streamUtilitySpy, 'getRandomFloat');
+        streamUtilitySpy.getRandomFloat.and.returnValue(1);
 
+        spyOn(streamUtilitySpy, 'getColor');
+        streamUtilityGetColorSpy = jasmine.createSpyObj('streamUtility.getColor', ['lightness']);
+        streamUtilitySpy.getColor.and.returnValue(streamUtilityGetColorSpy);
+
+        streamUtilityGetColorLightnessSpy = jasmine.createSpyObj('streamUtility.getColor.lightness', ['hex']);
+        streamUtilityGetColorLightnessSpy.hex.and.returnValue('color hex');
+        streamUtilityGetColorSpy.lightness.and.returnValue(streamUtilityGetColorLightnessSpy);
+
+        image = {
+            photo_height: 100,
+            photo_width: 50,
+            type: 'TYPE',
+        };
+    });
+
+    const construct = () => {
         target = new Amo.Client.StreamImage(
-            {
-                photo_height: 100,
-                photo_width: 50,
-            },
+            image,
             {
                 width: 3,
             },
             {
-                colorMax: 2,
-                colorMin: 1,
+                colorBrightnessMax: 2,
+                colorBrightnessMin: 1,
+                typeColorMap: {
+                    TYPE: '#color',
+                },
             },
         );
-    });
+    };
 
-    it('should generate random color', () => {
-        expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(1, 2);
-        expect(target.color).toEqual(1);
-    });
+    describe('When creating an image', () => {
+        describe('with a photo URL', () => {
+            beforeEach(() => {
+                image.photo_url = 'URL';
 
-    it('should compute image height', () => {
-        expect(target.height).toEqual(6);
+                construct();
+            });
+
+            it('should generate random color', () => {
+                expect(streamUtilitySpy.getRandomFloat).toHaveBeenCalledWith(1, 2);
+                expect(streamUtilitySpy.getColor).toHaveBeenCalledWith('#color');
+                expect(streamUtilityGetColorSpy.lightness).toHaveBeenCalledWith(1, true);
+                expect(target.color).toEqual('color hex');
+            });
+
+            it('should compute image height', () => {
+                expect(target.height).toEqual(6);
+            });
+        });
+
+        describe('without a photo URL', () => {
+            beforeEach(() => {
+                construct();
+            });
+
+            it('should compute image height', () => {
+                expect(target.height).toEqual(3);
+            });
+        });
     });
 
     /**
@@ -40,61 +81,105 @@ describe('StreamImage', () => {
 
     describe('When getting the HTML', () => {
         beforeEach(() => {
-            target.item = {
-                photo_url: 'URL',
-                title: 'TITLE',
-            };
-
-            target.color = 'C';
-            target.height = 1;
-            target.imageConfig = {
-                left: 2,
-                top: 3,
-                width: 4,
-            };
-
-            spyOn(target, 'createImageTag');
-            target.createImageTag.and.returnValue('HTML');
-
-            spyOn(target, 'createStyleAttribute');
-            target.createStyleAttribute.and.returnValue('STYLE');
-
-            result = target.getHtml();
+            spyOn(target, 'createTag');
+            target.createTag.and.returnValues(
+                '<a>',
+                '<img>'
+            );
         });
 
-        it('should create image tag', () => {
-            expect(target.createImageTag).toHaveBeenCalledWith({
-                alt: 'TITLE',
-                src: 'URL',
-                style: 'STYLE',
+        describe('with a photo URL', () => {
+            beforeEach(() => {
+                target.item = {
+                    photo_url: 'PHOTO URL',
+                    title: 'TITLE',
+                    type: 'TYPE',
+                    url: 'URL',
+                };
+
+                target.color = 'COLOR';
+                target.height = 1;
+                target.imageConfig = {
+                    left: 2,
+                    top: 3,
+                    width: 4,
+                };
+
+                spyOn(target, 'createStyleAttribute');
+                target.createStyleAttribute.and.returnValue('STYLE');
+
+                result = target.getHtml();
+            });
+
+            it('should create hyperlink tag', () => {
+                expect(target.createTag).toHaveBeenCalledWith(
+                    'a',
+                    {
+                        class: 'type-TYPE',
+                        href: 'URL',
+                        style: 'STYLE',
+                        target: '_blank',
+                        title: 'TITLE',
+                    }
+                );
+            });
+
+            it('should create style attrbute', () => {
+                expect(target.createStyleAttribute).toHaveBeenCalledWith({
+                    'background-color': 'COLOR',
+                    'font-size': '0.6px',
+                    height: '1px',
+                    left: '2px',
+                    top: '3px',
+                    width: '4px',
+                });
+            });
+
+            it('should create image tag', () => {
+                expect(target.createTag).toHaveBeenCalledWith(
+                    'img',
+                    {
+                        alt: 'TITLE',
+                        src: 'PHOTO URL',
+                    }
+                );
+            });
+
+            it('should return HTML', () => {
+                expect(result).toEqual('<a><img></a>');
             });
         });
 
-        it('should create style attrbute', () => {
-            expect(target.createStyleAttribute).toHaveBeenCalledWith({
-                'background-color': 'rgb(C,C,C)',
-                height: '1px',
-                left: '2px',
-                top: '3px',
-                width: '4px',
-            });
-        });
+        describe('with a photo URL', () => {
+            beforeEach(() => {
+                target.item = {
+                    title: 'TITLE',
+                };
 
-        it('should return HTML', () => {
-            expect(result).toEqual('HTML');
+                result = target.getHtml();
+            });
+
+            it('should return HTML', () => {
+                expect(result).toEqual('<a>TITLE</a>');
+            });
         });
     });
 
     /**
-     * createImageTag
+     * createTag
      */
 
     describe('When creating an image tag', () => {
         beforeEach(() => {
-            result = target.createImageTag({
-                attr1: 'value1',
-                attr2: 'value2',
-            });
+            construct();
+
+            result = target.createTag(
+                'img',
+                {
+                    attr1: 'value1',
+                    attr2: 'value2',
+                }
+            );
         });
 
         it('should return image tag', () => {
@@ -108,6 +193,8 @@ describe('StreamImage', () => {
 
     describe('When creating a style attribute', () => {
         beforeEach(() => {
+            construct();
+
             result = target.createStyleAttribute({
                 key1: 'val1',
                 key2: 'val2',

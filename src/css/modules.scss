@@ -1,5 +1,5 @@
 .title {
-    font-family: 'Playfair Display', serif;
+    font-family: $font-serif;
     font-size: 1.5em;
     font-weight: bold;
     line-height: 1.6em;
@@ -9,7 +9,7 @@
 
 .title-sub {
     color: $gray-dark;
-    font-family: 'Inconsolata', sans-serif;
+    font-family: $font-sans-serif;
     font-size: 1.25em;
     font-weight: normal;
     text-transform: uppercase;
@@ -21,14 +21,30 @@
 }
 
 #stream {
-    padding: 0;
     position: absolute;
     top: 65%;
     width: 100%;
 
-    > img {
+    > a {
+        color: $white;
         display: inline-block;
+        font-family: $font-sans-serif;
+        overflow: hidden;
         position: absolute;
+        text-decoration: none;
+
+        &:hover > img {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            opacity: 0.8;
+            
+        }
+
+        > img {
+
+            height: 100%;
+            width: 100%;
+        }
     }
 }
 

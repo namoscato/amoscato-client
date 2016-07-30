@@ -10,8 +10,8 @@ describe('StreamColumn', () => {
     beforeEach(() => {
         streamUtilitySpy = Amo.Client.StreamUtility;
 
-        spyOn(streamUtilitySpy, 'getRandomNumber');
-        streamUtilitySpy.getRandomNumber.and.returnValue(1);
+        spyOn(streamUtilitySpy, 'getRandomInteger');
+        streamUtilitySpy.getRandomInteger.and.returnValue(1);
 
         configSpy = jasmine.createSpyObj('config', ['getColumnHeightMax', 'getColumnHeightMin', 'getOffset']);
         configSpy.getColumnHeightMax.and.returnValue(13);
@@ -55,12 +55,12 @@ describe('StreamColumn', () => {
             });
 
             it('should get random width', () => {
-                expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(10, 11);
+                expect(streamUtilitySpy.getRandomInteger).toHaveBeenCalledWith(10, 11);
                 expect(target.width).toEqual(1);
             });
 
             it('should get random height', () => {
-                expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(12, 13);
+                expect(streamUtilitySpy.getRandomInteger).toHaveBeenCalledWith(12, 13);
                 expect(target.height).toEqual(1);
             });
 
@@ -70,7 +70,7 @@ describe('StreamColumn', () => {
             });
 
             it('should get random top', () => {
-                expect(streamUtilitySpy.getRandomNumber).toHaveBeenCalledWith(14, 26);
+                expect(streamUtilitySpy.getRandomInteger).toHaveBeenCalledWith(14, 26);
             });
 
             it('should not add photo', () => {

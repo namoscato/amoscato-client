@@ -4,13 +4,14 @@ namespace Amo.Client {
     }
 
     export interface IStreamConfiguration {
-        colorMax: number;
-        colorMin: number;
+        colorBrightnessMax: number;
+        colorBrightnessMin: number;
         getColumnHeightMax: ICoordinateFunction;
         getColumnHeightMin: ICoordinateFunction;
         getOffset: ICoordinateFunction;
         photoWidthMax: number;
         photoWidthMin: number;
+        typeColorMap: Object;
         windowWidth?: number;
     }
 
@@ -19,6 +20,7 @@ namespace Amo.Client {
         photo_url: string;
         photo_width: number;
         title: string;
+        type: string;
         url: string;
     }
 }

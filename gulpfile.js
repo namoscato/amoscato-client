@@ -20,7 +20,10 @@ var css = {
 var js = {
     src: {
         app: 'src/js/**/*.ts',
-        lib: 'node_modules/jquery/dist/jquery.min.js',
+        lib: [
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/onecolor/one-color.js',
+        ],
         test: 'tests/js/**/*.ts',
         typings: 'typings/**/*.ts'
     },
@@ -40,13 +43,17 @@ gulp.task('all', [
 gulp.task('js', ['js:app', 'js:lint']);
 
 gulp.task('js:app', function() {
-    var stream = gulp.src(js.src.lib);
+    var stream = gulp.src(js.src.lib)
+        .pipe(gulpUglify({
+            mangle: false,
+            compress: false,
+        }));
 
     stream = stream.pipe(
         addStream.obj(gulp.src([js.src.typings, js.src.app])
             .pipe(gulpTypescript(tsProject))
             .pipe(gulpUglify({
-                compress: false
+                compress: false,
             }))
         )
     );

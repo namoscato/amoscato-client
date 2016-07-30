@@ -20,7 +20,7 @@ namespace Amo.Client {
             let column = this.createColumn(left);
 
             for (item of items) {
-                if (item.photo_height === null) { // TODO: Add support for photoless items
+                if (item.type === 'github') { // TODO: Add GitHub support
                     continue;
                 }
 

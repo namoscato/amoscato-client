@@ -9,15 +9,19 @@ namespace Amo.Client {
     }
 
     export class StreamImage {
-        private color: number;
+        private color: string;
         private height: number;
 
         constructor(
             private item: IStreamItem,
             private imageConfig: IImageConfiguration,
             private config: IStreamConfiguration) {
-            this.color = StreamUtility.getRandomNumber(config.colorMin, config.colorMax);
-            this.height = Number(item.photo_height) / Number(item.photo_width) * imageConfig.width;
+            const colorBrightnessDelta = StreamUtility.getRandomFloat(config.colorBrightnessMin, config.colorBrightnessMax);
+            const height = item.photo_url ? item.photo_height : imageConfig.width;
+            const width = item.photo_url ? item.photo_width : imageConfig.width;
+
+            this.color = StreamUtility.getColor((<any> this.config.typeColorMap)[this.item.type]).lightness(colorBrightnessDelta, true).hex();
+            this.height = Number(height) / Number(width) * imageConfig.width;
         }
 
         /**
@@ -33,26 +37,49 @@ namespace Amo.Client {
          * @returns {string}
          */
         public getHtml(): string {
-            return this.createImageTag({
-                alt: this.item.title,
-                src: this.item.photo_url,
-                style: this.createStyleAttribute({
-                    'background-color': 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')',
-                    height: this.height + 'px',
-                    left: this.imageConfig.left + 'px',
-                    top: this.imageConfig.top + 'px',
-                    width: this.imageConfig.width + 'px',
-                }),
-            });
+            const title = this.item.title.replace(/"/g, '&quot;');
+
+            let html = this.createTag(
+                'a',
+                {
+                    class: `type-${this.item.type}`,
+                    href: this.item.url,
+                    style: this.createStyleAttribute({
+                        'background-color': this.color,
+                        'font-size': this.imageConfig.width * 0.15 + 'px',
+                        height: this.height + 'px',
+                        left: this.imageConfig.left + 'px',
+                        top: this.imageConfig.top + 'px',
+                        width: this.imageConfig.width + 'px',
+                    }),
+                    target: '_blank',
+                    title: title,
+                }
+            );
+
+            if (this.item.photo_url) {
+                html += this.createTag(
+                    'img',
+                    {
+                        alt: title,
+                        src: this.item.photo_url,
+                    }
+                );
+            } else {
+                html += title;
+            }
+
+            return html + '</a>';
         }
 
         /**
-         * @description Creates an image tag from a set of attributes
+         * @description Creates an HTML tag from a set of attributes
+         * @param {String} tag
          * @param {Object} attributes
          * @returns {string}
          */
-        private createImageTag(attributes: Object): string {
-            let tag = '<img';
+        private createTag(tag: string, attributes: Object): string {
+            tag = '<' + tag;
 
             for (let i in attributes) {
                 tag += ' ' + i + '="' + (<any> attributes)[i] + '"';

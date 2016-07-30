@@ -17,11 +17,11 @@ namespace Amo.Client {
             const xCoordinate = left - config.windowWidth / 2;
             const heightMax = config.getColumnHeightMax(xCoordinate);
 
-            this.width = StreamUtility.getRandomNumber(config.photoWidthMin, config.photoWidthMax);
-            this.height = StreamUtility.getRandomNumber(config.getColumnHeightMin(xCoordinate), heightMax);
+            this.width = StreamUtility.getRandomInteger(config.photoWidthMin, config.photoWidthMax);
+            this.height = StreamUtility.getRandomInteger(config.getColumnHeightMin(xCoordinate), heightMax);
 
             this.offset = config.getOffset(xCoordinate);
-            this.top = StreamUtility.getRandomNumber(this.offset, heightMax - this.height + this.offset);
+            this.top = StreamUtility.getRandomInteger(this.offset, heightMax - this.height + this.offset);
 
             if (item) {
                 this.addItem(item);
