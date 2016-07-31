@@ -1,7 +1,6 @@
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
-    const columnHeightMax = 550;
     const streamConfig = {
         colorBrightnessMax: 0.1,
         colorBrightnessMin: -0.1,
@@ -12,7 +11,7 @@ namespace Amo.Client {
                 return absoluteValue / 2 + 400;
             }
 
-            return columnHeightMax;
+            return 550;
         },
         getColumnHeightMin: (x: number) => {
             return Math.abs(x) / 3 + 300;
@@ -34,7 +33,7 @@ namespace Amo.Client {
     const streamElement: JQuery = $('#stream');
 
     $.get(
-        'http://localhost:8000/stream',
+        'http://api.amoscato.com/stream',
         (data) => {
             const stream = new Stream(
                 data,
@@ -42,9 +41,6 @@ namespace Amo.Client {
             );
 
             streamElement.html(stream.getHtml());
-            streamElement.css({
-                height: columnHeightMax + 'px',
-            });
         }
     );
 }

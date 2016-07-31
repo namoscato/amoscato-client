@@ -93,7 +93,6 @@ describe('StreamImage', () => {
                 target.item = {
                     photo_url: 'PHOTO URL',
                     title: 'TITLE',
-                    type: 'TYPE',
                     url: 'URL',
                 };
 
@@ -115,7 +114,7 @@ describe('StreamImage', () => {
                 expect(target.createTag).toHaveBeenCalledWith(
                     'a',
                     {
-                        class: 'type-TYPE',
+                        class: 'stream-item stream-item-photo',
                         href: 'URL',
                         style: 'STYLE',
                         target: '_blank',
@@ -146,11 +145,11 @@ describe('StreamImage', () => {
             });
 
             it('should return HTML', () => {
-                expect(result).toEqual('<a><img></a>');
+                expect(result).toEqual('<a><span class="stream-title">TITLE</span><img></a>');
             });
         });
 
-        describe('with a photo URL', () => {
+        describe('without a photo URL', () => {
             beforeEach(() => {
                 target.item = {
                     title: 'TITLE',
@@ -159,8 +158,17 @@ describe('StreamImage', () => {
                 result = target.getHtml();
             });
 
+            it('should create hyperlink tag', () => {
+                expect(target.createTag).toHaveBeenCalledWith(
+                    'a',
+                    jasmine.objectContaining({
+                        class: 'stream-item stream-item-text',
+                    })
+                );
+            });
+
             it('should return HTML', () => {
-                expect(result).toEqual('<a>TITLE</a>');
+                expect(result).toEqual('<a><span class="stream-title">TITLE</span></a>');
             });
         });
     });

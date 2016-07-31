@@ -20,43 +20,70 @@
     }
 }
 
-#stream {
-    position: absolute;
-    top: 65%;
-    width: 100%;
+// ------
+// Social
+// ------
+
+.social-item {
+    display: inline;
+    margin: 0 0.8em;
 
     > a {
-        color: $white;
-        display: inline-block;
-        font-family: $font-sans-serif;
-        overflow: hidden;
-        position: absolute;
+        color: $gray-dark;
+        line-height: 2em;
         text-decoration: none;
 
-        &:hover > img {
-            -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-            opacity: 0.8;
-            
-        }
-
-        > img {
-
-            height: 100%;
-            width: 100%;
+        &:hover {
+            color: lighten($gray-dark, 20%);
         }
     }
+}
+
+// ------
+// Stream
+// ------
+
+.stream-item {
+    color: $white;
+    display: inline-block;
+    font-family: $font-sans-serif;
+    overflow: hidden;
+    position: absolute;
+    text-align: right;
+    text-decoration: none;
+
+    > img {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.stream-item-photo:hover {
+    > img {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        opacity: 0.8;
+    }
+
+    .stream-title {
+        display: none;
+    }
+}
+
+.stream-item-text:hover {
+    opacity: 0.85;
+}
+
+.stream-title {
+    opacity: 0.6;
 }
 
 @media (min-width:30em) {
     .title {
         font-size: 2em;
-    }
-}
-
-@media (min-height:43em) {
-    #stream {
-        top: 55%;
     }
 }
 

@@ -6,6 +6,31 @@
     top: 10%;
 }
 
+#social,
+#stream {
+    position: absolute;
+    top: 65%;
+}
+
+#social {
+    font-family: $font-sans-serif;
+    font-size: 0.85em;
+    left: 0;
+    list-style-type: none;
+    margin: 450px 0 5em;
+    padding: 0 4em;
+    right: 0;
+    text-align: center;
+}
+
+#stream {
+    width: 100%;
+}
+
+// -----
+// Frame
+// -----
+
 .frame {
     background-color: $white;
     position: fixed;
@@ -41,4 +66,15 @@
 
 #frame-bottom {
     bottom: 0;
+}
+
+// -------------
+// Media Queries
+// -------------
+
+@media (min-height:43em) {
+    #social,
+    #stream {
+        top: 55%;
+    }
 }

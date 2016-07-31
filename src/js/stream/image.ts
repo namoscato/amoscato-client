@@ -42,7 +42,7 @@ namespace Amo.Client {
             let html = this.createTag(
                 'a',
                 {
-                    class: `type-${this.item.type}`,
+                    class: 'stream-item stream-item-' + (this.item.photo_url ? 'photo' : 'text'),
                     href: this.item.url,
                     style: this.createStyleAttribute({
                         'background-color': this.color,
@@ -57,6 +57,8 @@ namespace Amo.Client {
                 }
             );
 
+            html += `<span class="stream-title">${title}</span>`;
+
             if (this.item.photo_url) {
                 html += this.createTag(
                     'img',
@@ -65,8 +67,6 @@ namespace Amo.Client {
                         src: this.item.photo_url,
                     }
                 );
-            } else {
-                html += title;
             }
 
             return html + '</a>';
