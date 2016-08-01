@@ -2,24 +2,25 @@
 
 namespace Amo.Client {
 
-    export interface IStream {
-        getHtml(): string;
-    }
-
-    export class Stream implements IStream {
-        private html = '';
+    export class Stream {
 
         constructor(
-            items: Array<IStreamItem>,
+            private items: Array<IStreamItem>,
             private config: IStreamConfiguration) {
-            let left = 0;
-            let item: IStreamItem;
+        }
 
-            config.windowWidth = $(window).width();
+        /**
+         * @description Returns the HTML for the initialized stream items
+         * @returns {string}
+         */
+        public getHtml(): string {
+            let left = 0;
+            let html = '';
+            let item: IStreamItem;
 
             let column = this.createColumn(left);
 
-            for (item of items) {
+            for (item of this.items) {
                 if (item.type === 'github') { // TODO: Add GitHub support
                     continue;
                 }
@@ -28,23 +29,17 @@ namespace Amo.Client {
                     continue;
                 }
 
-                this.html += column.getHtml();
+                html += column.getHtml();
                 left += column.getWidth();
 
-                if (left > config.windowWidth) {
+                if (left > this.config.windowWidth) {
                     break;
                 }
 
                 column = this.createColumn(left, item);
             }
-        }
 
-        /**
-         * @description Returns the HTML for the initialized stream items
-         * @returns {string}
-         */
-        public getHtml(): string {
-            return this.html;
+            return html;
         }
 
         /**

@@ -12,7 +12,7 @@ namespace Amo.Client {
         photoWidthMax: number;
         photoWidthMin: number;
         typeColorMap: Object;
-        windowWidth?: number;
+        windowWidth: number;
     }
 
     export interface IStreamItem {

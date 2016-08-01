@@ -1,6 +1,8 @@
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
+    const windowElement: JQuery = $(window);
+
     const streamConfig = {
         colorBrightnessMax: 0.1,
         colorBrightnessMin: -0.1,
@@ -29,18 +31,39 @@ namespace Amo.Client {
             vimeo: '#3490C4',
             youtube: '#C41C14',
         },
+        windowWidth: windowElement.width(),
     };
     const streamElement: JQuery = $('#stream');
 
     $.get(
         'http://api.amoscato.com/stream',
         (data) => {
+            let resizeTimeout: number;
             const stream = new Stream(
                 data,
                 streamConfig
             );
 
-            streamElement.html(stream.getHtml());
+            const setStreamHtml = () => {
+                streamElement.html(stream.getHtml());
+            };
+
+            setStreamHtml();
+
+            windowElement.resize(() => {
+                const windowWidth = windowElement.width();
+
+                if (streamConfig.windowWidth === windowWidth) {
+                    return;
+                }
+
+                clearTimeout(resizeTimeout);
+
+                resizeTimeout = setTimeout(() => {
+                    streamConfig.windowWidth = windowWidth;
+                    setStreamHtml();
+                }, 150);
+            });
         }
     );
 }

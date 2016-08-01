@@ -1,12 +1,11 @@
 describe('Stream', () => {
+    let result: any;
     let target: Amo.Client.IStream;
 
     let column: Amo.Client.StreamColumn;
     let columnSpy: Amo.Client.StreamColumn;
     let jQuerySpy: JQuery;
     let windowJQuery: any;
-
-    let configMock: Object;
 
     beforeEach(() => {
         windowJQuery = window.$;
@@ -47,8 +46,6 @@ describe('Stream', () => {
             51
         );
 
-        configMock = {};
-
         jQuerySpy.width.and.returnValue(100);
 
         target = new Amo.Client.Stream(
@@ -60,7 +57,9 @@ describe('Stream', () => {
                 'p5',
                 'p6',
             ],
-            configMock
+            {
+                windowWidth: 100,
+            },
         );
     });
 
@@ -69,9 +68,9 @@ describe('Stream', () => {
         window.$ = windowJQuery;
     });
 
-    describe('When creating a stream', () => {
-        it('should get window object', () => {
-            expect(window.$).toHaveBeenCalledWith(window);
+    describe('When getting the HTML', () => {
+        beforeEach(() => {
+            result = target.getHtml();
         });
 
         it('should create columns', () => {
@@ -118,7 +117,7 @@ describe('Stream', () => {
         });
 
         it('should generate HTML', () => {
-            expect(target.getHtml()).toEqual('c1c2');
+            expect(result).toEqual('c1c2');
         });
     });
 });
