@@ -40,7 +40,6 @@ var js = {
     dest: 'static/js'
 };
 
-var ftpConfig = require('./ftpconfig');
 var tsProject = gulpTypescript.createProject('tsconfig.json');
 
 gulp.task('default', ['all', 'watch']);
@@ -99,6 +98,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('deploy', function() {
+    var ftpConfig = require('./ftpconfig');
     var ftpConnection = vinylFtp.create({
         host: ftpConfig.host,
         user: ftpConfig.user,
