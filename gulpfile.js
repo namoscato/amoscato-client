@@ -8,6 +8,16 @@ var gulpSass = require('gulp-sass');
 var gulpTslint = require('gulp-tslint');
 var gulpTypescript = require('gulp-typescript');
 var gulpUglify = require('gulp-uglify');
+var gulpUtil = require('gulp-util');
+var vinylFtp = require('vinyl-ftp');
+
+var build = {
+    src: [
+        'public/**/*.*',
+        '!public/data/*'
+    ],
+    dest: '/'
+};
 
 var css = {
     src: {
@@ -30,6 +40,7 @@ var js = {
     dest: 'static/js'
 };
 
+var ftpConfig = require('./ftpconfig');
 var tsProject = gulpTypescript.createProject('tsconfig.json');
 
 gulp.task('default', ['all', 'watch']);
@@ -85,6 +96,20 @@ gulp.task('css', function() {
         .pipe(gulpConcat('all.css'))
         .pipe(gulpCleanCss())
         .pipe(gulp.dest(css.dest));
+});
+
+gulp.task('deploy', function() {
+    var ftpConnection = vinylFtp.create({
+        host: ftpConfig.host,
+        user: ftpConfig.user,
+        password: ftpConfig.password,
+        parallel: 10,
+        log: gulpUtil.log
+    });
+
+    return gulp.src(build.src, { base: 'public', buffer: false })
+        .pipe(ftpConnection.newerOrDifferentSize(build.dest))
+        .pipe(ftpConnection.dest(build.dest));
 });
 
 gulp.task('watch', function() {
