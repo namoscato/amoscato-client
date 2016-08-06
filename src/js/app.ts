@@ -36,7 +36,7 @@ namespace Amo.Client {
     const streamElement: JQuery = $('#stream');
 
     $.get(
-        'http://api.amoscato.com/stream',
+        '/data/stream.json',
         (data) => {
             let resizeTimeout: number;
             const stream = new Stream(

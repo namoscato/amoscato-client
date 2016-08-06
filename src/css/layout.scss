@@ -24,6 +24,8 @@
 }
 
 #stream {
+    height: 550px;
+    overflow-x: hidden;
     width: 100%;
 }
 
@@ -71,6 +73,12 @@
 // -------------
 // Media Queries
 // -------------
+
+@media (min-width:43em) {
+    #stream {
+        overflow-x: visible;
+    }
+}
 
 @media (min-height:43em) {
     #social,
