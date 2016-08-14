@@ -124,7 +124,6 @@ describe('StreamImage', () => {
                 expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     'img',
                     {
-                        alt: 'TITLE',
                         src: 'PHOTO URL',
                     }
                 );

@@ -5,6 +5,8 @@ describe('StreamColumn', () => {
     let configSpy: Amo.Client.IStreamConfiguration;
     let image: Amo.Client.StreamImage;
     let imageSpy: Amo.Client.StreamImage;
+    let squareCluster: Amo.Client.StreamSquareCluster;
+    let squareClusterSpy: Amo.Client.StreamSquareCluster;
     let streamUtilitySpy: Amo.Client.StreamUtility;
 
     beforeEach(() => {
@@ -32,10 +34,22 @@ describe('StreamColumn', () => {
                 'getHtml',
             ]
         );
+
+        spyOn(Amo.Client, 'StreamSquareCluster');
+
+        squareCluster = Amo.Client.StreamSquareCluster.prototype;
+        squareClusterSpy = Amo.Client.StreamSquareCluster.prototype = jasmine.createSpyObj(
+            'StreamSquareCluster',
+            [
+                'addItem',
+                'generateHtml',
+            ]
+        );
     });
 
     afterEach(() => {
         Amo.Client.StreamImage.prototype = image;
+        Amo.Client.StreamSquareCluster.prototype = squareCluster;
     });
 
     describe('When creating a column', () => {
@@ -72,6 +86,10 @@ describe('StreamColumn', () => {
 
             it('should get random top', () => {
                 expect(streamUtilitySpy.getRandomInteger).toHaveBeenCalledWith(14, 26);
+            });
+
+            it('should create square cluster', () => {
+                expect(Amo.Client.StreamSquareCluster).toHaveBeenCalledWith(1, jasmine.any(Object));
             });
 
             it('should not add photo', () => {
@@ -182,6 +200,70 @@ describe('StreamColumn', () => {
                     expect(target.html).toEqual('i1i2');
                 });
             });
+        });
+    });
+
+    describe('When adding a secondary source', () => {
+        beforeEach(() => {
+            configSpy.secondarySourceTypeMap.TYPE = true;
+
+            target = new Amo.Client.StreamColumn(
+                500,
+                configSpy
+            );
+
+            target.addItem({
+                type: 'TYPE',
+            });
+        });
+
+        it('should add square item', () => {
+            expect(squareClusterSpy.addItem).toHaveBeenCalledWith({
+                type: 'TYPE',
+            });
+        });
+
+        it('should not create stream image', () => {
+            expect(Amo.Client.StreamImage).not.toHaveBeenCalled();
+        });
+    });
+
+    /**
+     * generateHtml
+     */
+
+    describe('When generating the column HTML', () => {
+        beforeEach(() => {
+            target = new Amo.Client.StreamColumn(
+                500,
+                configSpy
+            );
+
+            target.html = 'HTML';
+            target.bottom = 1;
+            target.left = 2;
+            target.top = 3;
+
+            squareClusterSpy.generateHtml.and.returnValue('SQ');
+
+            spyOn(target, 'getWidth');
+            target.getWidth.and.returnValue(4);
+
+            result = target.generateHtml('top-left');
+        });
+
+        it('should generate square cluster HTML', () => {
+            expect(squareClusterSpy.generateHtml).toHaveBeenCalledWith({
+                alignment: 'top-left',
+                columnBottom: 1,
+                columnLeft: 2,
+                columnRight: 6,
+                columnTop: 3,
+            });
+        });
+
+        it('should return HTML', () => {
+            expect(result).toEqual('HTMLSQ');
         });
     });
 });

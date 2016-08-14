@@ -44,8 +44,7 @@ namespace Amo.Client {
          */
         public addItem(item: IStreamItem): boolean {
             if (typeof this.streamConfig.secondarySourceTypeMap[item.type] !== 'undefined') {
-                this.squareCluster.addItem(item);
-                return true;
+                return this.squareCluster.addItem(item);
             }
 
             const image = new StreamImage(
@@ -69,7 +68,8 @@ namespace Amo.Client {
         }
 
         /**
-         * @description Returns the column HTML
+         * @description Generates the column HTML
+         * @param {string} squareClusterAlignment
          * @returns {string}
          */
         public generateHtml(squareClusterAlignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'): string {

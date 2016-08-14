@@ -62,7 +62,6 @@ namespace Amo.Client {
                 html += StreamUtility.createTag(
                     'img',
                     {
-                        alt: title,
                         src: this.item.photo_url,
                     }
                 );

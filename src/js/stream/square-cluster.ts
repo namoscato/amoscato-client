@@ -23,7 +23,12 @@ namespace Amo.Client {
             this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
         }
 
-        public addItem(item: IStreamItem) {
+        /**
+         * @description Adds the specified stream item to the square cluster
+         * @param {IStreamItem} item
+         * @returns {boolean}
+         */
+        public addItem(item: IStreamItem): boolean {
             this.squares.push(
                 new StreamSquare(
                     StreamUtility.getRandomInteger(this.sizeMin, this.sizeMax),
@@ -31,6 +36,8 @@ namespace Amo.Client {
                     this.streamConfig
                 )
             );
+
+            return true;
         }
 
         /**
