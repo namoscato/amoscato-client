@@ -16,11 +16,10 @@ namespace Amo.Client {
             private item: IStreamItem,
             private imageConfig: IImageConfiguration,
             private config: IStreamConfiguration) {
-            const colorBrightnessDelta = StreamUtility.getRandomFloat(config.colorBrightnessMin, config.colorBrightnessMax);
             const height = item.photo_url ? item.photo_height : imageConfig.width;
             const width = item.photo_url ? item.photo_width : imageConfig.width;
 
-            this.color = StreamUtility.getColor((<any> config.typeColorMap)[item.type]).lightness(colorBrightnessDelta, true).hex();
+            this.color = StreamUtility.getRandomColor((<any> config.typeColorMap)[item.type], config.colorBrightnessMin, config.colorBrightnessMax);
             this.height = Number(height) / Number(width) * imageConfig.width;
         }
 

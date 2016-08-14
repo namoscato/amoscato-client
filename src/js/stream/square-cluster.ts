@@ -2,7 +2,7 @@
 
 namespace Amo.Client {
 
-    export interface IStreamSquareClusterConfiguration {
+    interface IStreamSquareClusterConfiguration {
         alignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
         columnBottom: number;
         columnLeft: number;
@@ -17,7 +17,7 @@ namespace Amo.Client {
         private sizeMin: number;
 
         constructor(
-            private columnWidth: number,
+            columnWidth: number,
             private streamConfig: IStreamConfiguration) {
             this.sizeMax = columnWidth * streamConfig.secondarySquareSizeMax;
             this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
@@ -45,10 +45,8 @@ namespace Amo.Client {
             let left = isLeft ? config.columnLeft : config.columnRight;
             let top = isTop ? config.columnTop : config.columnBottom;
 
-            const position = {
-                left: left,
-                top: top,
-            };
+            let positionLeft = left;
+            let positionTop = top;
 
             this.squares.sort((a, b) => {
                 return b.size - a.size;
@@ -61,26 +59,26 @@ namespace Amo.Client {
                     left += (isLeft ? 1 : -1) * square.size;
                     top += (isTop ? -1 : 1 ) * square.size;
                 } else if (this.isHorizontal) {
-                    position.left = left;
-                    position.top = isTop ? config.columnTop : config.columnBottom;
+                    positionLeft = left;
+                    positionTop = isTop ? config.columnTop : config.columnBottom;
 
                     left += (isLeft ? 1 : -1) * square.size;
                 } else {
-                    position.left = isLeft ? config.columnLeft : config.columnRight;
-                    position.top = top;
+                    positionLeft = isLeft ? config.columnLeft : config.columnRight;
+                    positionTop = top;
 
                     top += (isTop ? -1 : 1 ) * square.size;
                 }
 
                 if (!isLeft) {
-                    position.left -= square.size;
+                    positionLeft -= square.size;
                 }
 
                 if (!isTop) {
-                    position.top += square.size;
+                    positionTop += square.size;
                 }
 
-                html += square.generateHtml(position);
+                html += square.generateHtml(positionLeft, positionTop);
 
                 this.isHorizontal = !this.isHorizontal;
             });

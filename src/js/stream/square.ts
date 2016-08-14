@@ -2,13 +2,6 @@
 
 namespace Amo.Client {
 
-    interface IConfiguration {
-        bottom?: number;
-        left?: number;
-        right?: number;
-        top?: number;
-    }
-
     export class StreamSquare {
         private color: string;
 
@@ -16,63 +9,36 @@ namespace Amo.Client {
             public size: number,
             private item: IStreamItem,
             streamConfig: IStreamConfiguration) {
-            const colorBrightnessDelta = StreamUtility.getRandomFloat(streamConfig.colorBrightnessMin, streamConfig.colorBrightnessMax);
-
-            this.color = StreamUtility.getColor((<any> streamConfig.typeColorMap)[item.type]).lightness(colorBrightnessDelta, true).hex();
+            this.color = StreamUtility.getRandomColor(
+                (<any> streamConfig.typeColorMap)[item.type],
+                streamConfig.colorBrightnessMin,
+                streamConfig.colorBrightnessMax
+            );
         }
 
         /**
-         * @description Returns the image HTML
+         * @description Generates the square cluster HTML
+         * @param {number} left
+         * @param {number} top
          * @returns {string}
          */
-        public generateHtml(config: IConfiguration): string {
-            return this.createTag(
+        public generateHtml(left: number, top: number): string {
+            return StreamUtility.createTag(
                 'a',
                 {
                     class: 'stream-item stream-item-text',
                     href: this.item.url,
-                    style: this.createStyleAttribute({
+                    style: StreamUtility.createStyleAttribute({
                         'background-color': this.color,
                         height: this.size + 'px',
-                        left: config.left + 'px',
-                        top: config.top - this.size + 'px',
+                        left: left + 'px',
+                        top: top - this.size + 'px',
                         width: this.size + 'px',
                     }),
                     target: '_blank',
                     title: this.item.title,
                 }
             );
-        }
-
-        /**
-         * @description Creates an HTML tag from a set of attributes
-         * @param {String} tag
-         * @param {Object} attributes
-         * @returns {string}
-         */
-        private createTag(tag: string, attributes: Object): string {
-            tag = '<' + tag;
-
-            for (let i in attributes) {
-                tag += ' ' + i + '="' + (<any> attributes)[i] + '"';
-            }
-
-            return tag + '>';
-        }
-
-        /**
-         * @description Creates a style attribute from a set of properties
-         * @param {Object} properties
-         * @returns {string}
-         */
-        private createStyleAttribute(properties: Object): string {
-            let result = '';
-
-            for (let i in properties) {
-                result += i + ':' + (<any> properties)[i] + ';';
-            }
-
-            return result;
         }
     }
 }

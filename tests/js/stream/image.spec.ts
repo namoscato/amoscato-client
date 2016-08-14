@@ -4,22 +4,12 @@ describe('StreamImage', () => {
 
     let image: Object;
     let streamUtilitySpy: Amo.Client.StreamUtility;
-    let streamUtilityGetColorSpy: any;
-    let streamUtilityGetColorLightnessSpy: any;
 
     beforeEach(() => {
         streamUtilitySpy = Amo.Client.StreamUtility;
 
-        spyOn(streamUtilitySpy, 'getRandomFloat');
-        streamUtilitySpy.getRandomFloat.and.returnValue(1);
-
-        spyOn(streamUtilitySpy, 'getColor');
-        streamUtilityGetColorSpy = jasmine.createSpyObj('streamUtility.getColor', ['lightness']);
-        streamUtilitySpy.getColor.and.returnValue(streamUtilityGetColorSpy);
-
-        streamUtilityGetColorLightnessSpy = jasmine.createSpyObj('streamUtility.getColor.lightness', ['hex']);
-        streamUtilityGetColorLightnessSpy.hex.and.returnValue('color hex');
-        streamUtilityGetColorSpy.lightness.and.returnValue(streamUtilityGetColorLightnessSpy);
+        spyOn(streamUtilitySpy, 'getRandomColor');
+        streamUtilitySpy.getRandomColor.and.returnValue('color hex');
 
         image = {
             photo_height: 100,
@@ -53,9 +43,7 @@ describe('StreamImage', () => {
             });
 
             it('should generate random color', () => {
-                expect(streamUtilitySpy.getRandomFloat).toHaveBeenCalledWith(1, 2);
-                expect(streamUtilitySpy.getColor).toHaveBeenCalledWith('#color');
-                expect(streamUtilityGetColorSpy.lightness).toHaveBeenCalledWith(1, true);
+                expect(streamUtilitySpy.getRandomColor).toHaveBeenCalledWith('#color', 1, 2);
                 expect(target.color).toEqual('color hex');
             });
 
