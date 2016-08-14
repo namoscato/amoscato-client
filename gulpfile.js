@@ -93,7 +93,9 @@ gulp.task('css', function() {
 
     return stream
         .pipe(gulpConcat('all.css'))
-        .pipe(gulpCleanCss())
+        .pipe(gulpCleanCss({
+            keepSpecialComments: 0
+        }))
         .pipe(gulp.dest(css.dest));
 });
 

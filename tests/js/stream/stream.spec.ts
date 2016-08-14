@@ -21,7 +21,7 @@ describe('Stream', () => {
             'StreamColumn',
             [
                 'addItem',
-                'getHtml',
+                'generateHtml',
                 'getWidth',
             ]
         );
@@ -36,7 +36,7 @@ describe('Stream', () => {
             true
         );
 
-        columnSpy.getHtml.and.returnValues(
+        columnSpy.generateHtml.and.returnValues(
             'c1',
             'c2'
         );
@@ -58,6 +58,7 @@ describe('Stream', () => {
                 'p6',
             ],
             {
+                secondarySourceTypes: [],
                 windowWidth: 100,
             },
         );
@@ -68,9 +69,9 @@ describe('Stream', () => {
         window.$ = windowJQuery;
     });
 
-    describe('When getting the HTML', () => {
+    describe('When generating the HTML', () => {
         beforeEach(() => {
-            result = target.getHtml();
+            result = target.generateHtml();
         });
 
         it('should create columns', () => {
@@ -79,6 +80,8 @@ describe('Stream', () => {
                     [
                         0,
                         {
+                            secondarySourceTypeMap: {},
+                            secondarySourceTypes: [],
                             windowWidth: 100,
                         },
                         undefined,
@@ -86,6 +89,8 @@ describe('Stream', () => {
                     [
                         50,
                         {
+                            secondarySourceTypeMap: {},
+                            secondarySourceTypes: [],
                             windowWidth: 100,
                         },
                         'p3',

@@ -1,27 +1,36 @@
 /// <reference path="./image.ts" />
+/// <reference path="./square-cluster.ts" />
 /// <reference path="./utility.ts" />
 
 namespace Amo.Client {
 
     export class StreamColumn {
+        private bottom: number;
         private height: number;
         private width: number;
         private html = '';
         private offset: number;
+        private squareCluster: StreamSquareCluster;
         private top: number;
 
         constructor(
             private left: number,
-            private config: IStreamConfiguration,
+            private streamConfig: IStreamConfiguration,
             item?: IStreamItem) {
-            const xCoordinate = left - config.windowWidth / 2;
-            const heightMax = config.getColumnHeightMax(xCoordinate);
+            const xCoordinate = left - streamConfig.windowWidth / 2;
+            const heightMax = streamConfig.getColumnHeightMax(xCoordinate);
 
-            this.width = StreamUtility.getRandomInteger(config.photoWidthMin, config.photoWidthMax);
-            this.height = StreamUtility.getRandomInteger(config.getColumnHeightMin(xCoordinate), heightMax);
+            this.width = StreamUtility.getRandomInteger(streamConfig.photoWidthMin, streamConfig.photoWidthMax);
+            this.height = StreamUtility.getRandomInteger(streamConfig.getColumnHeightMin(xCoordinate), heightMax);
 
-            this.offset = config.getOffset(xCoordinate);
+            this.offset = streamConfig.getOffset(xCoordinate);
             this.top = StreamUtility.getRandomInteger(this.offset, heightMax - this.height + this.offset);
+            this.bottom = this.top;
+
+            this.squareCluster = new StreamSquareCluster(
+                this.getWidth(),
+                this.streamConfig
+            );
 
             if (item) {
                 this.addItem(item);
@@ -34,22 +43,27 @@ namespace Amo.Client {
          * @returns {boolean} Whether or not the item could be added
          */
         public addItem(item: IStreamItem): boolean {
+            if (typeof this.streamConfig.secondarySourceTypeMap[item.type] !== 'undefined') {
+                this.squareCluster.addItem(item);
+                return true;
+            }
+
             const image = new StreamImage(
                 item,
                 {
                     left: this.left,
-                    top: this.top,
+                    top: this.bottom,
                     width: this.width,
                 },
-                this.config
+                this.streamConfig
             );
 
-            if (this.top + image.getHeight() > this.height + this.offset) {
+            if (this.bottom + image.getHeight() > this.height + this.offset) {
                 return false;
             }
 
             this.html += image.getHtml();
-            this.top += image.getHeight();
+            this.bottom += image.getHeight();
 
             return true;
         }
@@ -58,8 +72,14 @@ namespace Amo.Client {
          * @description Returns the column HTML
          * @returns {string}
          */
-        public getHtml(): string {
-            return this.html;
+        public generateHtml(squareClusterAlignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'): string {
+            return this.html + this.squareCluster.generateHtml({
+                alignment: squareClusterAlignment,
+                columnBottom: this.bottom,
+                columnLeft: this.left,
+                columnRight: this.left + this.getWidth(),
+                columnTop: this.top,
+            });
         }
 
         /**

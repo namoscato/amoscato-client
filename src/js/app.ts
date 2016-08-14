@@ -23,9 +23,15 @@ namespace Amo.Client {
         },
         photoWidthMax: 150,
         photoWidthMin: 50,
+        secondarySourceTypes: [
+            'github',
+        ],
+        secondarySquareSizeMax: 0.3,
+        secondarySquareSizeMin: 0.1,
         typeColorMap: {
             flickr: '#CF006B',
             foodspotting: '#BA5D33',
+            github: '#8cc665',
             goodreads: '#A37134',
             lastfm: '#C40000',
             vimeo: '#3490C4',
@@ -45,7 +51,7 @@ namespace Amo.Client {
             );
 
             const setStreamHtml = () => {
-                streamElement.html(stream.getHtml());
+                streamElement.html(stream.generateHtml());
             };
 
             setStreamHtml();

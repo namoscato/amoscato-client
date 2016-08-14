@@ -3,6 +3,10 @@ namespace Amo.Client {
         (x: number): number;
     }
 
+    interface ISecondarySourceTypeMap {
+        [key: string]: boolean;
+    }
+
     export interface IStreamConfiguration {
         colorBrightnessMax: number;
         colorBrightnessMin: number;
@@ -11,6 +15,10 @@ namespace Amo.Client {
         getOffset: ICoordinateFunction;
         photoWidthMax: number;
         photoWidthMin: number;
+        secondarySourceTypes: Array<string>;
+        secondarySourceTypeMap?: ISecondarySourceTypeMap;
+        secondarySquareSizeMax: number;
+        secondarySquareSizeMin: number;
         typeColorMap: Object;
         windowWidth: number;
     }

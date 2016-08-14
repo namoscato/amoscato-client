@@ -19,6 +19,7 @@ describe('StreamColumn', () => {
         configSpy.getOffset.and.returnValue(14);
         configSpy.photoWidthMax = 11;
         configSpy.photoWidthMin = 10;
+        configSpy.secondarySourceTypeMap = {};
         configSpy.windowWidth = 500;
 
         spyOn(Amo.Client, 'StreamImage');
@@ -104,11 +105,13 @@ describe('StreamColumn', () => {
                 configSpy
             );
 
-            target.config = 'CONFIG';
+            target.streamConfig = {
+                secondarySourceTypeMap: {},
+            };
             target.height = 100;
             target.left = 1;
             target.offset = 50;
-            target.top = 2;
+            target.bottom = 2;
             target.width = 3;
 
             imageSpy.getHtml.and.returnValue('i1');
@@ -125,7 +128,9 @@ describe('StreamColumn', () => {
                     top: 2,
                     width: 3,
                 },
-                'CONFIG'
+                {
+                    secondarySourceTypeMap: {},
+                },
             );
         });
 
@@ -133,8 +138,8 @@ describe('StreamColumn', () => {
             expect(target.html).toEqual('i1');
         });
 
-        it('should update top', () => {
-            expect(target.top).toEqual(12);
+        it('should update bottom', () => {
+            expect(target.bottom).toEqual(12);
         });
 
         it('should return true', () => {
@@ -153,8 +158,8 @@ describe('StreamColumn', () => {
                 expect(target.html).toEqual('i1i2');
             });
 
-            it('should update top', () => {
-                expect(target.top).toEqual(150);
+            it('should update bottom', () => {
+                expect(target.bottom).toEqual(150);
             });
 
             it('should return true', () => {

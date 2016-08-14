@@ -2,18 +2,30 @@
 
 namespace Amo.Client {
 
+    const alignmentOptions = [
+        'top-left',
+        'top-right',
+        'bottom-left',
+        'bottom-right',
+    ];
+
     export class Stream {
 
         constructor(
             private items: Array<IStreamItem>,
             private config: IStreamConfiguration) {
+            config.secondarySourceTypeMap = {};
+
+            config.secondarySourceTypes.forEach((type) => {
+                config.secondarySourceTypeMap[type] = true;
+            });
         }
 
         /**
          * @description Returns the HTML for the initialized stream items
          * @returns {string}
          */
-        public getHtml(): string {
+        public generateHtml(): string {
             let left = 0;
             let html = '';
             let item: IStreamItem;
@@ -21,15 +33,11 @@ namespace Amo.Client {
             let column = this.createColumn(left);
 
             for (item of this.items) {
-                if (item.type === 'github') { // TODO: Add GitHub support
-                    continue;
-                }
-
                 if (column.addItem(item)) {
                     continue;
                 }
 
-                html += column.getHtml();
+                html += column.generateHtml(<any> alignmentOptions[StreamUtility.getRandomInteger(0, 3)]);
                 left += column.getWidth();
 
                 if (left > this.config.windowWidth) {
