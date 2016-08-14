@@ -8,6 +8,15 @@ describe('StreamImage', () => {
     beforeEach(() => {
         streamUtilitySpy = Amo.Client.StreamUtility;
 
+        spyOn(streamUtilitySpy, 'createStyleAttribute');
+        streamUtilitySpy.createStyleAttribute.and.returnValue('STYLE');
+
+        spyOn(streamUtilitySpy, 'createTag');
+        streamUtilitySpy.createTag.and.returnValues(
+            '<a>',
+            '<img>'
+        );
+
         spyOn(streamUtilitySpy, 'getRandomColor');
         streamUtilitySpy.getRandomColor.and.returnValue('color hex');
 
@@ -68,14 +77,6 @@ describe('StreamImage', () => {
      */
 
     describe('When getting the HTML', () => {
-        beforeEach(() => {
-            spyOn(target, 'createTag');
-            target.createTag.and.returnValues(
-                '<a>',
-                '<img>'
-            );
-        });
-
         describe('with a photo URL', () => {
             beforeEach(() => {
                 target.item = {
@@ -92,14 +93,11 @@ describe('StreamImage', () => {
                     width: 4,
                 };
 
-                spyOn(target, 'createStyleAttribute');
-                target.createStyleAttribute.and.returnValue('STYLE');
-
                 result = target.getHtml();
             });
 
             it('should create hyperlink tag', () => {
-                expect(target.createTag).toHaveBeenCalledWith(
+                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     'a',
                     {
                         class: 'stream-item stream-item-photo',
@@ -112,7 +110,7 @@ describe('StreamImage', () => {
             });
 
             it('should create style attrbute', () => {
-                expect(target.createStyleAttribute).toHaveBeenCalledWith({
+                expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
                     'background-color': 'COLOR',
                     'font-size': '0.6px',
                     height: '1px',
@@ -123,7 +121,7 @@ describe('StreamImage', () => {
             });
 
             it('should create image tag', () => {
-                expect(target.createTag).toHaveBeenCalledWith(
+                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     'img',
                     {
                         alt: 'TITLE',
@@ -147,7 +145,7 @@ describe('StreamImage', () => {
             });
 
             it('should create hyperlink tag', () => {
-                expect(target.createTag).toHaveBeenCalledWith(
+                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     'a',
                     jasmine.objectContaining({
                         class: 'stream-item stream-item-text',
@@ -158,47 +156,6 @@ describe('StreamImage', () => {
             it('should return HTML', () => {
                 expect(result).toEqual('<a><span class="stream-title">TITLE</span></a>');
             });
-        });
-    });
-
-    /**
-     * createTag
-     */
-
-    describe('When creating an image tag', () => {
-        beforeEach(() => {
-            construct();
-
-            result = target.createTag(
-                'img',
-                {
-                    attr1: 'value1',
-                    attr2: 'value2',
-                }
-            );
-        });
-
-        it('should return image tag', () => {
-            expect(result).toEqual('<img attr1="value1" attr2="value2">');
-        });
-    });
-
-    /**
-     * createStyleAttribute
-     */
-
-    describe('When creating a style attribute', () => {
-        beforeEach(() => {
-            construct();
-
-            result = target.createStyleAttribute({
-                key1: 'val1',
-                key2: 'val2',
-            });
-        });
-
-        it('should return style attribute', () => {
-            expect(result).toEqual('key1:val1;key2:val2;');
         });
     });
 });
