@@ -25,6 +25,7 @@ namespace Amo.Client {
         photoWidthMin: 50,
         secondarySourceTypes: [
             'github',
+            'twitter',
         ],
         secondarySquareSizeMax: 0.3,
         secondarySquareSizeMin: 0.1,
@@ -34,6 +35,7 @@ namespace Amo.Client {
             github: '#8cc665',
             goodreads: '#A37134',
             lastfm: '#C40000',
+            twitter: '#1da1f2',
             vimeo: '#3490C4',
             youtube: '#C41C14',
         },
