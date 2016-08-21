@@ -36,7 +36,7 @@ namespace Amo.Client {
                         width: this.size + 'px',
                     }),
                     target: '_blank',
-                    title: this.item.title,
+                    title: this.item.title.replace(/"/g, '&quot;'),
                 }
             );
         }
