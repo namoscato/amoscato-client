@@ -25,12 +25,12 @@
 // ------
 
 .social-item {
-    display: inline;
-    margin: 0 0.8em;
+    font-size: 1.4em;
+    display: block;
+    line-height: 2.5em;
 
     > a {
         color: $gray-dark;
-        line-height: 2em;
         text-decoration: none;
 
         &:hover {
@@ -81,9 +81,22 @@
     opacity: 0.6;
 }
 
+// -------------
+// Media Queries
+// -------------
+
 @media (min-width:30em) {
     .title {
         font-size: 2em;
+    }
+}
+
+@media (min-width:34em) {
+    .social-item {
+        display: inline;
+        font-size: 1em;
+        line-height: 2em;
+        margin: 0 0.8em;
     }
 }
 

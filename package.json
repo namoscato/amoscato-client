@@ -5,6 +5,7 @@
   "description": "Front end client for amoscato.com",
   "scripts": {
     "postinstall": "typings install --global",
+    "start": "hugo serve & gulp && fg",
     "pretest": "gulp all",
     "test": "karma start --single-run --browsers PhantomJS",
     "predeploy": "npm test && hugo",
