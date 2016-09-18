@@ -52,7 +52,7 @@ namespace Amo.Client {
                         width: this.imageConfig.width + 'px',
                     }),
                     target: '_blank',
-                    title: title,
+                    title,
                 }
             );
 
