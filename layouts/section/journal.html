@@ -1,0 +1,26 @@
+{{ partial "header-before.html" . }}
+{{ partial "header-after.html" . }}
+
+<div id="content">
+    <!-- <h2 class="title-sub">
+        <a href="/">Nick Amoscato</a>
+    </h2> -->
+    <h1>Journal</h1>
+    <ul class="journal-list">
+    {{ range .Data.Pages  }}
+        <li class="journal-list-item">
+            <h2 class="journal-list-item-title">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            <div class="title-sub">{{ .Date.Format "2006-01-02" }}</div>
+        </li>
+    {{ end }}
+    </ul>
+</div>
+
+<div id="footer">
+Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.    
+</div>
+
+{{ partial "frame.html" . }}
+{{ partial "footer.html" . }}

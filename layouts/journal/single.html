@@ -1,0 +1,13 @@
+{{ partial "header-before.html" . }}
+{{ partial "header-after.html" . }}
+
+<article id="content">
+    <h2 class="title-sub">
+        <a href="/journal/">Journal</a> / {{ .Date.Format "2006-01-02" }}
+    </h2>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+</article>
+
+{{ partial "frame.html" . }}
+{{ partial "footer.html" . }}

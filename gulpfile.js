@@ -61,7 +61,7 @@ gulp.task('js:app', function() {
 
     stream = stream.pipe(
         addStream.obj(gulp.src([js.src.typings, js.src.app])
-            .pipe(gulpTypescript(tsProject))
+            .pipe(tsProject())
             .pipe(gulpUglify({
                 compress: false,
             }))

@@ -1,34 +1,41 @@
-{{ partial "header" . }}
+{{ partial "header-before" . }}
+{{ partial "header-after" . }}
 
-<div id="content">
+<div id="content" class="is-homepage">
     <h2 class="title-sub title-sub-intro">Introduction</h2>
     <h1 class="title title-intro">Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.</h1>
-    <ul id="social">
-        <li class="social-item">
-            <a href="mailto:nicholas@amoscato.com">Email</a>
-        </li>
-        <li class="social-item">
-            <a href="https://www.flickr.com/photos/namoscato/" target="_default">Flickr</a>
-        </li>
-        <li class="social-item">
-            <a href="https://github.com/namoscato" target="_default">GitHub</a>
-        </li>
-        <li class="social-item">
-            <a href="http://www.last.fm/user/namoscato" target="_default">Last.fm</a>
-        </li>
-        <li class="social-item">
-            <a href="https://www.linkedin.com/in/namoscato" target="_default">LinkedIn</a>
-        </li>
-        <li class="social-item">
-            <a href="https://twitter.com/namoscato" target="_default">Twitter</a>
-        </li>
-    </ul>
-</h1>
+    <div id="homepage-content">
+        <h2 class="title-sub title-sub-intro">Currently</h2>
+        <h1 class="title title-intro">
+            {{ range first 1 .Data.Pages }}
+                writing <a href="{{ .Permalink }}">{{ .Title }}</a>
+            {{ end }}
+        </h1>
+        <ul id="social">
+            <li class="social-item">
+                <a href="mailto:nicholas@amoscato.com">Email</a>
+            </li>
+            <li class="social-item">
+                <a href="https://www.flickr.com/photos/namoscato/" target="_default">Flickr</a>
+            </li>
+            <li class="social-item">
+                <a href="https://github.com/namoscato" target="_default">GitHub</a>
+            </li>
+            <li class="social-item">
+                <a href="http://www.last.fm/user/namoscato" target="_default">Last.fm</a>
+            </li>
+            <li class="social-item">
+                <a href="https://www.linkedin.com/in/namoscato" target="_default">LinkedIn</a>
+            </li>
+            <li class="social-item">
+                <a href="https://twitter.com/namoscato" target="_default">Twitter</a>
+            </li>
+        </ul>
+    </div>
 </div>
-<div id="frame-top" class="frame"></div>
-<div id="frame-right" class="frame"></div>
-<div id="frame-bottom" class="frame"></div>
-<div id="frame-left" class="frame"></div>
+
+{{ partial "frame.html" . }}
+
 <div id="stream"></div>
 
 {{ partial "footer.html" . }}

@@ -1,11 +1,76 @@
 body {
-    background-color: $gray-light;
-    color: $black;
+    background-color: $color-gray-light;
+    color: $color-black;
+    font-family: $font-serif;
     overflow-x: hidden;
 }
 
 html,
-body,
-#content {
+body {
     height: 100%;
+}
+
+p {
+    line-height: 1.6;
+    margin: 1.3em 0 0;
+}
+
+p a {
+    border-bottom: 1px solid $color-orange-light;
+    color: $color-orange;
+    text-decoration: none;
+
+    &:hover {
+        border-bottom-color: $color-orange;
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: $font-serif-heading;
+}
+
+h1 {
+    line-height: 1.6em;
+    margin: 0.2em 0 0;
+    max-width: 50rem;
+}
+
+h2 {
+    margin: 1.5em 0 0;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+.highlight {
+    margin: 1.5em -1.5em;
+    overflow-x: auto;
+}
+
+code,
+pre {
+    font-family: Hack, monospace;
+}
+
+code {
+    background-color: $color-gray;
+    color: $color-blue-dark;
+    padding: 0.2em 0.3em;
+}
+
+pre {
+    display: inline-block;
+    margin: 0;
+    padding: 1.5em;
+}
+
+blockquote {
+    border-left: 2px solid $color-blue-dark;
+    margin: 0;
+    padding: 0 0 0 1.5em;
 }

@@ -1,25 +1,33 @@
 #content {
-    margin: 2em auto;
+    margin: 5em auto;
     padding: 0 4em;
-    max-width: 60em;
+    max-width: 43.75em;
     position: relative;
-    top: 10%;
+
+    &.is-homepage {
+        height: 100%;
+        margin: 2em auto;
+        top: 10%;
+    }
 }
 
-#social,
+#homepage-content,
 #stream {
     position: absolute;
     top: 65%;
 }
 
-#social {
-    font-family: $font-sans-serif;
-    font-size: 0.85em;
-    left: 0;
-    list-style-type: none;
+#homepage-content {
     margin: 450px 0 5em;
+    left: 0;
     padding: 0 4em;
     right: 0;
+}
+
+#social {
+    font-family: $font-sans-serif;
+    list-style-type: none;
+    margin-top: 4em;
     text-align: center;
 }
 
@@ -34,7 +42,7 @@
 // -----
 
 .frame {
-    background-color: $white;
+    background-color: $color-white;
     position: fixed;
 }
 
@@ -81,7 +89,7 @@
 }
 
 @media (min-height:43em) {
-    #social,
+    #homepage-content,
     #stream {
         top: 55%;
     }
