@@ -1,6 +1,7 @@
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
+    const streamElement: JQuery = $('#homepage-stream');
     const windowElement: JQuery = $(window);
 
     const streamConfig = {
@@ -41,37 +42,38 @@ namespace Amo.Client {
         },
         windowWidth: windowElement.width(),
     };
-    const streamElement: JQuery = $('#homepage-stream');
 
-    $.get(
-        '/data/stream.json',
-        (data) => {
-            let resizeTimeout: number;
-            const stream = new Stream(
-                data,
-                streamConfig
-            );
+    if (streamElement.length) {
+        $.get(
+            '/data/stream.json',
+            (data) => {
+                let resizeTimeout: number;
+                const stream = new Stream(
+                    data,
+                    streamConfig
+                );
 
-            const setStreamHtml = () => {
-                streamElement.html(stream.generateHtml());
-            };
+                const setStreamHtml = () => {
+                    streamElement.html(stream.generateHtml());
+                };
 
-            setStreamHtml();
+                setStreamHtml();
 
-            windowElement.resize(() => {
-                const windowWidth = windowElement.width();
+                windowElement.resize(() => {
+                    const windowWidth = windowElement.width();
 
-                if (streamConfig.windowWidth === windowWidth) {
-                    return;
-                }
+                    if (streamConfig.windowWidth === windowWidth) {
+                        return;
+                    }
 
-                clearTimeout(resizeTimeout);
+                    clearTimeout(resizeTimeout);
 
-                resizeTimeout = setTimeout(() => {
-                    streamConfig.windowWidth = windowWidth;
-                    setStreamHtml();
-                }, 150);
-            });
-        }
-    );
+                    resizeTimeout = setTimeout(() => {
+                        streamConfig.windowWidth = windowWidth;
+                        setStreamHtml();
+                    }, 150);
+                });
+            }
+        );
+    }
 }
