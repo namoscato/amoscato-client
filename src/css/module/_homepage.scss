@@ -1,0 +1,48 @@
+// -----------------
+// Homepage Headings
+// -----------------
+
+.homepage-subtitle::after {
+    content: '—';
+    margin-left: 0.5em;
+}
+
+.homepage-introduction {
+    font-size: 1.5em;
+}
+
+// --------------
+// Currently List
+// --------------
+
+.homepage-current-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.homepage-current-list-item {
+    font: bold 1.7em $font-serif-heading;
+    margin-top: .5em;
+
+    > a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+// -------------
+// Media Queries
+// -------------
+
+@media (min-width:30em) {
+    .homepage-introduction {
+        font-size: 2em;
+    }
+}
+
+@media (min-height:43em) and (min-width:45em) {
+    .homepage-introduction {
+        font-size: 2.6em;
+    }
+}

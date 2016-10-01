@@ -41,7 +41,7 @@ namespace Amo.Client {
         },
         windowWidth: windowElement.width(),
     };
-    const streamElement: JQuery = $('#stream');
+    const streamElement: JQuery = $('#homepage-stream');
 
     $.get(
         '/data/stream.json',

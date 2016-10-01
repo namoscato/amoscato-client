@@ -10,8 +10,12 @@ body {
     height: 100%;
 }
 
+// ----------
+// Paragraphs
+// ----------
+
 p {
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 1.3em 0 0;
 }
 
@@ -25,14 +29,23 @@ p a {
     }
 }
 
+// --------
+// Headings
+// --------
+
 h1,
 h2,
 h3 {
     font-family: $font-serif-heading;
+
+    > a {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 h1 {
-    line-height: 1.6em;
+    line-height: 1.6;
     margin: 0.2em 0 0;
     max-width: 50rem;
 }
@@ -41,11 +54,18 @@ h2 {
     margin: 1.5em 0 0;
 }
 
-ul,
-ol {
+.subtitle {
+    color: $color-gray-dark;
+    font-family: $font-sans-serif;
+    font-size: 1.2em;
+    font-weight: normal;
     margin: 0;
-    padding: 0;
+    text-transform: uppercase;
 }
+
+// -----------
+// Code Blocks
+// -----------
 
 .highlight {
     margin: 1.5em -1.5em;
@@ -68,6 +88,10 @@ pre {
     margin: 0;
     padding: 1.5em;
 }
+
+// ------------
+// Block Quotes
+// ------------
 
 blockquote {
     border-left: 2px solid $color-blue-dark;

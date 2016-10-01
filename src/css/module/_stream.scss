@@ -1,0 +1,41 @@
+// ------
+// Stream
+// ------
+
+.stream-item {
+    color: $color-white;
+    display: inline-block;
+    font-family: $font-sans-serif;
+    overflow: hidden;
+    position: absolute;
+    text-align: right;
+    text-decoration: none;
+
+    > img {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.stream-item-photo:hover {
+    > img {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        opacity: 0.8;
+    }
+
+    .stream-title {
+        display: none;
+    }
+}
+
+.stream-item-text:hover {
+    opacity: 0.85;
+}
+
+.stream-title {
+    opacity: 0.6;
+}

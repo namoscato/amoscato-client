@@ -1,3 +1,11 @@
+    {{ if eq .URL "/" }}{{ else }}
+        <div id="footer">
+            <p>
+                <a href="/">Nick Amoscato</a> is a software engineer, designer, and musician based in Pittsburgh.
+            </p>
+            {{ partial "social.html" . }}
+        </div>
+    {{ end }}
     <script src="/js/all.js"></script>
     <script>
         if (window.location.hostname !== 'localhost') {

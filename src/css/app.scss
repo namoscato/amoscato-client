@@ -1,5 +1,13 @@
 @import 'variables';
-
 @import 'base';
-@import 'layout';
-@import 'modules';
+
+// Layouts
+@import 'layout/frame';
+@import 'layout/homepage';
+@import 'layout/layout';
+
+// Modules
+@import 'module/homepage';
+@import 'module/journal';
+@import 'module/social';
+@import 'module/stream';

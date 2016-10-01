@@ -1,0 +1,38 @@
+// ------
+// Social
+// ------
+
+.social {
+    font-family: $font-sans-serif;
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.social-item {
+    font-size: 1.3em;
+    display: block;
+    line-height: 2.5em;
+
+    > a {
+        color: $color-gray-dark;
+        text-decoration: none;
+
+        &:hover {
+            color: lighten($color-gray-dark, 20%);
+        }
+    }
+}
+
+// -------------
+// Media Queries
+// -------------
+
+@media (min-width:40em) {
+    .social-item {
+        display: inline;
+        font-size: 1em;
+        line-height: 2em;
+        margin: 0 0.8em;
+    }
+}

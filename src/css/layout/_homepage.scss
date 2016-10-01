@@ -1,0 +1,52 @@
+// --------
+// Homepage
+// --------
+
+#homepage {
+    height: 100%;
+    margin: 2em auto;
+    max-width: $site-width;
+    padding: 0 4em;
+    position: relative;
+    top: 10%;
+}
+
+#homepage-content,
+#homepage-stream {
+    position: absolute;
+    top: 65%;
+}
+
+#homepage-content {
+    margin: 470px 0 5em;
+    left: 0;
+    padding: 0 4em;
+    right: 0;
+}
+
+#homepage-stream {
+    height: 550px;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+#homepage-social {
+    margin-top: 4em;
+}
+
+// -------------
+// Media Queries
+// -------------
+
+@media (min-width:43em) {
+    #homepage-stream {
+        overflow-x: visible;
+    }
+}
+
+@media (min-height:43em) {
+    #homepage-content,
+    #homepage-stream {
+        top: 55%;
+    }
+}

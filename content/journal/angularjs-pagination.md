@@ -1,7 +1,7 @@
 +++
 title = "Lessons Learned: AngularJS Pagination"
-date = "2015-08-16"
-draft = true
+date = "2015-08-16T21:35:00"
+description = "A description of AngularJS pagination patterns around fetching, storing, and interacting with data, having learned from previous missteps."
 +++
 
 Once upon a time, I had an idea to create this all-inclusive pagination service that would abstract the common logic used when interacting with a server-side paginated result set via an AngularJS application. A few whiteboarding sessions with a co-worker led to some informal specifications, and shortly thereafter, a well-documented `apiPaginationService` was born.

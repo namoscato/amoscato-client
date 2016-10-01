@@ -1,41 +1,71 @@
 {{ partial "header-before" . }}
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Person",
+        "name": "Nick Amoscato",
+        "url": "http://amoscato.com",
+        "email": "nicholas@amoscato.com",
+        "jobTitle": "Software Engineer",
+        "homeLocation": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pittsburgh",
+            "addressRegion": "PA"
+        },
+        "worksFor": {
+            "@context": "http://www.schema.org",
+            "@type": "Corporation",
+            "name": "Jazz",
+            "url": "https://jazz.co",
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+1-888-353-0887",
+                    "contactType": "customer service"
+                }
+            ]
+        },
+        "alumniOf": {
+            "@type": "OrganizationRole",
+            "alumniOf": {
+                "@type": "CollegeOrUniversity",
+                "name": "University of Pittsburgh",
+                "sameAs": "https://en.wikipedia.org/wiki/University_of_Pittsburgh"
+            },
+            "startDate": "2010"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/namoscato",
+            "https://twitter.com/namoscato",
+            "https://github.com/namoscato",
+            "https://www.flickr.com/photos/namoscato/"
+        ]
+    }
+</script>
+
 {{ partial "header-after" . }}
 
-<div id="content" class="is-homepage">
-    <h2 class="title-sub title-sub-intro">Introduction</h2>
-    <h1 class="title title-intro">Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.</h1>
+<div id="homepage">
+    <h2 class="subtitle homepage-subtitle">Introduction</h2>
+    <h1 class="homepage-introduction">Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.</h1>
     <div id="homepage-content">
-        <h2 class="title-sub title-sub-intro">Currently</h2>
-        <h1 class="title title-intro">
-            {{ range first 1 .Data.Pages }}
-                writing <a href="{{ .Permalink }}">{{ .Title }}</a>
-            {{ end }}
-        </h1>
-        <ul id="social">
-            <li class="social-item">
-                <a href="mailto:nicholas@amoscato.com">Email</a>
-            </li>
-            <li class="social-item">
-                <a href="https://www.flickr.com/photos/namoscato/" target="_default">Flickr</a>
-            </li>
-            <li class="social-item">
-                <a href="https://github.com/namoscato" target="_default">GitHub</a>
-            </li>
-            <li class="social-item">
-                <a href="http://www.last.fm/user/namoscato" target="_default">Last.fm</a>
-            </li>
-            <li class="social-item">
-                <a href="https://www.linkedin.com/in/namoscato" target="_default">LinkedIn</a>
-            </li>
-            <li class="social-item">
-                <a href="https://twitter.com/namoscato" target="_default">Twitter</a>
+        <h2 class="subtitle homepage-subtitle">Currently</h2>
+        <ul class="homepage-current-list">
+            <li class="homepage-current-list-item">
+                {{ range first 1 .Data.Pages }}
+                    writing <a href="{{ .Permalink }}">&ldquo;{{ .Title }}&rdquo;</a>
+                {{ end }}
             </li>
         </ul>
+        <div id="homepage-social">
+            {{ partial "social.html" . }}
+        </div>
     </div>
 </div>
 
 {{ partial "frame.html" . }}
 
-<div id="stream"></div>
+<div id="homepage-stream"></div>
 
 {{ partial "footer.html" . }}

@@ -1,7 +1,7 @@
 +++
 title = "AngularJS Patterns"
-date = "2015-07-19"
-draft = true
+date = "2015-07-19T12:34:00"
+description = "Some thoughts on AngularJS data loading, service architecture, and controller patterns after a year of exposure to the framework."
 +++
 
 I gave a brief engineering talk yesterday at [Jazz](https://jazz.co) – yes, The Resumator [rebranded](https://jazz.co/blog/the-resumator-is-now-jazz) a month ago and no, I haven’t had a chance to even update my site until now. I regret that this site has gotten stale; I realize literally every “recent” blog post begins with an apology, but life goes on.

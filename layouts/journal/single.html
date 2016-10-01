@@ -1,8 +1,28 @@
 {{ partial "header-before.html" . }}
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id":"{{ .Site.BaseURL }}"
+        },
+        "headline": "{{ .Title }} - {{ .Site.Title }}",
+        "datePublished": "{{ .Date.Format "2006-01-02T15:04:05EST" }}",
+        "dateModified": "{{ .Date.Format "2006-01-02T15:04:05EST" }}",
+        "author": {
+            "@type": "Person",
+            "name": "Nick Amoscato"
+        },
+        "description": "{{ .Description }}"
+    }
+</script>
+
 {{ partial "header-after.html" . }}
 
 <article id="content">
-    <h2 class="title-sub">
+    <h2 class="subtitle">
         <a href="/journal/">Journal</a> / {{ .Date.Format "2006-01-02" }}
     </h2>
     <h1>{{ .Title }}</h1>

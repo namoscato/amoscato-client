@@ -1,0 +1,40 @@
+// -----
+// Frame
+// -----
+
+.frame {
+    background-color: $color-white;
+    position: fixed;
+}
+
+#frame-top,
+#frame-right,
+#frame-left {
+    top: 0;
+}
+
+#frame-top,
+#frame-bottom,
+#frame-left {
+    left: 0;
+}
+
+#frame-top,
+#frame-bottom {
+    height: 2rem;
+    width: 100%;
+}
+
+#frame-right,
+#frame-left {
+    height: 100%;
+    width: 2rem;
+}
+
+#frame-right {
+    right: 0;
+}
+
+#frame-bottom {
+    bottom: 0;
+}
