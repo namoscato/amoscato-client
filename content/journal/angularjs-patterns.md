@@ -1,6 +1,6 @@
 +++
-title = "AngularJS Patterns"
 date = "2015-07-19T12:34:00"
+title = "AngularJS Patterns"
 description = "Some thoughts on AngularJS data loading, service architecture, and controller patterns after a year of exposure to the framework."
 +++
 

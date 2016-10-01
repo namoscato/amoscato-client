@@ -1,6 +1,6 @@
 +++
-title = "Lessons Learned: AngularJS Pagination"
 date = "2015-08-16T21:35:00"
+title = "Lessons Learned: AngularJS Pagination"
 description = "A description of AngularJS pagination patterns around fetching, storing, and interacting with data, having learned from previous missteps."
 +++
 
