@@ -1,9 +1,14 @@
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
+    const currentListElement: JQuery = $('#homepage-currently');
     const streamElement: JQuery = $('#homepage-stream');
     const windowElement: JQuery = $(window);
 
+    const currentListSources = [
+        'lastfm',
+        'goodreads',
+    ];
     const streamConfig = {
         colorBrightnessMax: 0.1,
         colorBrightnessMin: -0.1,
@@ -42,6 +47,17 @@ namespace Amo.Client {
         },
         windowWidth: windowElement.width(),
     };
+
+    if (currentListElement.length) {
+        $.get(
+            '/data/current.json',
+            (data) => {
+                const currentList = new CurrentList(currentListSources, data);
+
+                currentListElement.append(currentList.getHtml());
+            }
+        );
+    }
 
     if (streamElement.length) {
         $.get(
