@@ -37,7 +37,7 @@ describe('CurrentList', () => {
             });
 
             it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="by goodreads author, started formatted goodreads date">reading <a href="goodreads url" target="_default">&ldquo;goodreads title&rdquo;</a></li>');
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="by goodreads author, started formatted goodreads date">reading <a href="goodreads url" target="_blank">&ldquo;goodreads title&rdquo;</a></li>');
             });
         });
 
@@ -58,7 +58,7 @@ describe('CurrentList', () => {
             });
 
             it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="formatted journal date">writing <a href="journal url" target="_default">&ldquo;journal title&rdquo;</a></li>');
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="formatted journal date">writing <a href="journal url" target="_self">&ldquo;journal title&rdquo;</a></li>');
             });
         });
 
@@ -81,7 +81,7 @@ describe('CurrentList', () => {
             });
 
             it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="&ldquo;lastfm name&rdquo; on lastfm album, formatted lastfm date">listening to <a href="lastfm url" target="_default">lastfm artist</a></li>');
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="&ldquo;lastfm name&rdquo; on lastfm album, formatted lastfm date">listening to <a href="lastfm url" target="_blank">lastfm artist</a></li>');
             });
         });
     });

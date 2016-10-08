@@ -3,6 +3,7 @@ declare var moment: any;
 namespace Amo.Client {
 
     interface IListItem {
+        target?: string;
         title: string;
         tooltip: string;
         url: string;
@@ -47,7 +48,11 @@ namespace Amo.Client {
          * @returns {string}
          */
         private getListItemHtml(item: IListItem): string {
-            return `<li class="homepage-current-list-item" title="${item.tooltip}">${item.verb} <a href="${item.url}" target="_default">${item.title}</a></li>`;
+            if (typeof item.target === 'undefined') {
+                item.target = '_blank';
+            }
+
+            return `<li class="homepage-current-list-item" title="${item.tooltip}">${item.verb} <a href="${item.url}" target="${item.target}">${item.title}</a></li>`;
         }
 
         /**
@@ -67,6 +72,7 @@ namespace Amo.Client {
                     });
                 case 'journal':
                     return this.getListItemHtml({
+                        target: '_self',
                         title: this.quoteText(item.title),
                         tooltip: this.formatDate(item.date),
                         url: item.url,
