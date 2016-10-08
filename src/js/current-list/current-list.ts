@@ -1,7 +1,10 @@
+declare var moment: any;
+
 namespace Amo.Client {
 
     interface IListItem {
         title: string;
+        tooltip: string;
         url: string;
         verb: string;
     };
@@ -12,7 +15,7 @@ namespace Amo.Client {
         constructor(
             private sources: Array<string>,
             private data: any) {
-            ['lastfm', 'goodreads'].forEach((source) => {
+            sources.forEach((source) => {
                 const item = data[source];
 
                 if (item !== null) {
@@ -30,12 +33,21 @@ namespace Amo.Client {
         }
 
         /**
+         * @description Formats the specified date
+         * @param {string} date
+         * @returns {string}
+         */
+        private formatDate(date: string): string {
+            return moment.utc(date).fromNow();
+        }
+
+        /**
          * @description Returns the HTML for the specified list item
          * @param {IListItem} item
          * @returns {string}
          */
         private getListItemHtml(item: IListItem): string {
-            return `<li class="homepage-current-list-item">${item.verb} <a href="${item.url}" target="_default">${item.title}</a></li>`;
+            return `<li class="homepage-current-list-item" title="${item.tooltip}">${item.verb} <a href="${item.url}" target="_default">${item.title}</a></li>`;
         }
 
         /**
@@ -49,16 +61,26 @@ namespace Amo.Client {
                 case 'goodreads':
                     return this.getListItemHtml({
                         title: this.quoteText(item.title),
+                        tooltip: `by ${item.author}, started ${this.formatDate(item.date)}`,
                         url: item.url,
                         verb: 'reading',
+                    });
+                case 'journal':
+                    return this.getListItemHtml({
+                        title: this.quoteText(item.title),
+                        tooltip: this.formatDate(item.date),
+                        url: item.url,
+                        verb: 'writing',
                     });
                 case 'lastfm':
                     return this.getListItemHtml({
                         title: item.artist,
+                        tooltip: `${this.quoteText(item.name)} on ${item.album}, ${this.formatDate(item.date)}`,
                         url: item.url,
                         verb: 'listening to',
                     });
                 default:
+                    return '';
             }
         }
 

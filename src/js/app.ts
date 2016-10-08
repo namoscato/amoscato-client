@@ -5,7 +5,8 @@ namespace Amo.Client {
     const streamElement: JQuery = $('#homepage-stream');
     const windowElement: JQuery = $(window);
 
-    const currentListSources = [
+    const currentListSources: Array<string> = [
+        'journal',
         'lastfm',
         'goodreads',
     ];
@@ -52,6 +53,12 @@ namespace Amo.Client {
         $.get(
             '/data/current.json',
             (data) => {
+                data.journal = {
+                    date: currentListElement.data('journal-date'),
+                    title: currentListElement.data('journal-title'),
+                    url: currentListElement.data('journal-url'),
+                };
+
                 const currentList = new CurrentList(currentListSources, data);
 
                 currentListElement.append(currentList.getHtml());
