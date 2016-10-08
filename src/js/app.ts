@@ -1,3 +1,4 @@
+/// <reference path="./current-list/current-list.ts" />
 /// <reference path="./stream/stream.ts" />
 
 namespace Amo.Client {
