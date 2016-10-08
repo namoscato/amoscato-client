@@ -18,30 +18,30 @@ describe('CurrentList', () => {
         Amo.Client.CurrentList.prototype.formatDate = formatDate;
     });
 
-    describe('When generating the HTML for', () => {
-        describe('Goodreads', () => {
+    describe('When generating the HTML for a', () => {
+        describe('book', () => {
             beforeEach(() => {
                 target = new Amo.Client.CurrentList(
                     [
-                        'goodreads',
+                        'book',
                     ],
                     {
-                        goodreads: {
-                            author: 'goodreads author',
-                            date: 'goodreads date',
-                            title: 'goodreads title',
-                            url: 'goodreads url',
+                        book: {
+                            author: 'book author',
+                            date: 'book date',
+                            title: 'book title',
+                            url: 'book url',
                         },
                     }
                 );
             });
 
             it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="by goodreads author, started formatted goodreads date">reading <a href="goodreads url" target="_blank">&ldquo;goodreads title&rdquo;</a></li>');
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="by book author, started formatted book date">reading <a href="book url" target="_blank">&ldquo;book title&rdquo;</a></li>');
             });
         });
 
-        describe('a journal', () => {
+        describe('journal', () => {
             beforeEach(() => {
                 target = new Amo.Client.CurrentList(
                     [
@@ -62,26 +62,47 @@ describe('CurrentList', () => {
             });
         });
 
-        describe('Last.fm', () => {
+        describe('song', () => {
             beforeEach(() => {
                 target = new Amo.Client.CurrentList(
                     [
-                        'lastfm',
+                        'music',
                     ],
                     {
-                        lastfm: {
-                            album: 'lastfm album',
-                            artist: 'lastfm artist',
-                            date: 'lastfm date',
-                            name: 'lastfm name',
-                            url: 'lastfm url',
+                        music: {
+                            album: 'music album',
+                            artist: 'music artist',
+                            date: 'music date',
+                            name: 'music name',
+                            url: 'music url',
                         },
                     }
                 );
             });
 
             it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="&ldquo;lastfm name&rdquo; on lastfm album, formatted lastfm date">listening to <a href="lastfm url" target="_blank">lastfm artist</a></li>');
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="&ldquo;music name&rdquo; on music album, formatted music date">listening to <a href="music url" target="_blank">music artist</a></li>');
+            });
+        });
+
+        describe('video', () => {
+            beforeEach(() => {
+                target = new Amo.Client.CurrentList(
+                    [
+                        'video',
+                    ],
+                    {
+                        video: {
+                            date: 'video date',
+                            title: 'video title',
+                            url: 'video url',
+                        },
+                    }
+                );
+            });
+
+            it('should generate HTML', () => {
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="formatted video date">watching <a href="video url" target="_blank">&ldquo;video title&rdquo;</a></li>');
             });
         });
     });

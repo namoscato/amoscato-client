@@ -63,7 +63,7 @@ namespace Amo.Client {
          */
         private getSourceHtml(source: string, item: any): string {
             switch (source) {
-                case 'goodreads':
+                case 'book':
                     return this.getListItemHtml({
                         title: this.quoteText(item.title),
                         tooltip: `by ${item.author}, started ${this.formatDate(item.date)}`,
@@ -78,12 +78,19 @@ namespace Amo.Client {
                         url: item.url,
                         verb: 'writing',
                     });
-                case 'lastfm':
+                case 'music':
                     return this.getListItemHtml({
                         title: item.artist,
                         tooltip: `${this.quoteText(item.name)} on ${item.album}, ${this.formatDate(item.date)}`,
                         url: item.url,
                         verb: 'listening to',
+                    });
+                case 'video':
+                    return this.getListItemHtml({
+                        title: this.quoteText(item.title),
+                        tooltip: this.formatDate(item.date),
+                        url: item.url,
+                        verb: 'watching',
                     });
                 default:
                     return '';

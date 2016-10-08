@@ -8,8 +8,9 @@ namespace Amo.Client {
 
     const currentListSources: Array<string> = [
         'journal',
-        'lastfm',
-        'goodreads',
+        'music',
+        'book',
+        'video',
     ];
     const streamConfig = {
         colorBrightnessMax: 0.1,
