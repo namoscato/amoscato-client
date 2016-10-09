@@ -70,6 +70,13 @@ namespace Amo.Client {
                         url: item.url,
                         verb: 'reading',
                     });
+                case 'food':
+                    return this.getListItemHtml({
+                        title: item.place,
+                        tooltip: `${item.item}, ${this.formatDate(item.date)}`,
+                        url: item.url,
+                        verb: 'eating at',
+                    });
                 case 'journal':
                     return this.getListItemHtml({
                         target: '_self',
