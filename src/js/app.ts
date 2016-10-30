@@ -12,6 +12,7 @@ namespace Amo.Client {
         'book',
         'video',
         'food',
+        'drink',
     ];
     const streamConfig = {
         colorBrightnessMax: 0.1,

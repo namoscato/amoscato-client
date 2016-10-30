@@ -41,6 +41,29 @@ describe('CurrentList', () => {
             });
         });
 
+        describe('drink', () => {
+            beforeEach(() => {
+                target = new Amo.Client.CurrentList(
+                    [
+                        'drink',
+                    ],
+                    {
+                        drink: {
+                            brewery: 'drink brewery',
+                            date: 'drink date',
+                            name: 'drink name',
+                            url: 'drink url',
+                            venue: 'drink venue',
+                        },
+                    }
+                );
+            });
+
+            it('should generate HTML', () => {
+                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="by drink brewery at drink venue, formatted drink date">drinking <a href="drink url" target="_blank">drink name</a></li>');
+            });
+        });
+
         describe('food', () => {
             beforeEach(() => {
                 target = new Amo.Client.CurrentList(
