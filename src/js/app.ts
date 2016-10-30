@@ -47,6 +47,7 @@ namespace Amo.Client {
             goodreads: '#A37134',
             lastfm: '#C40000',
             twitter: '#1da1f2',
+            untappd: '#ffcc01',
             vimeo: '#3490C4',
             youtube: '#C41C14',
         },
