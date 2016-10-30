@@ -73,7 +73,7 @@ namespace Amo.Client {
                 case 'drink':
                     return this.getListItemHtml({
                         title: item.name,
-                        tooltip: `by ${item.brewery} at ${item.venue}, ${this.formatDate(item.date)}`,
+                        tooltip: `by ${item.brewery}, ${this.formatDate(item.date)}`,
                         url: item.url,
                         verb: 'drinking',
                     });
