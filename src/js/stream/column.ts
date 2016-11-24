@@ -29,7 +29,7 @@ namespace Amo.Client {
 
             this.squareCluster = new StreamSquareCluster(
                 this.getWidth(),
-                this.streamConfig
+                this.streamConfig,
             );
 
             if (item) {
@@ -54,7 +54,7 @@ namespace Amo.Client {
                     top: this.bottom,
                     width: this.width,
                 },
-                this.streamConfig
+                this.streamConfig,
             );
 
             if (this.bottom + image.getHeight() > this.height + this.offset) {

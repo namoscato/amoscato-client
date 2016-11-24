@@ -12,7 +12,7 @@ namespace Amo.Client {
 
     export class StreamSquareCluster {
         private isHorizontal: boolean;
-        private squares: Array<StreamSquare> = [];
+        private squares: StreamSquare[] = [];
         private sizeMax: number;
         private sizeMin: number;
 
@@ -33,8 +33,8 @@ namespace Amo.Client {
                 new StreamSquare(
                     StreamUtility.getRandomInteger(this.sizeMin, this.sizeMax),
                     item,
-                    this.streamConfig
-                )
+                    this.streamConfig,
+                ),
             );
 
             return true;

@@ -6,7 +6,7 @@ namespace Amo.Client {
     const streamElement: JQuery = $('#homepage-stream');
     const windowElement: JQuery = $(window);
 
-    const currentListSources: Array<string> = [
+    const currentListSources: string[] = [
         'journal',
         'music',
         'book',
@@ -67,7 +67,7 @@ namespace Amo.Client {
                 const currentList = new CurrentList(currentListSources, data);
 
                 currentListElement.append(currentList.getHtml());
-            }
+            },
         );
     }
 
@@ -78,7 +78,7 @@ namespace Amo.Client {
                 let resizeTimeout: number;
                 const stream = new Stream(
                     data,
-                    streamConfig
+                    streamConfig,
                 );
 
                 const setStreamHtml = () => {
@@ -101,7 +101,7 @@ namespace Amo.Client {
                         setStreamHtml();
                     }, 150);
                 });
-            }
+            },
         );
     }
 }

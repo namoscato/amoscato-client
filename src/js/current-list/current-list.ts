@@ -14,7 +14,7 @@ namespace Amo.Client {
         private html: string = '';
 
         constructor(
-            private sources: Array<string>,
+            private sources: string[],
             private data: any) {
             sources.forEach((source) => {
                 const item = data[source];

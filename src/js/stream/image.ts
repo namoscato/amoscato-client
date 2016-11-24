@@ -46,14 +46,14 @@ namespace Amo.Client {
                     style: StreamUtility.createStyleAttribute({
                         'background-color': this.color,
                         'font-size': this.imageConfig.width * 0.15 + 'px',
-                        height: this.height + 'px',
-                        left: this.imageConfig.left + 'px',
-                        top: this.imageConfig.top + 'px',
-                        width: this.imageConfig.width + 'px',
+                        'height': this.height + 'px',
+                        'left': this.imageConfig.left + 'px',
+                        'top': this.imageConfig.top + 'px',
+                        'width': this.imageConfig.width + 'px',
                     }),
                     target: '_blank',
                     title,
-                }
+                },
             );
 
             html += `<span class="stream-title">${title}</span>`;
@@ -63,7 +63,7 @@ namespace Amo.Client {
                     'img',
                     {
                         src: this.item.photo_url,
-                    }
+                    },
                 );
             }
 

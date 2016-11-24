@@ -56,7 +56,7 @@ namespace Amo.Client {
                 .getColor(color)
                 .lightness(
                     this.getRandomFloat(colorBrightnessMin, colorBrightnessMax),
-                    true
+                    true,
                 )
                 .hex();
         }

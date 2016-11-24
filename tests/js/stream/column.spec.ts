@@ -32,7 +32,7 @@ describe('StreamColumn', () => {
             [
                 'getHeight',
                 'getHtml',
-            ]
+            ],
         );
 
         spyOn(Amo.Client, 'StreamSquareCluster');
@@ -43,7 +43,7 @@ describe('StreamColumn', () => {
             [
                 'addItem',
                 'generateHtml',
-            ]
+            ],
         );
     });
 
@@ -61,7 +61,7 @@ describe('StreamColumn', () => {
             beforeEach(() => {
                 target = new Amo.Client.StreamColumn(
                     500,
-                    configSpy
+                    configSpy,
                 );
             });
 
@@ -102,7 +102,7 @@ describe('StreamColumn', () => {
                 target = new Amo.Client.StreamColumn(
                     500,
                     configSpy,
-                    'ITEM'
+                    'ITEM',
                 );
             });
 
@@ -120,7 +120,7 @@ describe('StreamColumn', () => {
         beforeEach(() => {
             target = new Amo.Client.StreamColumn(
                 500,
-                configSpy
+                configSpy,
             );
 
             target.streamConfig = {
@@ -209,7 +209,7 @@ describe('StreamColumn', () => {
 
             target = new Amo.Client.StreamColumn(
                 500,
-                configSpy
+                configSpy,
             );
 
             target.addItem({
@@ -236,7 +236,7 @@ describe('StreamColumn', () => {
         beforeEach(() => {
             target = new Amo.Client.StreamColumn(
                 500,
-                configSpy
+                configSpy,
             );
 
             target.html = 'HTML';

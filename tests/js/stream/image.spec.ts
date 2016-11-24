@@ -14,7 +14,7 @@ describe('StreamImage', () => {
         spyOn(streamUtilitySpy, 'createTag');
         streamUtilitySpy.createTag.and.returnValues(
             '<a>',
-            '<img>'
+            '<img>',
         );
 
         spyOn(streamUtilitySpy, 'getRandomColor');
@@ -105,7 +105,7 @@ describe('StreamImage', () => {
                         style: 'STYLE',
                         target: '_blank',
                         title: 'TITLE',
-                    }
+                    },
                 );
             });
 
@@ -113,10 +113,10 @@ describe('StreamImage', () => {
                 expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
                     'background-color': 'COLOR',
                     'font-size': '0.6px',
-                    height: '1px',
-                    left: '2px',
-                    top: '3px',
-                    width: '4px',
+                    'height': '1px',
+                    'left': '2px',
+                    'top': '3px',
+                    'width': '4px',
                 });
             });
 
@@ -125,7 +125,7 @@ describe('StreamImage', () => {
                     'img',
                     {
                         src: 'PHOTO URL',
-                    }
+                    },
                 );
             });
 
@@ -148,7 +148,7 @@ describe('StreamImage', () => {
                     'a',
                     jasmine.objectContaining({
                         class: 'stream-item stream-item-text',
-                    })
+                    }),
                 );
             });
 

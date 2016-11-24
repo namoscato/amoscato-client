@@ -52,10 +52,10 @@ describe('StreamSquare', () => {
         it('should create style attribute', () => {
             expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
                 'background-color': 'color hex',
-                height: '5px',
-                left: '10px',
-                top: '15px',
-                width: '5px',
+                'height': '5px',
+                'left': '10px',
+                'top': '15px',
+                'width': '5px',
             });
         });
 

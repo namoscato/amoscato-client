@@ -15,7 +15,7 @@ namespace Amo.Client {
         getOffset: ICoordinateFunction;
         photoWidthMax: number;
         photoWidthMin: number;
-        secondarySourceTypes: Array<string>;
+        secondarySourceTypes: string[];
         secondarySourceTypeMap?: ISecondarySourceTypeMap;
         secondarySquareSizeMax: number;
         secondarySquareSizeMin: number;

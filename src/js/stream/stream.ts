@@ -12,7 +12,7 @@ namespace Amo.Client {
     export class Stream {
 
         constructor(
-            private items: Array<IStreamItem>,
+            private items: IStreamItem[],
             private config: IStreamConfiguration) {
             config.secondarySourceTypeMap = {};
 

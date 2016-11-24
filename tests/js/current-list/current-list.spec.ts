@@ -32,7 +32,7 @@ describe('CurrentList', () => {
                             title: 'book title',
                             url: 'book url',
                         },
-                    }
+                    },
                 );
             });
 
@@ -54,7 +54,7 @@ describe('CurrentList', () => {
                             name: 'drink name',
                             url: 'drink url',
                         },
-                    }
+                    },
                 );
             });
 
@@ -76,7 +76,7 @@ describe('CurrentList', () => {
                             place: 'food place',
                             url: 'food url',
                         },
-                    }
+                    },
                 );
             });
 
@@ -97,7 +97,7 @@ describe('CurrentList', () => {
                             title: 'journal title',
                             url: 'journal url',
                         },
-                    }
+                    },
                 );
             });
 
@@ -120,7 +120,7 @@ describe('CurrentList', () => {
                             name: 'music name',
                             url: 'music url',
                         },
-                    }
+                    },
                 );
             });
 
@@ -141,7 +141,7 @@ describe('CurrentList', () => {
                             title: 'video title',
                             url: 'video url',
                         },
-                    }
+                    },
                 );
             });
 

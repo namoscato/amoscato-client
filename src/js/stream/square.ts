@@ -12,7 +12,7 @@ namespace Amo.Client {
             this.color = StreamUtility.getRandomColor(
                 (<any> streamConfig.typeColorMap)[item.type],
                 streamConfig.colorBrightnessMin,
-                streamConfig.colorBrightnessMax
+                streamConfig.colorBrightnessMax,
             );
         }
 
@@ -30,14 +30,14 @@ namespace Amo.Client {
                     href: this.item.url,
                     style: StreamUtility.createStyleAttribute({
                         'background-color': this.color,
-                        height: this.size + 'px',
-                        left: left + 'px',
-                        top: top - this.size + 'px',
-                        width: this.size + 'px',
+                        'height': this.size + 'px',
+                        'left': left + 'px',
+                        'top': top - this.size + 'px',
+                        'width': this.size + 'px',
                     }),
                     target: '_blank',
                     title: this.item.title.replace(/"/g, '&quot;'),
-                }
+                },
             );
         }
     }

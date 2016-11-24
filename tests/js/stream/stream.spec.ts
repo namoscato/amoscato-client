@@ -23,7 +23,7 @@ describe('Stream', () => {
                 'addItem',
                 'generateHtml',
                 'getWidth',
-            ]
+            ],
         );
 
         columnSpy.addItem.and.returnValues(
@@ -33,17 +33,17 @@ describe('Stream', () => {
             true,
             false,
             true,
-            true
+            true,
         );
 
         columnSpy.generateHtml.and.returnValues(
             'c1',
-            'c2'
+            'c2',
         );
 
         columnSpy.getWidth.and.returnValues(
             50,
-            51
+            51,
         );
 
         jQuerySpy.width.and.returnValue(100);
@@ -95,7 +95,7 @@ describe('Stream', () => {
                         },
                         'p3',
                     ],
-                ]
+                ],
             );
         });
 
@@ -117,7 +117,7 @@ describe('Stream', () => {
                     [
                         'p5',
                     ],
-                ]
+                ],
             );
         });
 
