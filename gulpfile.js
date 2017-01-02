@@ -13,6 +13,7 @@ var vinylFtp = require('vinyl-ftp');
 
 var build = {
     src: [
+        'public/.htaccess',
         'public/**/*.*',
         '!public/data/*'
     ],
