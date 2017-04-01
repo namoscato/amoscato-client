@@ -9,5 +9,8 @@ module.exports = function(config) {
         preprocessors: {
           "tests/**/*.spec.ts": ["typescript"]
         },
+        typescriptPreprocessor: {
+            typescript: require('typescript')
+        },
     });
 }
