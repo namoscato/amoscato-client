@@ -1,5 +1,5 @@
 {
-    "extends": "tslint:latest",
+    "extends": "tslint:recommended",
     "rules": {
         "forin": false,
         "max-line-length": false,

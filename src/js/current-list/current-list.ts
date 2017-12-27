@@ -8,7 +8,7 @@ namespace Amo.Client {
         tooltip: string;
         url: string;
         verb: string;
-    };
+    }
 
     export class CurrentList {
         private html: string = '';

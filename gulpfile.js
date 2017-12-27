@@ -36,8 +36,7 @@ var js = {
             'node_modules/onecolor/one-color.js',
             'node_modules/moment/min/moment.min.js',
         ],
-        test: 'tests/js/**/*.ts',
-        typings: 'typings/**/*.ts'
+        test: 'tests/js/**/*.ts'
     },
     dest: 'static/js'
 };
@@ -62,7 +61,7 @@ gulp.task('js:app', function() {
         }));
 
     stream = stream.pipe(
-        addStream.obj(gulp.src([js.src.typings, js.src.app])
+        addStream.obj(gulp.src(js.src.app)
             .pipe(tsProject())
             .pipe(gulpUglify({
                 compress: false,

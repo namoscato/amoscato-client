@@ -9,11 +9,11 @@ namespace Amo.Client {
          * @param {Object} properties
          * @returns {string}
          */
-        public static createStyleAttribute(properties: Object): string {
+        public static createStyleAttribute(properties: object): string {
             let result = '';
 
-            for (let i in properties) {
-                result += i + ':' + (<any> properties)[i] + ';';
+            for (const i in properties) {
+                result += i + ':' + (properties as any)[i] + ';';
             }
 
             return result;
@@ -25,11 +25,11 @@ namespace Amo.Client {
          * @param {Object} attributes
          * @returns {string}
          */
-        public static createTag(tag: string, attributes: Object): string {
+        public static createTag(tag: string, attributes: object): string {
             tag = '<' + tag;
 
-            for (let i in attributes) {
-                tag += ' ' + i + '="' + (<any> attributes)[i] + '"';
+            for (const i in attributes) {
+                tag += ' ' + i + '="' + (attributes as any)[i] + '"';
             }
 
             return tag + '>';

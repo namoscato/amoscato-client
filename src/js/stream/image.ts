@@ -19,7 +19,7 @@ namespace Amo.Client {
             const height = item.photo_url ? item.photo_height : imageConfig.width;
             const width = item.photo_url ? item.photo_width : imageConfig.width;
 
-            this.color = StreamUtility.getRandomColor((<any> config.typeColorMap)[item.type], config.colorBrightnessMin, config.colorBrightnessMax);
+            this.color = StreamUtility.getRandomColor((config.typeColorMap as any)[item.type], config.colorBrightnessMin, config.colorBrightnessMax);
             this.height = Number(height) / Number(width) * imageConfig.width;
         }
 

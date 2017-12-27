@@ -1,7 +1,5 @@
 namespace Amo.Client {
-    export interface ICoordinateFunction {
-        (x: number): number;
-    }
+    export type ICoordinateFunction = (x: number) => number;
 
     interface ISecondarySourceTypeMap {
         [key: string]: boolean;
@@ -19,7 +17,7 @@ namespace Amo.Client {
         secondarySourceTypeMap?: ISecondarySourceTypeMap;
         secondarySquareSizeMax: number;
         secondarySquareSizeMin: number;
-        typeColorMap: Object;
+        typeColorMap: object;
         windowWidth: number;
     }
 

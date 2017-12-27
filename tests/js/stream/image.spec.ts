@@ -2,7 +2,7 @@ describe('StreamImage', () => {
     let result: any;
     let target: Amo.Client.StreamImage;
 
-    let image: Object;
+    let image: object;
     let streamUtilitySpy: Amo.Client.StreamUtility;
 
     beforeEach(() => {

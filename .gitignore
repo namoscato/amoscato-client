@@ -6,4 +6,3 @@ node_modules/
 /static/**/*.js
 /static/data/
 /themes/
-/typings/

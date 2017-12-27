@@ -1,7 +1,7 @@
 describe('CurrentList', () => {
     let target: Amo.Client.CurrentList;
 
-    let formatDate: Function;
+    let formatDate: any;
     let formatDateSpy: any;
 
     beforeEach(() => {

@@ -4,7 +4,13 @@
         "noResolve": false,
         "out": "static/js/app.js",
         "removeComments": true,
-        "sourceMap": false
+        "sourceMap": false,
+        "target": "es5",
+        "lib": [
+            "es6",
+            "dom",
+            "scripthost"
+        ]
     },
     "exclude": [
         "node_modules"

@@ -10,7 +10,7 @@ namespace Amo.Client {
             private item: IStreamItem,
             streamConfig: IStreamConfiguration) {
             this.color = StreamUtility.getRandomColor(
-                (<any> streamConfig.typeColorMap)[item.type],
+                (streamConfig.typeColorMap as any)[item.type],
                 streamConfig.colorBrightnessMin,
                 streamConfig.colorBrightnessMax,
             );

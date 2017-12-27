@@ -37,7 +37,7 @@ namespace Amo.Client {
                     continue;
                 }
 
-                html += column.generateHtml(<any> alignmentOptions[StreamUtility.getRandomInteger(0, 3)]);
+                html += column.generateHtml((alignmentOptions as any)[StreamUtility.getRandomInteger(0, 3)]);
                 left += column.getWidth();
 
                 if (left > this.config.windowWidth) {
