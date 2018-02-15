@@ -1,5 +1,5 @@
 +++
-date = "2018-02-15T23:11:00-05:00"
+date = "2018-02-14T23:11:00-05:00"
 title = "Observable Development"
 description = "Parallels are drawn between system operations and software development."
 +++

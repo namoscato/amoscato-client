@@ -55,9 +55,9 @@
         <ul
             id="homepage-currently"
             class="homepage-current-list"
-            data-journal-date="{{ $journal.Date.Format "2006-01-02 15:04:05" }}"
-            data-journal-title="{{ $journal.Title }}"
-            data-journal-url="{{ $journal.Permalink }}">
+            data-journal-date="{{ dateFormat "2006-01-02 15:04:05" .Date.UTC }}"
+            data-journal-title="{{ .Title }}"
+            data-journal-url="{{ .Permalink }}">
         </ul>
         {{ end }}
         <div id="homepage-social">
