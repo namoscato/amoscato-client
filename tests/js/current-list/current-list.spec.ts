@@ -63,28 +63,6 @@ describe('CurrentList', () => {
             });
         });
 
-        describe('food', () => {
-            beforeEach(() => {
-                target = new Amo.Client.CurrentList(
-                    [
-                        'food',
-                    ],
-                    {
-                        food: {
-                            date: 'food date',
-                            item: 'food item',
-                            place: 'food place',
-                            url: 'food url',
-                        },
-                    },
-                );
-            });
-
-            it('should generate HTML', () => {
-                expect(target.getHtml()).toEqual('<li class="homepage-current-list-item" title="food item, formatted food date">eating at <a href="food url" target="_blank">food place</a></li>');
-            });
-        });
-
         describe('journal', () => {
             beforeEach(() => {
                 target = new Amo.Client.CurrentList(

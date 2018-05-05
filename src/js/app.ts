@@ -11,7 +11,6 @@ namespace Amo.Client {
         'music',
         'book',
         'video',
-        'food',
         'drink',
     ];
     const streamConfig = {

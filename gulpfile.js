@@ -45,13 +45,7 @@ var tsProject = gulpTypescript.createProject('tsconfig.json');
 
 gulp.task('default', ['all', 'watch']);
 
-gulp.task('all', [
-    'js:app',
-    'js:lint',
-    'css'
-]);
-
-gulp.task('js', ['js:app', 'js:lint']);
+gulp.task('all', ['js:app', 'css']);
 
 gulp.task('js:app', function() {
     var stream = gulp.src(js.src.lib)
@@ -119,14 +113,6 @@ gulp.task('watch', function() {
     gulp.watch(
         js.src.app,
         ['js:app']
-    );
-
-    gulp.watch(
-        [
-            js.src.app,
-            js.src.test
-        ],
-        ['js:lint']
     );
 
     gulp.watch(

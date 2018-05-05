@@ -1,6 +1,6 @@
 module.exports = function(config) {
     config.set({
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         files: [
             'static/js/all.js',
             'tests/**/*.spec.ts',

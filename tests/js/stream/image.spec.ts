@@ -77,6 +77,10 @@ describe('StreamImage', () => {
      */
 
     describe('When getting the HTML', () => {
+        beforeEach(() => {
+            construct();
+        });
+
         describe('with a photo URL', () => {
             beforeEach(() => {
                 target.item = {
