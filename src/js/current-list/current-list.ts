@@ -10,6 +10,11 @@ namespace Amo.Client {
         verb: string;
     }
 
+    const stravaTypeVerbMap: any = {
+        Ride: 'biking',
+        Run: 'running',
+    };
+
     export class CurrentList {
         private html: string = '';
 
@@ -63,6 +68,17 @@ namespace Amo.Client {
          */
         private getSourceHtml(source: string, item: any): string {
             switch (source) {
+                case 'athleticActivity':
+                    if ('undefined' === typeof stravaTypeVerbMap[item.type]) {
+                        return '';
+                    }
+
+                    return this.getListItemHtml({
+                        title: `${Math.floor(100 * item.miles) / 100} miles`,
+                        tooltip: `in ${Math.ceil(item.minutes)} minutes, ${this.formatDate(item.date)}`,
+                        url: item.url,
+                        verb: stravaTypeVerbMap[item.type],
+                    });
                 case 'book':
                     return this.getListItemHtml({
                         title: this.quoteText(item.title),

@@ -9,6 +9,7 @@ namespace Amo.Client {
     const currentListSources: string[] = [
         'journal',
         'music',
+        'athleticActivity',
         'book',
         'video',
         'drink',
