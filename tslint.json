@@ -3,7 +3,6 @@
     "rules": {
         "forin": false,
         "max-line-length": false,
-        "no-namespace": false,
         "no-reference": false,
         "only-arrow-functions": true,
         "quotemark": [true, "single"]

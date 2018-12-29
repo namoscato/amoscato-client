@@ -1,96 +1,95 @@
-/// <reference path="./utility.ts" />
+import { IStreamConfiguration, IStreamItem } from './interface';
+import { StreamSquare } from './square';
+import { StreamUtility } from './utility';
 
-namespace Amo.Client {
+interface IStreamSquareClusterConfiguration {
+    alignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+    columnBottom: number;
+    columnLeft: number;
+    columnRight: number;
+    columnTop: number;
+}
 
-    interface IStreamSquareClusterConfiguration {
-        alignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-        columnBottom: number;
-        columnLeft: number;
-        columnRight: number;
-        columnTop: number;
+export class StreamSquareCluster {
+    private isHorizontal: boolean;
+    private squares: StreamSquare[] = [];
+    private sizeMax: number;
+    private sizeMin: number;
+
+    constructor(
+        columnWidth: number,
+        private streamConfig: IStreamConfiguration) {
+        this.sizeMax = columnWidth * streamConfig.secondarySquareSizeMax;
+        this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
     }
 
-    export class StreamSquareCluster {
-        private isHorizontal: boolean;
-        private squares: StreamSquare[] = [];
-        private sizeMax: number;
-        private sizeMin: number;
+    /**
+     * @description Adds the specified stream item to the square cluster
+     * @param {IStreamItem} item
+     * @returns {boolean}
+     */
+    public addItem(item: IStreamItem): boolean {
+        this.squares.push(
+            new StreamSquare(
+                StreamUtility.getRandomInteger(this.sizeMin, this.sizeMax),
+                item,
+                this.streamConfig,
+            ),
+        );
 
-        constructor(
-            columnWidth: number,
-            private streamConfig: IStreamConfiguration) {
-            this.sizeMax = columnWidth * streamConfig.secondarySquareSizeMax;
-            this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
-        }
+        return true;
+    }
 
-        /**
-         * @description Adds the specified stream item to the square cluster
-         * @param {IStreamItem} item
-         * @returns {boolean}
-         */
-        public addItem(item: IStreamItem): boolean {
-            this.squares.push(
-                new StreamSquare(
-                    StreamUtility.getRandomInteger(this.sizeMin, this.sizeMax),
-                    item,
-                    this.streamConfig,
-                ),
-            );
+    /**
+     * @description Returns the image HTML
+     * @returns {string}
+     */
+    public generateHtml(config: IStreamSquareClusterConfiguration): string {
+        const isLeft = config.alignment.substr(-4) === 'left';
+        const isTop = config.alignment.substr(0, 3) === 'top';
 
-            return true;
-        }
+        let html = '';
+        let left = isLeft ? config.columnLeft : config.columnRight;
+        let top = isTop ? config.columnTop : config.columnBottom;
 
-        /**
-         * @description Returns the image HTML
-         * @returns {string}
-         */
-        public generateHtml(config: IStreamSquareClusterConfiguration): string {
-            const isLeft = config.alignment.substr(-4) === 'left';
-            const isTop = config.alignment.substr(0, 3) === 'top';
+        let positionLeft = left;
+        let positionTop = top;
 
-            let html = '';
-            let left = isLeft ? config.columnLeft : config.columnRight;
-            let top = isTop ? config.columnTop : config.columnBottom;
+        this.squares.sort((a, b) => {
+            return b.size - a.size;
+        });
 
-            let positionLeft = left;
-            let positionTop = top;
+        this.isHorizontal = false;
 
-            this.squares.sort((a, b) => {
-                return b.size - a.size;
-            });
+        this.squares.forEach((square, i) => {
+            if (i === 0) {
+                left += (isLeft ? 1 : -1) * square.size;
+                top += (isTop ? -1 : 1 ) * square.size;
+            } else if (this.isHorizontal) {
+                positionLeft = left;
+                positionTop = isTop ? config.columnTop : config.columnBottom;
 
-            this.isHorizontal = false;
+                left += (isLeft ? 1 : -1) * square.size;
+            } else {
+                positionLeft = isLeft ? config.columnLeft : config.columnRight;
+                positionTop = top;
 
-            this.squares.forEach((square, i) => {
-                if (i === 0) {
-                    left += (isLeft ? 1 : -1) * square.size;
-                    top += (isTop ? -1 : 1 ) * square.size;
-                } else if (this.isHorizontal) {
-                    positionLeft = left;
-                    positionTop = isTop ? config.columnTop : config.columnBottom;
+                top += (isTop ? -1 : 1 ) * square.size;
+            }
 
-                    left += (isLeft ? 1 : -1) * square.size;
-                } else {
-                    positionLeft = isLeft ? config.columnLeft : config.columnRight;
-                    positionTop = top;
+            if (!isLeft) {
+                positionLeft -= square.size;
+            }
 
-                    top += (isTop ? -1 : 1 ) * square.size;
-                }
+            if (!isTop) {
+                positionTop += square.size;
+            }
 
-                if (!isLeft) {
-                    positionLeft -= square.size;
-                }
+            html += square.generateHtml(positionLeft, positionTop);
 
-                if (!isTop) {
-                    positionTop += square.size;
-                }
+            this.isHorizontal = !this.isHorizontal;
+        });
 
-                html += square.generateHtml(positionLeft, positionTop);
-
-                this.isHorizontal = !this.isHorizontal;
-            });
-
-            return html;
-        }
+        return html;
     }
 }

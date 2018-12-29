@@ -1,16 +1,12 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
-        "noResolve": false,
-        "out": "static/js/app.js",
+        "outFile": "static/js/app.js",
         "removeComments": true,
-        "sourceMap": false,
         "target": "es5",
-        "lib": [
-            "es6",
-            "dom",
-            "scripthost"
-        ]
+        "module": "amd",
+        "moduleResolution": "node",
+        "allowJs": true
     },
     "exclude": [
         "node_modules"

@@ -31,11 +31,6 @@ var css = {
 var js = {
     src: {
         app: 'src/js/**/*.ts',
-        lib: [
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/onecolor/one-color.js',
-            'node_modules/moment/min/moment.min.js',
-        ],
         test: 'tests/js/**/*.ts'
     },
     dest: 'static/js'
@@ -48,22 +43,9 @@ gulp.task('default', ['all', 'watch']);
 gulp.task('all', ['js:app', 'css']);
 
 gulp.task('js:app', function() {
-    var stream = gulp.src(js.src.lib)
-        .pipe(gulpUglify({
-            mangle: false,
-            compress: false,
-        }));
-
-    stream = stream.pipe(
-        addStream.obj(gulp.src(js.src.app)
-            .pipe(tsProject())
-            .pipe(gulpUglify({
-                compress: false,
-            }))
-        )
-    );
-
-    return stream
+    return gulp.src(js.src.app)
+        .pipe(tsProject())
+        .pipe(gulpUglify())
         .pipe(gulpConcat('all.js'))
         .pipe(gulp.dest(js.dest));
 });
