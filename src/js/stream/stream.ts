@@ -13,9 +13,8 @@ export class Stream {
 
     constructor(
         private items: IStreamItem[],
-        private config: IStreamConfiguration) {
-        config.secondarySourceTypeMap = {};
-
+        private config: IStreamConfiguration,
+    ) {
         config.secondarySourceTypes.forEach((type) => {
             config.secondarySourceTypeMap[type] = true;
         });

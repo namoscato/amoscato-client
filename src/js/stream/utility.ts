@@ -1,5 +1,3 @@
-import * as oneColor from 'onecolor';
-
 export class StreamUtility {
 
     /**
@@ -39,7 +37,7 @@ export class StreamUtility {
      * @returns {Object}
      */
     public static getColor(hex: string) {
-        return oneColor(hex);
+        return one.color(hex);
     }
 
     /**

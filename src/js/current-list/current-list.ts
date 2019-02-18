@@ -18,7 +18,8 @@ export default class CurrentList {
 
     constructor(
         private sources: string[],
-        private data: any) {
+        private data: any,
+    ) {
         sources.forEach((source) => {
             const item = data[source];
 

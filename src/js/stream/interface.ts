@@ -13,7 +13,7 @@ export interface IStreamConfiguration {
     photoWidthMax: number;
     photoWidthMin: number;
     secondarySourceTypes: string[];
-    secondarySourceTypeMap?: ISecondarySourceTypeMap;
+    secondarySourceTypeMap: ISecondarySourceTypeMap;
     secondarySquareSizeMax: number;
     secondarySquareSizeMin: number;
     typeColorMap: object;

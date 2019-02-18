@@ -7,7 +7,7 @@
     "start": "hugo serve & gulp && fg",
     "pretest": "gulp all",
     "test": "karma start --single-run",
-    "posttest": "gulp js:lint",
+    "posttest": "gulp lint",
     "predeploy": "npm test && hugo",
     "deploy": "gulp deploy"
   },
@@ -16,32 +16,37 @@
     "url": "git://github.com/namoscato/amoscato-client.git"
   },
   "dependencies": {
-    "add-stream": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^4.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-tslint": "^8.1.2",
-    "gulp-typescript": "^4.0.2",
-    "gulp-uglify": "^3.0.1",
-    "gulp-util": "^3.0.7",
-    "normalize.css": "^8.0.1",
-    "requirejs": "^2.3.6",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2",
-    "vinyl-ftp": "^0.6.0"
+    "@babel/polyfill": "^7.2.5",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.8.14",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jasmine": "^3.3",
     "@types/jquery": "^3.3.29",
     "@types/moment": "^2.13.0",
+    "babel-loader": "^8.0.5",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-tslint": "^8.1.3",
+    "gulp-typescript": "^5.0.0",
     "jasmine-core": "^3.3.0",
-    "karma": "^2.0.5",
+    "karma": "^4.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-jasmine": "^1.1.2",
-    "karma-typescript-preprocessor": "^0.3.2"
+    "karma-jasmine": "^2.0",
+    "karma-typescript-preprocessor": "^0.4.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3",
+    "vinyl-ftp": "^0.6.1",
+    "webpack": "^4.29.5",
+    "webpack-stream": "^5.2.1"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=8"
   }
 }

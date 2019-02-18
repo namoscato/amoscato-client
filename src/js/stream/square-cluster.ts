@@ -2,7 +2,7 @@ import { IStreamConfiguration, IStreamItem } from './interface';
 import { StreamSquare } from './square';
 import { StreamUtility } from './utility';
 
-interface IStreamSquareClusterConfiguration {
+export interface IStreamSquareClusterConfiguration {
     alignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
     columnBottom: number;
     columnLeft: number;
@@ -11,7 +11,6 @@ interface IStreamSquareClusterConfiguration {
 }
 
 export class StreamSquareCluster {
-    private isHorizontal: boolean;
     private squares: StreamSquare[] = [];
     private sizeMax: number;
     private sizeMin: number;
@@ -52,6 +51,7 @@ export class StreamSquareCluster {
         let left = isLeft ? config.columnLeft : config.columnRight;
         let top = isTop ? config.columnTop : config.columnBottom;
 
+        let isHorizontal = false;
         let positionLeft = left;
         let positionTop = top;
 
@@ -59,13 +59,11 @@ export class StreamSquareCluster {
             return b.size - a.size;
         });
 
-        this.isHorizontal = false;
-
         this.squares.forEach((square, i) => {
             if (i === 0) {
                 left += (isLeft ? 1 : -1) * square.size;
                 top += (isTop ? -1 : 1 ) * square.size;
-            } else if (this.isHorizontal) {
+            } else if (isHorizontal) {
                 positionLeft = left;
                 positionTop = isTop ? config.columnTop : config.columnBottom;
 
@@ -87,7 +85,7 @@ export class StreamSquareCluster {
 
             html += square.generateHtml(positionLeft, positionTop);
 
-            this.isHorizontal = !this.isHorizontal;
+            isHorizontal = !isHorizontal;
         });
 
         return html;

@@ -1,14 +1,11 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
-        "noImplicitAny": true,
-        "outFile": "static/js/app.js",
-        "removeComments": true,
-        "target": "es5",
-        "module": "amd",
+        "baseUrl": "src",
         "moduleResolution": "node",
-        "allowJs": true
+        "noEmit": true,
+        "strict": true,
+        "target": "es2015"
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "exclude": ["node_modules"]
 }

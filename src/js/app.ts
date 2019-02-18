@@ -1,5 +1,6 @@
 import * as $ from 'jquery';
 import CurrentList from './current-list/current-list';
+import { IStreamConfiguration } from './stream/interface';
 import { Stream } from './stream/stream';
 
 const currentListElement = $('#homepage-currently');
@@ -14,7 +15,7 @@ const currentListSources: string[] = [
     'video',
     'drink',
 ];
-const streamConfig = {
+const streamConfig: IStreamConfiguration = {
     colorBrightnessMax: 0.1,
     colorBrightnessMin: -0.1,
     getColumnHeightMax: (x: number) => {
@@ -34,6 +35,7 @@ const streamConfig = {
     },
     photoWidthMax: 150,
     photoWidthMin: 50,
+    secondarySourceTypeMap: {},
     secondarySourceTypes: [
         'github',
         'twitter',
@@ -51,7 +53,7 @@ const streamConfig = {
         vimeo: '#3490C4',
         youtube: '#C41C14',
     },
-    windowWidth: windowElement.width(),
+    windowWidth: Number(windowElement.width()),
 };
 
 if (currentListElement.length) {
@@ -88,7 +90,7 @@ if (streamElement.length) {
             setStreamHtml();
 
             windowElement.resize(() => {
-                const windowWidth = windowElement.width();
+                const windowWidth = Number(windowElement.width());
 
                 if (streamConfig.windowWidth === windowWidth) {
                     return;
