@@ -26,7 +26,6 @@ const config = {
             'src/css/app.scss',
         ],
     },
-    ftp: require('./ftpconfig'),
     js: {
         dest: 'static/js',
         src: {
@@ -59,10 +58,11 @@ function css() {
 }
 
 function deploy() {
+    const ftpConfig = require('./ftpconfig');
     const ftpConnection = vinylFtp.create({
-        host: config.ftp.host,
-        user: config.ftp.user,
-        password: config.ftp.password,
+        host: ftpConfig.host,
+        user: ftpConfig.user,
+        password: ftpConfig.password,
         parallel: 10,
         log,
     });
