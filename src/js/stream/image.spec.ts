@@ -1,24 +1,28 @@
+import StreamImage, { IImageConfiguration } from './image';
+import { IStreamConfiguration, IStreamItem } from './interface';
+import { StreamUtility } from './utility';
+
 describe('StreamImage', () => {
     let result: any;
-    let target: Amo.Client.StreamImage;
+    let target: StreamImage;
 
-    let image: object;
-    let streamUtilitySpy: Amo.Client.StreamUtility;
+    let image: any;
+    let streamUtilitySpy: StreamUtility;
 
     beforeEach(() => {
-        streamUtilitySpy = Amo.Client.StreamUtility;
+        streamUtilitySpy = StreamUtility;
 
-        spyOn(streamUtilitySpy, 'createStyleAttribute');
-        streamUtilitySpy.createStyleAttribute.and.returnValue('STYLE');
+        spyOn(streamUtilitySpy as any, 'createStyleAttribute');
+        (streamUtilitySpy as any).createStyleAttribute.and.returnValue('STYLE');
 
-        spyOn(streamUtilitySpy, 'createTag');
-        streamUtilitySpy.createTag.and.returnValues(
+        spyOn(streamUtilitySpy as any, 'createTag');
+        (streamUtilitySpy as any).createTag.and.returnValues(
             '<a>',
             '<img>',
         );
 
-        spyOn(streamUtilitySpy, 'getRandomColor');
-        streamUtilitySpy.getRandomColor.and.returnValue('color hex');
+        spyOn(streamUtilitySpy as any, 'getRandomColor');
+        (streamUtilitySpy as any).getRandomColor.and.returnValue('color hex');
 
         image = {
             photo_height: 100,
@@ -28,18 +32,18 @@ describe('StreamImage', () => {
     });
 
     const construct = () => {
-        target = new Amo.Client.StreamImage(
-            image,
+        target = new StreamImage(
+            image as IStreamItem,
             {
                 width: 3,
-            },
+            } as IImageConfiguration,
             {
                 colorBrightnessMax: 2,
                 colorBrightnessMin: 1,
                 typeColorMap: {
                     TYPE: '#color',
                 },
-            },
+            } as IStreamConfiguration,
         );
     };
 
@@ -52,12 +56,12 @@ describe('StreamImage', () => {
             });
 
             it('should generate random color', () => {
-                expect(streamUtilitySpy.getRandomColor).toHaveBeenCalledWith('#color', 1, 2);
-                expect(target.color).toEqual('color hex');
+                expect((streamUtilitySpy as any).getRandomColor).toHaveBeenCalledWith('#color', 1, 2);
+                expect((target as any).color).toEqual('color hex');
             });
 
             it('should compute image height', () => {
-                expect(target.height).toEqual(6);
+                expect((target as any).height).toEqual(6);
             });
         });
 
@@ -67,7 +71,7 @@ describe('StreamImage', () => {
             });
 
             it('should compute image height', () => {
-                expect(target.height).toEqual(3);
+                expect((target as any).height).toEqual(3);
             });
         });
     });
@@ -83,15 +87,15 @@ describe('StreamImage', () => {
 
         describe('with a photo URL', () => {
             beforeEach(() => {
-                target.item = {
+                (target as any).item = {
                     photo_url: 'PHOTO URL',
                     title: 'TITLE',
                     url: 'URL',
                 };
 
-                target.color = 'COLOR';
-                target.height = 1;
-                target.imageConfig = {
+                (target as any).color = 'COLOR';
+                (target as any).height = 1;
+                (target as any).imageConfig = {
                     left: 2,
                     top: 3,
                     width: 4,
@@ -101,7 +105,7 @@ describe('StreamImage', () => {
             });
 
             it('should create hyperlink tag', () => {
-                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
+                expect((streamUtilitySpy as any).createTag).toHaveBeenCalledWith(
                     'a',
                     {
                         class: 'stream-item stream-item-photo',
@@ -114,7 +118,7 @@ describe('StreamImage', () => {
             });
 
             it('should create style attrbute', () => {
-                expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
+                expect((streamUtilitySpy as any).createStyleAttribute).toHaveBeenCalledWith({
                     'background-color': 'COLOR',
                     'font-size': '0.6px',
                     'height': '1px',
@@ -125,7 +129,7 @@ describe('StreamImage', () => {
             });
 
             it('should create image tag', () => {
-                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
+                expect((streamUtilitySpy as any).createTag).toHaveBeenCalledWith(
                     'img',
                     {
                         src: 'PHOTO URL',
@@ -140,7 +144,7 @@ describe('StreamImage', () => {
 
         describe('without a photo URL', () => {
             beforeEach(() => {
-                target.item = {
+                (target as any).item = {
                     title: 'TITLE',
                 };
 
@@ -148,7 +152,7 @@ describe('StreamImage', () => {
             });
 
             it('should create hyperlink tag', () => {
-                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
+                expect((streamUtilitySpy as any).createTag).toHaveBeenCalledWith(
                     'a',
                     jasmine.objectContaining({
                         class: 'stream-item stream-item-text',

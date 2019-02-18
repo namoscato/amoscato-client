@@ -17,7 +17,8 @@ export class StreamSquareCluster {
 
     constructor(
         columnWidth: number,
-        private streamConfig: IStreamConfiguration) {
+        private streamConfig: IStreamConfiguration,
+    ) {
         this.sizeMax = columnWidth * streamConfig.secondarySquareSizeMax;
         this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
     }

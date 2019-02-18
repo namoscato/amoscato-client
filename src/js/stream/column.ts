@@ -15,7 +15,8 @@ export default class StreamColumn {
     constructor(
         private left: number,
         private streamConfig: IStreamConfiguration,
-        item?: IStreamItem) {
+        item?: IStreamItem,
+    ) {
         const xCoordinate = left - streamConfig.windowWidth / 2;
         const heightMax = streamConfig.getColumnHeightMax(xCoordinate);
 

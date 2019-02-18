@@ -5,10 +5,9 @@
   "description": "Front end client for amoscato.com",
   "scripts": {
     "start": "hugo serve & gulp && fg",
-    "pretest": "gulp all",
     "test": "karma start --single-run",
     "posttest": "gulp lint",
-    "predeploy": "npm test && hugo",
+    "predeploy": "npm test && gulp all && hugo",
     "deploy": "gulp deploy"
   },
   "repository": {
@@ -17,7 +16,10 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "normalize.css": "^8.0.1"
+    "jquery": "^3.3.1",
+    "moment": "^2.24.0",
+    "normalize.css": "^8.0.1",
+    "onecolor": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
@@ -39,7 +41,7 @@
     "karma": "^4.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^2.0",
-    "karma-typescript-preprocessor": "^0.4.0",
+    "karma-webpack": "^3.0.5",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3",
     "vinyl-ftp": "^0.6.1",
