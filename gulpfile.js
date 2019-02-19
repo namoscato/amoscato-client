@@ -1,127 +1,88 @@
 'use strict';
 
-var addStream = require('add-stream');
-var gulp = require('gulp');
-var gulpCleanCss = require('gulp-clean-css');
-var gulpConcat = require('gulp-concat');
-var gulpSass = require('gulp-sass');
-var gulpTslint = require('gulp-tslint');
-var gulpTypescript = require('gulp-typescript');
-var gulpUglify = require('gulp-uglify');
-var gulpUtil = require('gulp-util');
-var vinylFtp = require('vinyl-ftp');
+const cleanCss = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const gulp = require('gulp');
+const log = require('fancy-log');
+const sass = require('gulp-sass');
+const tslint = require('gulp-tslint');
+const typescript = require('gulp-typescript');
+const vinylFtp = require('vinyl-ftp');
+const webpack = require('webpack-stream');
 
-var build = {
-    src: [
-        'public/.htaccess',
-        'public/**/*.*',
-        '!public/data/*'
-    ],
-    dest: '/'
-};
-
-var css = {
-    src: {
-        app: 'src/css/app.scss',
-        lib: 'node_modules/normalize.css/normalize.css'
-    },
-    dest: 'static/css'
-};
-
-var js = {
-    src: {
-        app: 'src/js/**/*.ts',
-        lib: [
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/onecolor/one-color.js',
-            'node_modules/moment/min/moment.min.js',
+const config = {
+    build: {
+        dest: '/',
+        src: [
+            'public/.htaccess',
+            'public/**/*.*',
+            '!public/data/*',
         ],
-        test: 'tests/js/**/*.ts'
     },
-    dest: 'static/js'
+    css: {
+        dest: 'static/css',
+        src: [
+            'node_modules/normalize.css/normalize.css',
+            'src/css/app.scss',
+        ],
+    },
+    js: {
+        dest: 'static/js',
+        src: {
+            app: 'src/js/**/*.ts',
+            test: 'tests/js/**/*.ts',
+        },
+    },
+    webpack: require('./webpack.config'),
 };
 
-var tsProject = gulpTypescript.createProject('tsconfig.json');
+function js(watch) {
+    return gulp.src(config.js.src.app)
+        .pipe(webpack({ ...config.webpack, watch: true === watch }))
+        .pipe(gulp.dest(config.js.dest));
+}
 
-gulp.task('default', ['all', 'watch']);
+function lint() {
+    return gulp.src(Object.values(config.js.src))
+        .pipe(tslint({ formatter: 'verbose' }))
+        .pipe(tslint.report())
+        .pipe(typescript.createProject('tsconfig.json')());
+}
 
-gulp.task('all', ['js:app', 'css']);
+function css() {
+    return gulp.src(config.css.src)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('all.css'))
+        .pipe(cleanCss({ specialComments: 0 }))
+        .pipe(gulp.dest(config.css.dest));
+}
 
-gulp.task('js:app', function() {
-    var stream = gulp.src(js.src.lib)
-        .pipe(gulpUglify({
-            mangle: false,
-            compress: false,
-        }));
-
-    stream = stream.pipe(
-        addStream.obj(gulp.src(js.src.app)
-            .pipe(tsProject())
-            .pipe(gulpUglify({
-                compress: false,
-            }))
-        )
-    );
-
-    return stream
-        .pipe(gulpConcat('all.js'))
-        .pipe(gulp.dest(js.dest));
-});
-
-gulp.task('js:lint', function() {
-    return gulp.src([js.src.app, js.src.test])
-        .pipe(gulpTslint({
-            formatter: "verbose"
-        }))
-        .pipe(gulpTslint.report());
-});
-
-gulp.task('css', function() {
-    var stream = gulp.src(css.src.lib);
-
-    stream = stream.pipe(
-        addStream.obj(gulp
-            .src(css.src.app)
-            .pipe(gulpSass().on('error', gulpSass.logError))
-        )
-    );
-
-    return stream
-        .pipe(gulpConcat('all.css'))
-        .pipe(gulpCleanCss({
-            keepSpecialComments: 0
-        }))
-        .pipe(gulp.dest(css.dest));
-});
-
-gulp.task('deploy', function() {
-    var ftpConfig = require('./ftpconfig');
-    var ftpConnection = vinylFtp.create({
+function deploy() {
+    const ftpConfig = require('./ftpconfig');
+    const ftpConnection = vinylFtp.create({
         host: ftpConfig.host,
         user: ftpConfig.user,
         password: ftpConfig.password,
         parallel: 10,
-        log: gulpUtil.log
+        log,
     });
 
-    return gulp.src(build.src, { base: 'public', buffer: false })
-        .pipe(ftpConnection.newerOrDifferentSize(build.dest))
-        .pipe(ftpConnection.dest(build.dest));
-});
+    return gulp.src(config.build.src, { base: 'public', buffer: false })
+        .pipe(ftpConnection.newerOrDifferentSize(config.build.dest))
+        .pipe(ftpConnection.dest(config.build.dest));
+}
 
-gulp.task('watch', function() {
-    gulp.watch(
-        js.src.app,
-        ['js:app']
-    );
+function watch() {
+    gulp.watch(Object.values(config.js.src), lint);
+    gulp.watch('src/css/**/*.scss', css);
 
-    gulp.watch(
-        js.src.lib,
-        ['js:app']
-    );
+    return js(true); // use webpack watch
+}
 
-    gulp.watch(
-        'src/css/**/*.scss',
-        ['css']
-    );
-});
+exports.all = gulp.parallel(js, css);
+exports.css = css;
+exports.default = gulp.parallel(css, watch);
+exports.deploy = deploy;
+exports.js = js;
+exports.lint = lint;
+exports.watch = watch;

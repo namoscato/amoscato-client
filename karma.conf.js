@@ -1,16 +1,19 @@
-module.exports = function(config) {
+const webpack = { ...require('./webpack.config') };
+
+delete webpack.entry;
+delete webpack.output;
+
+module.exports = function (config) {
     config.set({
         browsers: ['ChromeHeadless'],
         files: [
-            'static/js/all.js',
-            'tests/**/*.spec.ts',
+            'node_modules/moment/moment.js',
+            'src/**/*.spec.ts',
         ],
         frameworks: ['jasmine'],
         preprocessors: {
-          "tests/**/*.spec.ts": ["typescript"]
+            '**/*.ts': ['webpack'],
         },
-        typescriptPreprocessor: {
-            typescript: require('typescript')
-        },
+        webpack,
     });
 }

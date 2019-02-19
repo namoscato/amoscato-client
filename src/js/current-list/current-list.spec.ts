@@ -1,27 +1,29 @@
+import CurrentList from './current-list';
+
 describe('CurrentList', () => {
-    let target: Amo.Client.CurrentList;
+    let target: CurrentList;
 
     let formatDate: any;
     let formatDateSpy: any;
 
     beforeEach(() => {
-        formatDate = Amo.Client.CurrentList.prototype.formatDate;
+        formatDate = (CurrentList as any).prototype.formatDate;
 
-        spyOn(Amo.Client.CurrentList.prototype, 'formatDate');
-        formatDateSpy = Amo.Client.CurrentList.prototype.formatDate;
+        spyOn((CurrentList as any).prototype, 'formatDate');
+        formatDateSpy = (CurrentList as any).prototype.formatDate;
         formatDateSpy.and.callFake((date: string) => {
             return `formatted ${date}`;
         });
     });
 
     afterEach(() => {
-        Amo.Client.CurrentList.prototype.formatDate = formatDate;
+        (CurrentList as any).prototype.formatDate = formatDate;
     });
 
     describe('When generating the HTML for a', () => {
         describe('book', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'book',
                     ],
@@ -43,7 +45,7 @@ describe('CurrentList', () => {
 
         describe('bike ride', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'athleticActivity',
                     ],
@@ -66,7 +68,7 @@ describe('CurrentList', () => {
 
         describe('run', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'athleticActivity',
                     ],
@@ -89,7 +91,7 @@ describe('CurrentList', () => {
 
         describe('unexpected athletic activity', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'athleticActivity',
                     ],
@@ -112,7 +114,7 @@ describe('CurrentList', () => {
 
         describe('drink', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'drink',
                     ],
@@ -134,7 +136,7 @@ describe('CurrentList', () => {
 
         describe('journal', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'journal',
                     ],
@@ -155,7 +157,7 @@ describe('CurrentList', () => {
 
         describe('song', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'music',
                     ],
@@ -178,7 +180,7 @@ describe('CurrentList', () => {
 
         describe('video', () => {
             beforeEach(() => {
-                target = new Amo.Client.CurrentList(
+                target = new CurrentList(
                     [
                         'video',
                     ],

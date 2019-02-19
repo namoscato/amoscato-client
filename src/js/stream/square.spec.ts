@@ -1,11 +1,15 @@
+import { IStreamConfiguration, IStreamItem } from './interface';
+import { StreamSquare } from './square';
+import { StreamUtility } from './utility';
+
 describe('StreamSquare', () => {
     let result: any;
-    let target: Amo.Client.StreamSquare;
+    let target: StreamSquare;
 
-    let streamUtilitySpy: Amo.Client.StreamUtility;
+    let streamUtilitySpy: any;
 
     beforeEach(() => {
-        streamUtilitySpy = Amo.Client.StreamUtility;
+        streamUtilitySpy = StreamUtility;
 
         spyOn(streamUtilitySpy, 'createStyleAttribute');
         streamUtilitySpy.createStyleAttribute.and.returnValue('STYLE');
@@ -16,27 +20,27 @@ describe('StreamSquare', () => {
         spyOn(streamUtilitySpy, 'getRandomColor');
         streamUtilitySpy.getRandomColor.and.returnValue('color hex');
 
-        target = new Amo.Client.StreamSquare(
+        target = new StreamSquare(
             5,
             {
                 title: 'TITLE',
                 type: 'TYPE',
                 url: 'URL',
-            },
+            } as IStreamItem,
             {
                 colorBrightnessMax: 2,
                 colorBrightnessMin: 1,
                 typeColorMap: {
                     TYPE: '#color',
                 },
-            },
+            } as IStreamConfiguration,
         );
     });
 
     describe('When creating a square', () => {
         it('should generate random color', () => {
             expect(streamUtilitySpy.getRandomColor).toHaveBeenCalledWith('#color', 1, 2);
-            expect(target.color).toEqual('color hex');
+            expect((target as any).color).toEqual('color hex');
         });
     });
 

@@ -1,19 +1,21 @@
+import { StreamUtility } from './utility';
+
 describe('StreamUtility', () => {
     let result: any;
-    let target: Amo.Client.StreamUtility;
+    let target: StreamUtility;
 
     let getColorSpy: any;
     let getColorLightnessSpy: any;
 
     beforeEach(() => {
-        target = Amo.Client.StreamUtility;
+        target = StreamUtility;
 
-        spyOn(target, 'getRandomFloat');
-        target.getRandomFloat.and.returnValue(1);
+        spyOn(target as any, 'getRandomFloat');
+        (target as any).getRandomFloat.and.returnValue(1);
 
-        spyOn(target, 'getColor');
+        spyOn(target as any, 'getColor');
         getColorSpy = jasmine.createSpyObj('streamUtility.getColor', ['lightness']);
-        target.getColor.and.returnValue(getColorSpy);
+        (target as any).getColor.and.returnValue(getColorSpy);
 
         getColorLightnessSpy = jasmine.createSpyObj('streamUtility.getColor.lightness', ['hex']);
         getColorLightnessSpy.hex.and.returnValue('color hex');
@@ -26,7 +28,7 @@ describe('StreamUtility', () => {
 
     describe('When creating an image tag', () => {
         beforeEach(() => {
-            result = target.createTag(
+            result = StreamUtility.createTag(
                 'img',
                 {
                     attr1: 'value1',
@@ -46,7 +48,7 @@ describe('StreamUtility', () => {
 
     describe('When creating a style attribute', () => {
         beforeEach(() => {
-            result = target.createStyleAttribute({
+            result = StreamUtility.createStyleAttribute({
                 key1: 'val1',
                 key2: 'val2',
             });
@@ -63,12 +65,12 @@ describe('StreamUtility', () => {
 
     describe('When getting a random color', () => {
         beforeEach(() => {
-            result = target.getRandomColor('#color', 1, 2);
+            result = StreamUtility.getRandomColor('#color', 1, 2);
         });
 
         it('should generate random color', () => {
-            expect(target.getRandomFloat).toHaveBeenCalledWith(1, 2);
-            expect(target.getColor).toHaveBeenCalledWith('#color');
+            expect(StreamUtility.getRandomFloat).toHaveBeenCalledWith(1, 2);
+            expect(StreamUtility.getColor).toHaveBeenCalledWith('#color');
             expect(getColorSpy.lightness).toHaveBeenCalledWith(1, true);
             expect(result).toEqual('color hex');
         });

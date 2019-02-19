@@ -1,15 +1,18 @@
+import { IStreamConfiguration } from './interface';
+import { StreamSquare } from './square';
+import { IStreamSquareClusterConfiguration, StreamSquareCluster } from './square-cluster';
+
 describe('StreamSquareCluster', () => {
     let result: any;
-    let target: Amo.Client.StreamSquareCluster;
+    let target: StreamSquareCluster;
 
-    let squareSpy1: Amo.Client.StreamSquare;
-    let squareSpy2: Amo.Client.StreamSquare;
-    let squareSpy3: Amo.Client.StreamSquare;
-    let squareSpy4: Amo.Client.StreamSquare;
+    let squareSpy1: StreamSquare;
+    let squareSpy2: StreamSquare;
+    let squareSpy3: StreamSquare;
+    let squareSpy4: StreamSquare;
     let squareSpyCount: number;
-    let streamUtilitySpy: Amo.Client.StreamUtility;
 
-    const generateSquareSpy = (size: number) {
+    const generateSquareSpy = (size: number) => {
         const spy = jasmine.createSpyObj('StreamSquare ' + ++squareSpyCount, ['generateHtml']);
 
         spy.size = size;
@@ -19,13 +22,6 @@ describe('StreamSquareCluster', () => {
     };
 
     beforeEach(() => {
-        spyOn(Amo.Client, 'StreamSquare');
-
-        streamUtilitySpy = Amo.Client.StreamUtility;
-
-        spyOn(streamUtilitySpy, 'getRandomInteger');
-        streamUtilitySpy.getRandomInteger.and.returnValue(1);
-
         squareSpyCount = 0;
 
         squareSpy1 = generateSquareSpy(10);
@@ -33,15 +29,15 @@ describe('StreamSquareCluster', () => {
         squareSpy3 = generateSquareSpy(30);
         squareSpy4 = generateSquareSpy(40);
 
-        target = new Amo.Client.StreamSquareCluster(
+        target = new StreamSquareCluster(
             100,
             {
                 secondarySquareSizeMax: .5,
                 secondarySquareSizeMin: .2,
-            },
+            } as IStreamConfiguration,
         );
 
-        target.squares = [
+        (target as any).squares = [
             squareSpy2,
             squareSpy1,
             squareSpy4,
@@ -51,30 +47,8 @@ describe('StreamSquareCluster', () => {
 
     describe('When creating a square cluster', () => {
         it('should compute size bounds', () => {
-            expect(target.sizeMax).toEqual(50);
-            expect(target.sizeMin).toEqual(20);
-        });
-    });
-
-    /**
-     * addItem
-     */
-
-    describe('When adding an item', () => {
-        beforeEach(() => {
-            target.sizeMin = 20;
-            target.sizeMax = 50;
-
-            result = target.addItem('ITEM');
-        });
-
-        it('should create and add square', () => {
-            expect(streamUtilitySpy.getRandomInteger).toHaveBeenCalledWith(20, 50);
-            expect(Amo.Client.StreamSquare).toHaveBeenCalledWith(1, 'ITEM', jasmine.any(Object));
-        });
-
-        it('should return true', () => {
-            expect(result).toEqual(true);
+            expect((target as any).sizeMax).toEqual(50);
+            expect((target as any).sizeMin).toEqual(20);
         });
     });
 
@@ -89,7 +63,7 @@ describe('StreamSquareCluster', () => {
                     alignment: 'top-left',
                     columnLeft: 0,
                     columnTop: 0,
-                });
+                } as IStreamSquareClusterConfiguration);
             });
 
             it('should generate the square HTML', () => {
@@ -110,7 +84,7 @@ describe('StreamSquareCluster', () => {
                     alignment: 'top-right',
                     columnRight: 0,
                     columnTop: 0,
-                });
+                } as IStreamSquareClusterConfiguration);
             });
 
             it('should generate the square HTML', () => {
@@ -127,7 +101,7 @@ describe('StreamSquareCluster', () => {
                     alignment: 'bottom-left',
                     columnBottom: 0,
                     columnLeft: 0,
-                });
+                } as IStreamSquareClusterConfiguration);
             });
 
             it('should generate the square HTML', () => {
@@ -144,7 +118,7 @@ describe('StreamSquareCluster', () => {
                     alignment: 'bottom-right',
                     columnBottom: 0,
                     columnRight: 0,
-                });
+                } as IStreamSquareClusterConfiguration);
             });
 
             it('should generate the square HTML', () => {

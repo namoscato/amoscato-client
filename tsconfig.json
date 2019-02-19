@@ -1,18 +1,11 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
-        "noImplicitAny": true,
-        "noResolve": false,
-        "out": "static/js/app.js",
-        "removeComments": true,
-        "sourceMap": false,
-        "target": "es5",
-        "lib": [
-            "es6",
-            "dom",
-            "scripthost"
-        ]
+        "baseUrl": "src",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "strict": true,
+        "target": "es2015"
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "exclude": ["node_modules"]
 }
