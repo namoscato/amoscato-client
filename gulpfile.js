@@ -63,7 +63,7 @@ function deploy() {
         host: ftpConfig.host,
         user: ftpConfig.user,
         password: ftpConfig.password,
-        parallel: 10,
+        parallel: 5,
         log,
     });
 
