@@ -47,6 +47,7 @@ const streamConfig: IStreamConfiguration = {
         foodspotting: '#BA5D33',
         github: '#8cc665',
         goodreads: '#A37134',
+        instagram: '#eb4644',
         lastfm: '#C40000',
         twitter: '#1da1f2',
         untappd: '#ffcc01',
