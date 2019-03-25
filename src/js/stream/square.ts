@@ -35,7 +35,7 @@ export class StreamSquare {
                     'width': this.size + 'px',
                 }),
                 target: '_blank',
-                title: this.item.title.replace(/"/g, '&quot;'),
+                title: this.item.title ? this.item.title.replace(/"/g, '&quot;') : null,
             },
         );
     }

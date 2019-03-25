@@ -29,13 +29,17 @@ export class StreamUtility {
      * @returns {string}
      */
     public static createTag(tag: string, attributes: object): string {
-        tag = '<' + tag;
+        tag = `<${tag}`;
 
-        for (const i in attributes) {
-            tag += ' ' + i + '="' + (attributes as any)[i] + '"';
+        for (const attribute in attributes) {
+            if (!attributes.hasOwnProperty(attribute) || !(attributes as any)[attribute]) {
+                continue;
+            }
+
+            tag += ` ${attribute}="${(attributes as any)[attribute]}"`;
         }
 
-        return tag + '>';
+        return `${tag}>`;
     }
 
     /**

@@ -35,7 +35,7 @@ export default class StreamImage {
      * @returns {string}
      */
     public getHtml(): string {
-        const title = this.item.title.replace(/"/g, '&quot;');
+        const title = this.item.title ? this.item.title.replace(/"/g, '&quot;') : null;
 
         let html = StreamUtility.createTag(
             'a',
@@ -55,7 +55,9 @@ export default class StreamImage {
             },
         );
 
-        html += `<span class="stream-title">${title}</span>`;
+        if (title) {
+            html += `<span class="stream-title">${title}</span>`;
+        }
 
         if (this.item.photo_url) {
             html += StreamUtility.createTag(
