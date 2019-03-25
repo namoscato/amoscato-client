@@ -164,5 +164,19 @@ describe('StreamImage', () => {
                 expect(result).toEqual('<a><span class="stream-title">TITLE</span></a>');
             });
         });
+
+        describe('without a title', () => {
+            beforeEach(() => {
+                (target as any).item = {
+                    title: null,
+                };
+
+                result = target.getHtml();
+            });
+
+            it('should return HTML', () => {
+                expect(result).toEqual('<a></a>');
+            });
+        });
     });
 });

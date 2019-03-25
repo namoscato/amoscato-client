@@ -49,35 +49,52 @@ describe('StreamSquare', () => {
      */
 
     describe('When generating the HTML', () => {
-        beforeEach(() => {
-            result = target.generateHtml(10, 20);
-        });
+        describe('with a title', () => {
+            beforeEach(() => {
+                result = target.generateHtml(10, 20);
+            });
 
-        it('should create style attribute', () => {
-            expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
-                'background-color': 'color hex',
-                'height': '5px',
-                'left': '10px',
-                'top': '15px',
-                'width': '5px',
+            it('should create style attribute', () => {
+                expect(streamUtilitySpy.createStyleAttribute).toHaveBeenCalledWith({
+                    'background-color': 'color hex',
+                    'height': '5px',
+                    'left': '10px',
+                    'top': '15px',
+                    'width': '5px',
+                });
+            });
+
+            it('should create hyperlink tag', () => {
+                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
+                    'a',
+                    {
+                        class: 'stream-item stream-item-text',
+                        href: 'URL',
+                        style: 'STYLE',
+                        target: '_blank',
+                        title: 'TITLE',
+                    },
+                );
+            });
+
+            it('should return tag HTML', () => {
+                expect(result).toEqual('<a>');
             });
         });
 
-        it('should create hyperlink tag', () => {
-            expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
-                'a',
-                {
-                    class: 'stream-item stream-item-text',
-                    href: 'URL',
-                    style: 'STYLE',
-                    target: '_blank',
-                    title: 'TITLE',
-                },
-            );
-        });
+        describe('without a title', () => {
+            beforeEach(() => {
+                (target as any).item.title = null;
 
-        it('should return tag HTML', () => {
-            expect(result).toEqual('<a>');
+                result = target.generateHtml(10, 20);
+            });
+
+            it('should create hyperlink tag', () => {
+                expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
+                    'a',
+                    jasmine.objectContaining({ title: null }),
+                );
+            });
         });
     });
 });
