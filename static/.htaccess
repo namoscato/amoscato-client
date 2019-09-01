@@ -1,9 +1,8 @@
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
 <IfModule mod_rewrite.c>
   RewriteEngine on
-
-  # Redirect all users to 'https://'
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Redirect all users to access the site WITHOUT the 'www.' prefix
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
