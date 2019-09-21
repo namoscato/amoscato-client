@@ -1,4 +1,4 @@
-# Amoscato Client [![Build Status](https://travis-ci.org/namoscato/amoscato-client.svg?branch=master)](https://travis-ci.org/namoscato/amoscato-client)
+# Amoscato Client [![Actions Status](https://github.com/namoscato/amoscato-client/workflows/Node%20CI/badge.svg)](https://github.com/namoscato/amoscato-client/actions)
 
 Front end client for [amoscato.com](https://amoscato.com/) built with [Hugo](https://gohugo.io/) and [TypeScript](https://www.typescriptlang.org/).
 
