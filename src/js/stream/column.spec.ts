@@ -105,7 +105,7 @@ describe('StreamColumn', () => {
             });
 
             it('should add photo', () => {
-                expect(target.addItem).toHaveBeenCalledWith('ITEM');
+                expect(target.addItem).toHaveBeenCalledWith('ITEM' as any);
             });
         });
     });
