@@ -1,6 +1,6 @@
 .DS_Store
-ftpconfig.json
-node_modules/
+/config/default.json
+/node_modules/
 /public/
 /static/**/*.css
 /static/**/*.js
