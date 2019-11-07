@@ -51,7 +51,7 @@
     <h1 class="homepage-introduction">Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.</h1>
     <div id="homepage-content">
         <h2 class="subtitle homepage-subtitle">Currently</h2>
-        {{ with $journal := index .Data.Pages 0 }}
+        {{ with index .Site.RegularPages 0 }}
         <ul
             id="homepage-currently"
             class="homepage-current-list"
