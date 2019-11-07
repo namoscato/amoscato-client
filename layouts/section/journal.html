@@ -4,7 +4,7 @@
 <div id="content">
     <h1>Journal</h1>
     <ul class="journal-list">
-    {{ range .Data.Pages  }}
+    {{ range .Pages  }}
         <li class="journal-list-item">
             <h2 class="subtitle">{{ .Date.Format "2006-01-02" }}</h2>
             <h2 class="journal-list-item-title">
