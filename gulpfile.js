@@ -2,6 +2,7 @@
 
 const cleanCss = require('gulp-clean-css');
 const concat = require('gulp-concat');
+const config = require('config');
 const gulp = require('gulp');
 const log = require('fancy-log');
 const sass = require('gulp-sass');
@@ -10,7 +11,7 @@ const typescript = require('gulp-typescript');
 const vinylFtp = require('vinyl-ftp');
 const webpack = require('webpack-stream');
 
-const config = {
+const gulpConfig = {
     build: {
         dest: '/',
         src: [
@@ -37,43 +38,42 @@ const config = {
 };
 
 function js(watch) {
-    return gulp.src(config.js.src.app)
-        .pipe(webpack({ ...config.webpack, watch: true === watch }))
-        .pipe(gulp.dest(config.js.dest));
+    return gulp.src(gulpConfig.js.src.app)
+        .pipe(webpack({ ...gulpConfig.webpack, watch: true === watch }))
+        .pipe(gulp.dest(gulpConfig.js.dest));
 }
 
 function lint() {
-    return gulp.src(Object.values(config.js.src))
+    return gulp.src(Object.values(gulpConfig.js.src))
         .pipe(tslint({ formatter: 'verbose' }))
         .pipe(tslint.report())
         .pipe(typescript.createProject('tsconfig.json')());
 }
 
 function css() {
-    return gulp.src(config.css.src)
+    return gulp.src(gulpConfig.css.src)
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('all.css'))
         .pipe(cleanCss({ specialComments: 0 }))
-        .pipe(gulp.dest(config.css.dest));
+        .pipe(gulp.dest(gulpConfig.css.dest));
 }
 
 function deploy() {
-    const ftpConfig = require('./ftpconfig');
     const ftpConnection = vinylFtp.create({
-        host: ftpConfig.host,
-        user: ftpConfig.user,
-        password: ftpConfig.password,
+        host: config.get('ftp.host'),
+        user: config.get('ftp.user'),
+        password: config.get('ftp.password'),
         parallel: 5,
         log,
     });
 
-    return gulp.src(config.build.src, { base: 'public', buffer: false })
-        .pipe(ftpConnection.newerOrDifferentSize(config.build.dest))
-        .pipe(ftpConnection.dest(config.build.dest));
+    return gulp.src(gulpConfig.build.src, { base: 'public', buffer: false })
+        .pipe(ftpConnection.newerOrDifferentSize(gulpConfig.build.dest))
+        .pipe(ftpConnection.dest(gulpConfig.build.dest));
 }
 
 function watch() {
-    gulp.watch(Object.values(config.js.src), lint);
+    gulp.watch(Object.values(gulpConfig.js.src), lint);
     gulp.watch('src/css/**/*.scss', css);
 
     return js(true); // use webpack watch

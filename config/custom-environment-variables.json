@@ -1,0 +1,7 @@
+{
+    "ftp": {
+        "host": "FTP_HOST",
+        "user": "FTP_USER",
+        "password": "FTP_PASSWORD"
+    }
+}
