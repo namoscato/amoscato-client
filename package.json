@@ -43,7 +43,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^3.3",
     "karma-webpack": "^4.0.2",
-    "tslint": "^5.20.1",
+    "tslint": "^6.1.2",
     "typescript": "^3.9.7",
     "vinyl-ftp": "^0.6.1",
     "webpack": "^4.44.0",
