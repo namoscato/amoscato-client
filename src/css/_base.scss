@@ -77,7 +77,7 @@ pre {
     font-family: Hack, monospace;
 }
 
-code {
+p > code {
     background-color: $color-gray;
     color: $color-blue-dark;
     padding: 0.2em 0.3em;

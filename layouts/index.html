@@ -1,5 +1,4 @@
-{{ partial "header-before" . }}
-
+{{ define "head" }}
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -43,9 +42,9 @@
         ]
     }
 </script>
+{{ end }}
 
-{{ partial "header-after" . }}
-
+{{ define "content" }}
 <div id="homepage">
     <h2 class="subtitle homepage-subtitle">Introduction</h2>
     <h1 class="homepage-introduction">Nick Amoscato is a software engineer, designer, and musician based in Pittsburgh.</h1>
@@ -65,9 +64,8 @@
         </div>
     </div>
 </div>
+{{ end }}
 
-{{ partial "frame.html" . }}
-
+{{ define "footer" }}
 <div id="homepage-stream"></div>
-
-{{ partial "footer.html" . }}
+{{ end }}

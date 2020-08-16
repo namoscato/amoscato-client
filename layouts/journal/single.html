@@ -1,5 +1,4 @@
-{{ partial "header-before.html" . }}
-
+{{ define "head" }}
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -23,9 +22,9 @@
         "image": ""
     }
 </script>
+{{ end }}
 
-{{ partial "header-after.html" . }}
-
+{{ define "content" }}
 <article id="content">
     <h2 class="subtitle">
         <a href="/journal/">Journal</a> / {{ .Date.Format "2006-01-02" }}
@@ -33,6 +32,4 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
 </article>
-
-{{ partial "frame.html" . }}
-{{ partial "footer.html" . }}
+{{ end }}

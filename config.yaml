@@ -1,0 +1,10 @@
+baseurl: https://amoscato.com
+languageCode: en-us
+title: Nick Amoscato
+disableKinds:
+  - RSS
+  - taxonomy
+  - term
+markup:
+  highlight:
+    style: solarized-dark
