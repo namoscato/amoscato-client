@@ -2,4 +2,4 @@
 
 Front end client for [amoscato.com](https://amoscato.com/) built with [Hugo](https://gohugo.io/) and [TypeScript](https://www.typescriptlang.org/).
 
-<a href="https://amoscato.com"><img src="https://i.imgur.com/8eFS1tK.jpg" width="573"></a>
+<a href="https://amoscato.com"><img src="https://i.imgur.com/mxa6GSU.jpg" width="573"></a>
