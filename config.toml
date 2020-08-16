@@ -1,6 +1,0 @@
-baseurl = "https://amoscato.com"
-languageCode = "en-us"
-title = "Nick Amoscato"
-
-PygmentsCodeFences = true
-PygmentsStyle = "solarizeddark"

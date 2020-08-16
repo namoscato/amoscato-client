@@ -1,7 +1,9 @@
-name: ci
-on: [push]
+name: build
+on:
+  push:
+    branches: [master]
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,5 +17,14 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Install dependencies
         run: npm ci
-      - name: Run tests
-        run: npm test
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 0.74.3
+      - name: Deploy
+        env:
+          SUPPRESS_NO_CONFIG_WARNING: 1
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+        run: npm run deploy
