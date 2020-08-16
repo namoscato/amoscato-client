@@ -7,7 +7,7 @@
     "start": "hugo serve & gulp && fg",
     "test": "karma start --single-run",
     "posttest": "gulp lint",
-    "predeploy": "gulp all && hugo",
+    "predeploy": "gulp all && hugo --minify",
     "deploy": "gulp deploy"
   },
   "repository": {
