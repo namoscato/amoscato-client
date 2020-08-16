@@ -1,6 +1,4 @@
-{{ partial "header-before.html" . }}
-{{ partial "header-after.html" . }}
-
+{{ define "content" }}
 <div id="content">
     <h1>Journal</h1>
     <ul class="journal-list">
@@ -15,6 +13,4 @@
     {{ end }}
     </ul>
 </div>
-
-{{ partial "frame.html" . }}
-{{ partial "footer.html" . }}
+{{ end }}
