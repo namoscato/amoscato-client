@@ -1,16 +1,26 @@
 {{ define "content" }}
 <div id="content">
     <h1>Journal</h1>
+    {{ $paginator := .Paginate .Pages }}
     <ul class="journal-list">
-    {{ range .Pages  }}
+        {{ range $paginator.Pages  }}
         <li class="journal-list-item">
             <h2 class="subtitle">{{ .Date.Format "2006-01-02" }}</h2>
             <h2 class="journal-list-item-title">
                 <a href="{{ .Permalink }}">{{ .Title }}</a>
             </h2>
-            <p class="journal-list-item-description">{{ .Description }}</p>
+            <p class="journal-list-item-description">{{ .Summary }}</p>
         </li>
-    {{ end }}
+        {{ end }}
     </ul>
+    <p class="pagination">
+        {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}">{{ end -}}
+        Previous
+        {{- if $paginator.HasPrev }}</a>{{ end }}
+        /
+        {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}">{{ end -}}
+        Next
+        {{- if $paginator.HasNext }}</a>{{ end }}
+    </p>
 </div>
 {{ end }}

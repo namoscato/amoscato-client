@@ -1,7 +1,7 @@
 +++
 date = "2016-10-01T18:45:00-04:00"
 title = "What is Testing?"
-description = "A realization questions the purpose of automated testing without focusing on the bigger picture: The functional mindset that should inherently be part of the development process."
+summary = "A realization questions the purpose of automated testing without focusing on the bigger picture: The functional mindset that should inherently be part of the development process."
 +++
 
 I had a major realization this week: A software engineering team cannot simply rely on an automated test suite. "Substantial coverage" at every level of the testing pyramid does not directly equate to a substantial mitigation of bugs. For example, you could be asserting the validity of something that is incorrectly built. The test will pass, but the feature won't work as intended.

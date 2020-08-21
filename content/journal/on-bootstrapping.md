@@ -1,7 +1,7 @@
 +++
 date = "2014-08-06T16:12:23-04:00"
 title = "On Bootstrapping"
-description = "Initial exposure to some front end web frameworks leads to a changed perspective, one that emphasizes the importance of adaptability."
+summary = "Initial exposure to some front end web frameworks leads to a changed perspective, one that emphasizes the importance of adaptability."
 +++
 
 Not too long ago, I was pretty much against using any kind of bootstrapped, boilerplate framework. Part of it had to do with my determination to prevent my projects from looking like others. I had this seemingly naive perception that by using an existing framework, I would be constrained. But more importantly, I felt that I would lose ownership of the project. There was something about being able to build something from scratch  after all, thats what people did before these things existed.

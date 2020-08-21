@@ -1,7 +1,7 @@
 +++
 date = "2014-05-31T15:02:16-04:00"
 title = "Christmas Caching"
-description = "An explanation of a caching optimization for my personal site."
+summary = "An explanation of a caching optimization for my personal site."
 +++
 
 When I redesigned my site this past summer, I cut some corners. I think I ended up running out of time, and I really pushed to get the site up before I went back to school. With that said, I had ignored some implementation considerations when the site was first launched. Most notable, I neglected to cache data from third party services such as Twitter, Last.fm, Foodspotting, YouTube and Vimeo.

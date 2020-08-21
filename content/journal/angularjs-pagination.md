@@ -1,7 +1,7 @@
 +++
 date = "2015-08-16T21:35:00"
 title = "Lessons Learned: AngularJS Pagination"
-description = "A description of AngularJS pagination patterns around fetching, storing, and interacting with data, having learned from previous missteps."
+summary = "A description of AngularJS pagination patterns around fetching, storing, and interacting with data, having learned from previous missteps."
 +++
 
 Once upon a time, I had an idea to create this all-inclusive pagination service that would abstract the common logic used when interacting with a server-side paginated result set via an AngularJS application. A few whiteboarding sessions with a co-worker led to some informal specifications, and shortly thereafter, a well-documented `apiPaginationService` was born.
@@ -145,7 +145,7 @@ where `data` is a reference to the pagination metadata object, and the directive
 
 ```html
 <div>
-    <pagination 
+    <pagination
         items-per-page="data.perPage"
         ng-change="apiPaginator.pageChangeHandler()"
         ng-model="data.page"

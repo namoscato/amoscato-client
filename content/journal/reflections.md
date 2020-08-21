@@ -1,7 +1,7 @@
 +++
 date = "2014-12-30T17:48:10-04:00"
 title = "Reflections"
-description = "Descriptions of a few recent events leads to a realization that draws parallels between agile methodologies and life reflection."
+summary = "Descriptions of a few recent events leads to a realization that draws parallels between agile methodologies and life reflection."
 +++
 
 > I installed a Chrome App a couple of weeks ago called [Momentum](http://momentumdash.com/). A couple of guys at work had it, and I couldn't get over the awesome pictures. The app doesn't do much; it simply replaces the new tab page with a daily photo taken in some picturesque part of the world. There are some other productivity features, but I don't really use them. For me, it's all about the glimpse at unexplored territory. My mental list of travel destinations continues to grow.
