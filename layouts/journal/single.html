@@ -1,26 +1,26 @@
 {{ define "head" }}
 <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id":"{{ .Site.BaseURL }}"
-        },
-        "headline": "{{ .Title }} - {{ .Site.Title }}",
-        "datePublished": "{{ .Date.Format "2006-01-02T15:04:05EST" }}",
-        "dateModified": "{{ .Date.Format "2006-01-02T15:04:05EST" }}",
-        "author": {
-            "@type": "Person",
-            "name": "Nick Amoscato"
-        },
-        "description": "{{ .Description }}",
-        "publisher": {
-            "@type": "Person",
-            "name": "Nick Amoscato"
-        },
-        "image": ""
+{
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id":"{{ .Site.BaseURL }}"
+    },
+    "headline": "{{ .Title }} - {{ .Site.Title }}",
+    "image": "{{ index $.Site.Params.images 0 | absURL }}",
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05EST" }}",
+    "dateModified": "{{ dateFormat "2006-01-02T15:04:05EST" .Lastmod }}",
+    "author": {
+        "@type": "Person",
+        "name": "Nick Amoscato"
+    },
+    "description": "{{ .Summary }}",
+    "publisher": {
+        "@type": "Person",
+        "name": "Nick Amoscato"
     }
+}
 </script>
 {{ end }}
 
