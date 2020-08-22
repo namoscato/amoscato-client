@@ -1,7 +1,7 @@
 +++
 date = "2015-07-19T12:34:00"
 title = "AngularJS Patterns"
-description = "Some thoughts on AngularJS data loading, service architecture, and controller patterns after a year of exposure to the framework."
+summary = "Some thoughts on AngularJS data loading, service architecture, and controller patterns after a year of exposure to the framework."
 +++
 
 I gave a brief engineering talk yesterday at [Jazz](https://jazz.co) – yes, The Resumator [rebranded](https://jazz.co/blog/the-resumator-is-now-jazz) a month ago and no, I haven’t had a chance to even update my site until now. I regret that this site has gotten stale; I realize literally every “recent” blog post begins with an apology, but life goes on.
@@ -34,10 +34,10 @@ where `featureData` is a specified resolve dependency, returning a [promise](htt
 angular
     .module('app.feature')
     .controller('FeatureCtrl', FeatureCtrl);
- 
+
 function FeatureCtrl(featureData) {
     var self = this;
- 
+
     self.data = featureData;
 }
 ```
@@ -67,7 +67,7 @@ I have found it useful to define a `save` method in API services that abstracts 
 ```javascript
 function save(feature) {
     var method = angular.isDefined(feature.id) ? 'PUT' : 'POST';
- 
+
     return apiService.call(feature, {
         method: method,
         path: 'feature'

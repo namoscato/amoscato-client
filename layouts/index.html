@@ -1,46 +1,69 @@
+{{ define "meta" }}
+{{ template "_internal/schema.html" . }}
+<meta itemprop="keywords" content="amoscato,art,computer,computer science,design,developer,entrepreneurship,italian,jazz,minimalism,music,nicholas amoscato,nick amoscato,photography,pitt,pittsburgh,portfolio,programming,sax,saxophone,startups,technology,usability,user experience,web design">
+
+{{- $image := index $.Site.Params.images 0 | absURL }}
+{{- $title := printf "%s - %s" .Title .Site.Params.summary }}
+
+{{/* https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/opengraph.html */ -}}
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ .Site.Params.description }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:image" content="{{ $image }}" />
+
+{{/* https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/twitter_cards.html */ -}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="{{ $image }}" />
+<meta name="twitter:title" content="{{ $title }}"/>
+<meta name="twitter:description" content="{{ .Site.Params.description }}" />
+
+<title>{{ $title }}</title>
+{{ end }}
+
 {{ define "head" }}
 <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Person",
-        "name": "Nick Amoscato",
-        "url": "https://amoscato.com",
-        "email": "nicholas@amoscato.com",
-        "jobTitle": "Software Engineer",
-        "homeLocation": {
-            "@type": "PostalAddress",
-            "addressLocality": "Pittsburgh",
-            "addressRegion": "PA"
-        },
-        "worksFor": {
-            "@context": "http://www.schema.org",
-            "@type": "Corporation",
-            "name": "JazzHR",
-            "url": "https://www.jazzhr.com/",
-            "contactPoint": [
-                {
-                    "@type": "ContactPoint",
-                    "telephone": "+1-888-353-0887",
-                    "contactType": "customer service"
-                }
-            ]
-        },
-        "alumniOf": {
-            "@type": "OrganizationRole",
-            "alumniOf": {
-                "@type": "CollegeOrUniversity",
-                "name": "University of Pittsburgh",
-                "sameAs": "https://en.wikipedia.org/wiki/University_of_Pittsburgh"
-            },
-            "startDate": "2010"
-        },
-        "sameAs": [
-            "https://www.linkedin.com/in/namoscato",
-            "https://twitter.com/namoscato",
-            "https://github.com/namoscato",
-            "https://www.flickr.com/photos/namoscato/"
+{
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "Nick Amoscato",
+    "url": "https://amoscato.com",
+    "email": "nicholas@amoscato.com",
+    "jobTitle": "Software Engineer",
+    "homeLocation": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pittsburgh",
+        "addressRegion": "PA"
+    },
+    "worksFor": {
+        "@context": "http://www.schema.org",
+        "@type": "Corporation",
+        "name": "JazzHR",
+        "url": "https://www.jazzhr.com/",
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+1-888-353-0887",
+                "contactType": "customer service"
+            }
         ]
-    }
+    },
+    "alumniOf": {
+        "@type": "OrganizationRole",
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Pittsburgh",
+            "sameAs": "https://en.wikipedia.org/wiki/University_of_Pittsburgh"
+        },
+        "startDate": "2010"
+    },
+    "sameAs": [
+        "https://www.linkedin.com/in/namoscato",
+        "https://twitter.com/namoscato",
+        "https://github.com/namoscato",
+        "https://www.flickr.com/photos/namoscato/"
+    ]
+}
 </script>
 {{ end }}
 

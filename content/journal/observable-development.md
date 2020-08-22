@@ -1,7 +1,7 @@
 +++
 date = "2018-02-14T23:11:00-05:00"
 title = "Observable Development"
-description = "Parallels are drawn between system operations and software development."
+summary = "Parallels are drawn between system operations and software development."
 +++
 
 There is a prominent focus on failure in the software systems and operations realm. Netflix’s [Chaos Monkey](https://netflix.github.io/chaosmonkey/) was groundbreaking back in 2012, but at this point, its [principles](http://principlesofchaos.org/) are taken for granted in nearly every aspect of a mature infrastructure. Resilient distributed systems such as [Apache Kafka](https://kafka.apache.org/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) are built on the assumption that things will fail. Heck, there are even [conferences](https://uptime.events/) on the subject. Failure is no doubt an inevitable state of “the machine”.

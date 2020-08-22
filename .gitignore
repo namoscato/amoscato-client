@@ -1,8 +1,12 @@
 .DS_Store
 /config/default.json
 /node_modules/
+
+# Generated Hugo files
 /public/
+/resources/_gen/
+
+# Compiled assets
 /static/**/*.css
 /static/**/*.js
 /static/data/
-/themes/

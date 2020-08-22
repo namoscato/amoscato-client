@@ -1,6 +1,13 @@
 baseurl: https://amoscato.com
 languageCode: en-us
 title: Nick Amoscato
+params:
+  title: Nick Amoscato
+  summary: Software Engineer, Designer, Musician from Pittsburgh
+  description: Nick is a software engineer, designer, and musician with a passion for maintainable architecture, usable experiences, and jazz.
+  images:
+    - /img/feature-image.jpg
+googleAnalytics: UA-17188743-1
 disableKinds:
   - RSS
   - taxonomy

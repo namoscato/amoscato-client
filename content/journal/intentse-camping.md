@@ -1,7 +1,7 @@
 +++
 date = "2017-04-01T13:30:00-04:00"
 title = "Inten(t)se Camping"
-description = "An extreme camping trip in the Smoky Mountains put routines on hold, enabling the true appreciation of natural beauty."
+summary = "An extreme camping trip in the Smoky Mountains put routines on hold, enabling the true appreciation of natural beauty."
 +++
 
 I just got back a [pretty extreme camping trip](https://www.flickr.com/photos/namoscato/albums/72157679278337902) down in the Smoky Mountains. Ironically, I have never been camping before, so I do not really have anything to compare it to, but from what I was told, it was not your average trip.

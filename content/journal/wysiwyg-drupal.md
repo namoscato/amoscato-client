@@ -1,7 +1,7 @@
 +++
 date = "2014-05-31T19:50:19-04:00"
 title = "WYSIWYG Drupal"
-description = "Recent work with Drupal prompts a technical guide on configuring CKEditor with Drupal's WYSIWYG module."
+summary = "Recent work with Drupal prompts a technical guide on configuring CKEditor with Drupal's WYSIWYG module."
 +++
 
 I hate to blog about something technical – alright actually that's probably not true. But lately, I've been writing about things related to college, careers and whatnot, so this is going to be a bit different.
