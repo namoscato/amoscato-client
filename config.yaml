@@ -9,7 +9,6 @@ params:
     - /img/feature-image.jpg
 googleAnalytics: UA-17188743-1
 disableKinds:
-  - RSS
   - taxonomy
   - term
 markup:
