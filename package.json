@@ -27,7 +27,7 @@
         "@babel/preset-env": "^7.12.1",
         "@babel/preset-typescript": "^7.12.1",
         "@types/jasmine": "^3.5.14",
-        "@types/jquery": "^3.5.2",
+        "@types/jquery": "^3.5.3",
         "@types/moment": "^2.13.0",
         "babel-loader": "^8.1.0",
         "config": "^3.3.2",
