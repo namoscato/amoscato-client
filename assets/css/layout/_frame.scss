@@ -21,14 +21,14 @@
 
 #frame-top,
 #frame-bottom {
-    height: 2rem;
+    height: 1rem;
     width: 100%;
 }
 
 #frame-right,
 #frame-left {
     height: 100%;
-    width: 2rem;
+    width: 1rem;
 }
 
 #frame-right {
@@ -37,4 +37,16 @@
 
 #frame-bottom {
     bottom: 0;
+}
+
+@media (min-width: $breakpoint-sm) {
+    #frame-top,
+    #frame-bottom {
+        height: 2rem;
+    }
+
+    #frame-right,
+    #frame-left {
+        width: 2rem;
+    }
 }

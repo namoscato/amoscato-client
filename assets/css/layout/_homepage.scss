@@ -6,7 +6,7 @@
     height: 100%;
     margin: 2em auto;
     max-width: $site-width;
-    padding: 0 4em;
+    padding: 0 2em;
     position: relative;
     top: 10%;
 }
@@ -20,7 +20,7 @@
 #homepage-content {
     left: 0;
     margin: 470px 0 0;
-    padding: 0 4em 5em;
+    padding: 0 2em 3em;
     right: 0;
 }
 
@@ -38,13 +38,23 @@
 // Media Queries
 // -------------
 
-@media (min-width:43em) {
+@media (min-width: $breakpoint-sm) {
+    #homepage {
+        padding: 0 4em;
+    }
+
+    #homepage-content {
+        padding: 0 4em 5em;
+    }
+}
+
+@media (min-width: 43em) {
     #homepage-stream {
         overflow-x: visible;
     }
 }
 
-@media (min-height:43em) {
+@media (min-height: 43em) {
     #homepage-content,
     #homepage-stream {
         top: 55%;
