@@ -35,13 +35,13 @@
 // Media Queries
 // -------------
 
-@media (min-width:30em) {
+@media (min-width: $breakpoint-sm) {
     .homepage-introduction {
         font-size: 2em;
     }
 }
 
-@media (min-height:43em) and (min-width:45em) {
+@media (min-height: 43em) and (min-width: 45em) {
     .homepage-introduction {
         font-size: 2.6em;
     }
