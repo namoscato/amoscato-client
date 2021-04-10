@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from "moment";
 
 interface IListItem {
     target?: string;
@@ -9,16 +9,16 @@ interface IListItem {
 }
 
 const stravaTypeVerbMap: any = {
-    Ride: 'biking',
-    Run: 'running',
+    Ride: "biking",
+    Run: "running",
 };
 
 export default class CurrentList {
-    private html: string = '';
+    private html = "";
 
     constructor(
         private sources: string[],
-        private data: any,
+        private data: any // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
     ) {
         sources.forEach((source) => {
             const item = data[source];
@@ -52,8 +52,8 @@ export default class CurrentList {
      * @returns {string}
      */
     private getListItemHtml(item: IListItem): string {
-        if (typeof item.target === 'undefined') {
-            item.target = '_blank';
+        if (typeof item.target === "undefined") {
+            item.target = "_blank";
         }
 
         return `<li class="homepage-current-list-item" title="${item.tooltip}">${item.verb} <a href="${item.url}" target="${item.target}">${item.title}</a></li>`;
@@ -67,55 +67,63 @@ export default class CurrentList {
      */
     private getSourceHtml(source: string, item: any): string {
         switch (source) {
-            case 'athleticActivity':
-                if ('undefined' === typeof stravaTypeVerbMap[item.type]) {
-                    return '';
+            case "athleticActivity":
+                if ("undefined" === typeof stravaTypeVerbMap[item.type]) {
+                    return "";
                 }
 
                 return this.getListItemHtml({
                     title: `${Math.floor(100 * item.miles) / 100} miles`,
-                    tooltip: `in ${Math.ceil(item.minutes)} minutes, ${this.formatDate(item.date)}`,
+                    tooltip: `in ${Math.ceil(
+                        item.minutes
+                    )} minutes, ${this.formatDate(item.date)}`,
                     url: item.url,
                     verb: stravaTypeVerbMap[item.type],
                 });
-            case 'book':
+            case "book":
                 return this.getListItemHtml({
                     title: this.quoteText(item.title),
-                    tooltip: `by ${item.author}, started ${this.formatDate(item.date)}`,
+                    tooltip: `by ${item.author}, started ${this.formatDate(
+                        item.date
+                    )}`,
                     url: item.url,
-                    verb: 'reading',
+                    verb: "reading",
                 });
-            case 'drink':
+            case "drink":
                 return this.getListItemHtml({
                     title: item.name,
-                    tooltip: `by ${item.brewery}, ${this.formatDate(item.date)}`,
+                    tooltip: `by ${item.brewery}, ${this.formatDate(
+                        item.date
+                    )}`,
                     url: item.url,
-                    verb: 'drinking',
+                    verb: "drinking",
                 });
-            case 'journal':
+            case "journal":
                 return this.getListItemHtml({
-                    target: '_self',
+                    target: "_self",
                     title: this.quoteText(item.title),
                     tooltip: this.formatDate(item.date),
                     url: item.url,
-                    verb: 'writing',
+                    verb: "writing",
                 });
-            case 'music':
+            case "music":
                 return this.getListItemHtml({
                     title: item.artist,
-                    tooltip: `${this.quoteText(item.name)} on ${item.album}, ${this.formatDate(item.date)}`,
+                    tooltip: `${this.quoteText(item.name)} on ${
+                        item.album
+                    }, ${this.formatDate(item.date)}`,
                     url: item.url,
-                    verb: 'listening to',
+                    verb: "listening to",
                 });
-            case 'video':
+            case "video":
                 return this.getListItemHtml({
                     title: this.quoteText(item.title),
                     tooltip: this.formatDate(item.date),
                     url: item.url,
-                    verb: 'watching',
+                    verb: "watching",
                 });
             default:
-                return '';
+                return "";
         }
     }
 

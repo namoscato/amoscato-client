@@ -1,22 +1,16 @@
-/**
- * {@link https://github.com/One-com/one-color}
- */
-declare var one: {
-    color: (hex: string) => any;
-};
-
 export class StreamUtility {
-
     /**
      * @description Creates a style attribute from a set of properties
      * @param {Object} properties
      * @returns {string}
      */
-    public static createStyleAttribute(properties: object): string {
-        let result = '';
+    public static createStyleAttribute(
+        properties: Record<string, string>
+    ): string {
+        let result = "";
 
         for (const i in properties) {
-            result += i + ':' + (properties as any)[i] + ';';
+            result += i + ":" + properties[i] + ";";
         }
 
         return result;
@@ -28,11 +22,17 @@ export class StreamUtility {
      * @param {Object} attributes
      * @returns {string}
      */
-    public static createTag(tag: string, attributes: object): string {
+    public static createTag(
+        tag: string,
+        attributes: Record<string, string | null>
+    ): string {
         tag = `<${tag}`;
 
         for (const attribute in attributes) {
-            if (!attributes.hasOwnProperty(attribute) || !(attributes as any)[attribute]) {
+            if (
+                !Object.prototype.hasOwnProperty.call(attributes, attribute) ||
+                !attributes[attribute]
+            ) {
                 continue;
             }
 
@@ -47,7 +47,7 @@ export class StreamUtility {
      * @param {string} hex
      * @returns {Object}
      */
-    public static getColor(hex: string) {
+    public static getColor(hex: string): any {
         return one.color(hex);
     }
 
@@ -58,12 +58,15 @@ export class StreamUtility {
      * @param {number} colorBrightnessMax
      * @returns {string}
      */
-    public static getRandomColor(color: string, colorBrightnessMin: number, colorBrightnessMax: number): string {
-        return this
-            .getColor(color)
+    public static getRandomColor(
+        color: string,
+        colorBrightnessMin: number,
+        colorBrightnessMax: number
+    ): string {
+        return this.getColor(color)
             .lightness(
                 this.getRandomFloat(colorBrightnessMin, colorBrightnessMax),
-                true,
+                true
             )
             .hex();
     }
