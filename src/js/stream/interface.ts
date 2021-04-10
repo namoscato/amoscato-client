@@ -16,7 +16,7 @@ export interface IStreamConfiguration {
     secondarySourceTypeMap: ISecondarySourceTypeMap;
     secondarySquareSizeMax: number;
     secondarySquareSizeMin: number;
-    typeColorMap: object;
+    typeColorMap: Record<string, string>;
     windowWidth: number;
 }
 

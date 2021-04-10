@@ -1,6 +1,6 @@
 import StreamColumn from './column';
 import StreamImage from './image';
-import { IStreamConfiguration, IStreamItem } from './interface';
+import { IStreamConfiguration } from './interface';
 import { StreamSquareCluster } from './square-cluster';
 import { StreamUtility } from './utility';
 
