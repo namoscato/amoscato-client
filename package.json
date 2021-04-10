@@ -9,11 +9,12 @@
         "start-hugo": "hugo serve",
         "start-gulp": "gulp",
         "test": "karma start --single-run",
-        "posttest": "npm run lint-js",
+        "posttest": "npm run lint-js && npm run prettier",
         "predeploy": "gulp all && hugo --minify",
         "deploy": "gulp deploy",
         "lint-js": "eslint . --ext .js,.ts",
-        "lint-sass": "stylelint \"assets/**/*.scss\""
+        "lint-sass": "stylelint \"assets/**/*.scss\"",
+        "prettier": "prettier --check ."
     },
     "repository": {
         "type": "git",
@@ -39,6 +40,7 @@
         "concurrently": "^6.0.1",
         "config": "^3.3.6",
         "eslint": "^7.24.0",
+        "eslint-config-prettier": "^8.1.0",
         "fancy-log": "^1.3.3",
         "gulp": "^4.0.2",
         "jasmine-core": "^3.7.1",
@@ -46,6 +48,7 @@
         "karma-chrome-launcher": "^3.1.0",
         "karma-jasmine": "^4.0",
         "karma-webpack": "^5.0.0",
+        "prettier": "2.2.1",
         "stylelint": "^13.12.0",
         "stylelint-config-sass-guidelines": "^8.0.0",
         "typescript": "^4.2.4",

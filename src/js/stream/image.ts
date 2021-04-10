@@ -1,5 +1,5 @@
-import { IStreamConfiguration, IStreamItem } from './interface';
-import { StreamUtility } from './utility';
+import { IStreamConfiguration, IStreamItem } from "./interface";
+import { StreamUtility } from "./utility";
 
 export interface IImageConfiguration {
     left: number;
@@ -14,12 +14,17 @@ export default class StreamImage {
     constructor(
         private item: IStreamItem,
         private imageConfig: IImageConfiguration,
-        config: IStreamConfiguration) {
+        config: IStreamConfiguration
+    ) {
         const height = item.photo_url ? item.photo_height : imageConfig.width;
         const width = item.photo_url ? item.photo_width : imageConfig.width;
 
-        this.color = StreamUtility.getRandomColor((config.typeColorMap as any)[item.type], config.colorBrightnessMin, config.colorBrightnessMax);
-        this.height = Number(height) / Number(width) * imageConfig.width;
+        this.color = StreamUtility.getRandomColor(
+            (config.typeColorMap as any)[item.type],
+            config.colorBrightnessMin,
+            config.colorBrightnessMax
+        );
+        this.height = (Number(height) / Number(width)) * imageConfig.width;
     }
 
     /**
@@ -35,39 +40,37 @@ export default class StreamImage {
      * @returns {string}
      */
     public getHtml(): string {
-        const title = this.item.title ? this.item.title.replace(/"/g, '&quot;') : null;
+        const title = this.item.title
+            ? this.item.title.replace(/"/g, "&quot;")
+            : null;
 
-        let html = StreamUtility.createTag(
-            'a',
-            {
-                class: 'stream-item stream-item-' + (this.item.photo_url ? 'photo' : 'text'),
-                href: this.item.url,
-                style: StreamUtility.createStyleAttribute({
-                    'background-color': this.color,
-                    'font-size': this.imageConfig.width * 0.15 + 'px',
-                    'height': this.height + 'px',
-                    'left': this.imageConfig.left + 'px',
-                    'top': this.imageConfig.top + 'px',
-                    'width': this.imageConfig.width + 'px',
-                }),
-                target: '_blank',
-                title,
-            },
-        );
+        let html = StreamUtility.createTag("a", {
+            class:
+                "stream-item stream-item-" +
+                (this.item.photo_url ? "photo" : "text"),
+            href: this.item.url,
+            style: StreamUtility.createStyleAttribute({
+                "background-color": this.color,
+                "font-size": this.imageConfig.width * 0.15 + "px",
+                height: this.height + "px",
+                left: this.imageConfig.left + "px",
+                top: this.imageConfig.top + "px",
+                width: this.imageConfig.width + "px",
+            }),
+            target: "_blank",
+            title,
+        });
 
         if (title) {
             html += `<span class="stream-title">${title}</span>`;
         }
 
         if (this.item.photo_url) {
-            html += StreamUtility.createTag(
-                'img',
-                {
-                    src: this.item.photo_url,
-                },
-            );
+            html += StreamUtility.createTag("img", {
+                src: this.item.photo_url,
+            });
         }
 
-        return html + '</a>';
+        return html + "</a>";
     }
 }

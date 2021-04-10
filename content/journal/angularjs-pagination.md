@@ -23,18 +23,18 @@ As you can probably guess, the new utility service does not cache data, nor does
 To illustrate what this looks like, let’s assume we have a [state](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$stateProvider#methods_state) that fetches a paginated set of data before it resolves. The module configuration block would look something like this:
 
 ```javascript
-$stateProvider.state('app.feature', {
-    controller: 'FeatureListCtrl',
-    controllerAs: 'featureList',
+$stateProvider.state("app.feature", {
+    controller: "FeatureListCtrl",
+    controllerAs: "featureList",
     resolve: {
-        featureListResolve: function($stateParams, featureApiService) {
+        featureListResolve: function ($stateParams, featureApiService) {
             return featureApiService.fetchList({
-                page: $stateParams.page
+                page: $stateParams.page,
             });
-        }
+        },
     },
-    templateUrl: 'feature-list.html',
-    url: '/feature?page'
+    templateUrl: "feature-list.html",
+    url: "/feature?page",
 });
 ```
 
@@ -54,19 +54,30 @@ function FeatureApiService($http, paginationUtilityService) {
     self.getPagination = getPagination;
 
     function fetchList(queryString) {
-        if (angular.isUndefined(queryString)) { queryString = {}; }
+        if (angular.isUndefined(queryString)) {
+            queryString = {};
+        }
 
-        if (!queryString.page) { queryString.page = 1; }
+        if (!queryString.page) {
+            queryString.page = 1;
+        }
 
-        if (!queryString.per_page) { queryString.per_page = 15; }
+        if (!queryString.per_page) {
+            queryString.per_page = 15;
+        }
 
-        $http.get('/feature', {
-            params: queryString
-        }).then(function(result) {
-             _pagination = paginationUtilityService.store(result, queryString);
+        $http
+            .get("/feature", {
+                params: queryString,
+            })
+            .then(function (result) {
+                _pagination = paginationUtilityService.store(
+                    result,
+                    queryString
+                );
 
-             return result.data;
-        });
+                return result.data;
+            });
     }
 
     function getPagination() {
@@ -81,12 +92,14 @@ Assuming that the response of the paginated endpoint contains a `x-pagination-to
 
 ```javascript
 function store(response, queryString) {
-    if (angular.isUndefined(queryString)) { queryString = {}; }
+    if (angular.isUndefined(queryString)) {
+        queryString = {};
+    }
 
     return {
         page: queryString.page || 1,
         perPage: queryString.per_page || 15,
-        totalItems: Number(response.headers()['x-pagination-total-items'])
+        totalItems: Number(response.headers()["x-pagination-total-items"]),
     };
 }
 ```
@@ -112,16 +125,15 @@ Then, the `featurePagination` metadata object can be passed to the custom direct
 
 ```javascript
 function ApiPaginatorDirective($state) {
-
     return {
         controller: ApiPaginatorDirectiveCtrl,
-        controllerAs: 'apiPaginator',
+        controllerAs: "apiPaginator",
         replace: true,
-        restrict: 'E',
+        restrict: "E",
         scope: {
-            data: '='
+            data: "=",
         },
-        templateUrl: 'apiPaginator.html',
+        templateUrl: "apiPaginator.html",
     };
 
     function ApiPaginatorDirectiveCtrl($scope) {
@@ -135,7 +147,7 @@ function ApiPaginatorDirective($state) {
         }
 
         function pageChangeHandler() {
-            return $state.go('.', { page: $scope.data.page });
+            return $state.go(".", { page: $scope.data.page });
         }
     }
 }
@@ -153,7 +165,8 @@ where `data` is a reference to the pagination metadata object, and the directive
         next-text="Next"
         ng-if="apiPaginator.hasSubsequentPage()"
         previous-text="Prev"
-        total-items="data.totalItems">
+        total-items="data.totalItems"
+    >
     </pagination>
 </div>
 ```
@@ -167,7 +180,7 @@ The pagination control is only visible when there is more than one page, and cha
 Earlier, I mentioned that the previous pagination approach went through leaps and bounds to optimize performance when adding, updating or deleting items in the paginated set. This client-side logic can get extremely complex; thus, I have found it is best to keep this behavior as simple as possible. As a general rule of thumb, simply [reloading](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state#methods_go) the current state will suffice:
 
 ```javascript
-$state.go('.', null, { reload: true });
+$state.go(".", null, { reload: true });
 ```
 
 When an item has a _separate_ state outside the context of the paginated list (i.e. clicking on an item transitions to a view devoted solely to that item), creating or updating an item obviously does not need to affect data that is no longer visible. When the user subsequently views the list, it will be refetched from the server without any complex client-side intervention.
@@ -182,8 +195,10 @@ After deleting the specified item, the controller should call a utility method w
 
 ```javascript
 function deleteFeature(featureId) {
-    return featureApiService.remove(featureId).then(function() {
-        return paginationUtilityService.reloadAfterDeletion(self.featurePagination);
+    return featureApiService.remove(featureId).then(function () {
+        return paginationUtilityService.reloadAfterDeletion(
+            self.featurePagination
+        );
     });
 }
 ```
@@ -195,9 +210,13 @@ function reloadAfterDeletion(pagination) {
     var page = pagination.page;
 
     // If there are no more items on the current page, go to previous page
-    if (--pagination.totalItems <= pagination.perPage * (page - 1)) { page--; }
+    if (--pagination.totalItems <= pagination.perPage * (page - 1)) {
+        page--;
+    }
 
-    if (page <= 1) { page = null; }
+    if (page <= 1) {
+        page = null;
+    }
 
     return $state.go($state.current, { page: page }, { reload: true });
 }

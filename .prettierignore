@@ -1,0 +1,6 @@
+layouts
+node_modules
+public
+resources/_gen
+static
+package-lock.json
