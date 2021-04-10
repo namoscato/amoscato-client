@@ -16,21 +16,26 @@ The solution is nothing more than a simple AJAX script run after the page has lo
 function cache(url) {
     var xmlhttp;
 
-    if (window.XMLHttpRequest) { // IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) {
+        // IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-    } else if(window.ActiveXObject) { // IE6, IE5
+    } else if (window.ActiveXObject) {
+        // IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
     xmlhttp.open("POST", url, true);
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
             xmlhttp.close;
         }
-    }
+    };
 
     // Send the proper header information along with the request
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.setRequestHeader(
+        "Content-type",
+        "application/x-www-form-urlencoded"
+    );
     xmlhttp.setRequestHeader("Connection", "close");
     xmlhttp.send();
 }

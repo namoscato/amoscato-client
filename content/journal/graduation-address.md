@@ -56,5 +56,4 @@ At the intersection of Computer Science and Business we have software platforms 
 
 And those are just a few examples. The opportunities are endless. The world is a blank canvas, and as artists, we have the unique opportunity to have a direct impact on the evolution of society. Our approach _must_ holistically integrate different disciplines. Only then will our talents – the years of coursework that have prepared us for this day – have the best chance to truly impact people’s lives. Only then can we inspire everyone who comes into contact with us, our passions and our dreams.
 
-
 My name in Nick Amoscato, and today, we are are graduates of the University of Pittsburgh Department of Computer Science Class of 2014, and _this_ is our beginning.

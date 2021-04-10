@@ -1,9 +1,9 @@
-import { IStreamConfiguration, IStreamItem } from './interface';
-import { StreamSquare } from './square';
-import { StreamUtility } from './utility';
+import { IStreamConfiguration, IStreamItem } from "./interface";
+import { StreamSquare } from "./square";
+import { StreamUtility } from "./utility";
 
 export interface IStreamSquareClusterConfiguration {
-    alignment: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+    alignment: "top-left" | "top-right" | "bottom-left" | "bottom-right";
     columnBottom: number;
     columnLeft: number;
     columnRight: number;
@@ -17,7 +17,7 @@ export class StreamSquareCluster {
 
     constructor(
         columnWidth: number,
-        private streamConfig: IStreamConfiguration,
+        private streamConfig: IStreamConfiguration
     ) {
         this.sizeMax = columnWidth * streamConfig.secondarySquareSizeMax;
         this.sizeMin = columnWidth * streamConfig.secondarySquareSizeMin;
@@ -33,8 +33,8 @@ export class StreamSquareCluster {
             new StreamSquare(
                 StreamUtility.getRandomInteger(this.sizeMin, this.sizeMax),
                 item,
-                this.streamConfig,
-            ),
+                this.streamConfig
+            )
         );
 
         return true;
@@ -45,10 +45,10 @@ export class StreamSquareCluster {
      * @returns {string}
      */
     public generateHtml(config: IStreamSquareClusterConfiguration): string {
-        const isLeft = config.alignment.substr(-4) === 'left';
-        const isTop = config.alignment.substr(0, 3) === 'top';
+        const isLeft = config.alignment.substr(-4) === "left";
+        const isTop = config.alignment.substr(0, 3) === "top";
 
-        let html = '';
+        let html = "";
         let left = isLeft ? config.columnLeft : config.columnRight;
         let top = isTop ? config.columnTop : config.columnBottom;
 
@@ -63,7 +63,7 @@ export class StreamSquareCluster {
         this.squares.forEach((square, i) => {
             if (i === 0) {
                 left += (isLeft ? 1 : -1) * square.size;
-                top += (isTop ? -1 : 1 ) * square.size;
+                top += (isTop ? -1 : 1) * square.size;
             } else if (isHorizontal) {
                 positionLeft = left;
                 positionTop = isTop ? config.columnTop : config.columnBottom;
@@ -73,7 +73,7 @@ export class StreamSquareCluster {
                 positionLeft = isLeft ? config.columnLeft : config.columnRight;
                 positionTop = top;
 
-                top += (isTop ? -1 : 1 ) * square.size;
+                top += (isTop ? -1 : 1) * square.size;
             }
 
             if (!isLeft) {

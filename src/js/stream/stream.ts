@@ -1,19 +1,18 @@
-import StreamColumn from './column';
-import { IStreamConfiguration, IStreamItem } from './interface';
-import { StreamUtility } from './utility';
+import StreamColumn from "./column";
+import { IStreamConfiguration, IStreamItem } from "./interface";
+import { StreamUtility } from "./utility";
 
 const alignmentOptions = [
-    'top-left',
-    'top-right',
-    'bottom-left',
-    'bottom-right',
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right",
 ];
 
 export class Stream {
-
     constructor(
         private items: IStreamItem[],
-        private config: IStreamConfiguration,
+        private config: IStreamConfiguration
     ) {
         config.secondarySourceTypes.forEach((type) => {
             config.secondarySourceTypeMap[type] = true;
@@ -26,7 +25,7 @@ export class Stream {
      */
     public generateHtml(): string {
         let left = 0;
-        let html = '';
+        let html = "";
         let item: IStreamItem;
 
         let column = this.createColumn(left);
@@ -36,7 +35,9 @@ export class Stream {
                 continue;
             }
 
-            html += column.generateHtml((alignmentOptions as any)[StreamUtility.getRandomInteger(0, 3)]);
+            html += column.generateHtml(
+                (alignmentOptions as any)[StreamUtility.getRandomInteger(0, 3)]
+            );
             left += column.getWidth();
 
             if (left > this.config.windowWidth) {

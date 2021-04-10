@@ -15,25 +15,23 @@ There are essentially two paradigms when it comes to loading data in a single pa
 The minimum amount of data needed to render a view can be loaded **before controller initialization** by defining a [resolve map](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider) on the relevant state ([UI Router](http://angular-ui.github.io/ui-router/site/#/api/ui.router) concept) configuration object. In the module configuration block, this looks something like this:
 
 ```javascript
-$stateProvider.state('app.feature', {
-    controller: 'FeatureCtrl',
-    controllerAs: 'feature',
+$stateProvider.state("app.feature", {
+    controller: "FeatureCtrl",
+    controllerAs: "feature",
     resolve: {
-        featureData: function(featureService) {
+        featureData: function (featureService) {
             return featureService.fetch();
-        }
+        },
     },
-    templateUrl: 'feature-template.html',
-    url: '/feature'
+    templateUrl: "feature-template.html",
+    url: "/feature",
 });
 ```
 
 where `featureData` is a specified resolve dependency, returning a [promise](https://docs.angularjs.org/api/ng/service/$q) that resolves with the fetched data. `FeatureCtrl` would then look something like this:
 
 ```javascript
-angular
-    .module('app.feature')
-    .controller('FeatureCtrl', FeatureCtrl);
+angular.module("app.feature").controller("FeatureCtrl", FeatureCtrl);
 
 function FeatureCtrl(featureData) {
     var self = this;
@@ -66,14 +64,16 @@ I have found it useful to define a `save` method in API services that abstracts 
 
 ```javascript
 function save(feature) {
-    var method = angular.isDefined(feature.id) ? 'PUT' : 'POST';
+    var method = angular.isDefined(feature.id) ? "PUT" : "POST";
 
-    return apiService.call(feature, {
-        method: method,
-        path: 'feature'
-    }).then(function(result) {
-        return angular.extend(feature, result.data);
-    });
+    return apiService
+        .call(feature, {
+            method: method,
+            path: "feature",
+        })
+        .then(function (result) {
+            return angular.extend(feature, result.data);
+        });
 }
 ```
 

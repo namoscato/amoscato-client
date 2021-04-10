@@ -8,5 +8,5 @@
         "target": "es2015",
         "types": ["jasmine", "jquery", "moment"]
     },
-    "exclude": ["node_modules"],
+    "exclude": ["node_modules"]
 }

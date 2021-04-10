@@ -25,7 +25,7 @@ However, I have learned that there is a fine line between solving a problem and 
 
 **Lesson 4:** Take Shortcuts. This was a big one for me, and although I got a little better at it by the end of the summer, I certainly didn't master this lesson.
 
-It is in my nature to do things the right way. And not just the _right_ way, but the _best_ way. I think most people can relate. I mean, that's how I was brought up, and that's certainly what they teach us in college. However, out in the real world (of software engineering specifically), I have learned that the best way is not always the initial right choice.
+It is in my nature to do things the right way. And not just the _right_ way, but the *best* way. I think most people can relate. I mean, that's how I was brought up, and that's certainly what they teach us in college. However, out in the real world (of software engineering specifically), I have learned that the best way is not always the initial right choice.
 
 Don't get me wrong, I'm not implying that we should do things the wrong way, but sometimes, it makes sense to take shortcuts. For example, there are times in which one aspect of a project will take hours to complete. Rather than spend valuable time on that, finish the easier stuff first, and come back to that hard part when it becomes relevant. This way, if the project changes along the way, you have minimized any wasted efforts.
 
