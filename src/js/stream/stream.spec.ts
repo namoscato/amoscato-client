@@ -66,12 +66,12 @@ describe("Stream", () => {
         });
 
         it("should add photos to columns", () => {
-            expect(
-                (column1Spy.addItem as jasmine.Spy).calls.allArgs()
-            ).toEqual([["p1"], ["p2"], ["p3"]]);
-            expect(
-                (column2Spy.addItem as jasmine.Spy).calls.allArgs()
-            ).toEqual([["p4"], ["p5"]]);
+            expect((column1Spy.addItem as jasmine.Spy).calls.allArgs()).toEqual(
+                [["p1"], ["p2"], ["p3"]]
+            );
+            expect((column2Spy.addItem as jasmine.Spy).calls.allArgs()).toEqual(
+                [["p4"], ["p5"]]
+            );
         });
 
         it("should generate HTML", () => {
