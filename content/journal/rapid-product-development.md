@@ -1,6 +1,6 @@
 ---
 title: "Rapid Product Development"
-date: 2021-06-13T15:00:00-04:00
+date: 2021-06-13T16:45:00-04:00
 summary: A summary of Fieldguide's core technology stack surfaces code generation as a driver of product iteration speed.
 ---
 
