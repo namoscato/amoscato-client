@@ -1,4 +1,4 @@
-import * as $ from "jquery";
+import $ from "jquery";
 import CurrentList from "./current-list/current-list";
 import { IStreamConfiguration } from "./stream/interface";
 import { Stream } from "./stream/stream";

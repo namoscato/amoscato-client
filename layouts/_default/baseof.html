@@ -48,9 +48,11 @@
     </div>
     {{ end }}
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/onecolor/3.1.0/one-color.js"></script>
-    <script src="/js/app.min.js"></script>
+    {{ $shims := dict "jquery" "js/shims/jquery.ts" "moment" "js/shims/moment.ts" }}
+    {{ $js := resources.Get "js/app.ts" | js.Build (dict "shims" $shims "minify" true "target" "es2018")}}
+    <script src="{{ $js.RelPermalink }}"></script>
 </body>
 </html>

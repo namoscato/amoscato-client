@@ -1,7 +1,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "src",
+        "baseUrl": "assets/js",
         "moduleResolution": "node",
         "noEmit": true,
         "strict": true,
