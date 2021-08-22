@@ -16,25 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          cache: npm
+      - name: Add stylelint problem matcher
+        uses: xt0rted/stylelint-problem-matcher@v1
       - name: Install dependencies
         run: npm ci
       - name: Run tests
         run: npm test
-  lint-sass:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Read .nvmrc
-        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
-        id: nvm
-      - name: Use Node.js ${{ steps.nvm.outputs.NVMRC }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-      - name: Add problem matcher
-        uses: xt0rted/stylelint-problem-matcher@v1
-      - name: Install dependencies
-        run: npm ci
-      - name: Lint Sass
-        run: npm run lint-sass

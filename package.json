@@ -5,12 +5,10 @@
     "description": "Front end client for amoscato.com",
     "private": true,
     "scripts": {
-        "start": "concurrently --raw \"npm:start-*\"",
-        "start-hugo": "hugo serve",
-        "start-gulp": "gulp",
+        "start": "hugo serve",
         "test": "karma start --single-run",
-        "posttest": "npm run lint-js && npm run prettier",
-        "predeploy": "gulp all && hugo --minify",
+        "posttest": "npm run lint-js && npm run prettier && npm run lint-sass",
+        "predeploy": "hugo --minify",
         "deploy": "gulp deploy",
         "lint-js": "eslint . --ext .js,.ts",
         "lint-sass": "stylelint \"assets/**/*.scss\"",
@@ -28,16 +26,14 @@
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
-        "@babel/plugin-proposal-class-properties": "^7.14.5",
         "@babel/preset-env": "^7.15.0",
         "@babel/preset-typescript": "^7.15.0",
         "@types/jasmine": "^3.8.2",
         "@types/jquery": "^3.5.6",
         "@types/moment": "^2.13.0",
-        "@typescript-eslint/eslint-plugin": "^4.29.0",
-        "@typescript-eslint/parser": "^4.29.0",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
         "babel-loader": "^8.2.2",
-        "concurrently": "^6.2.0",
         "config": "^3.3.6",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
@@ -54,8 +50,7 @@
         "stylelint-config-sass-guidelines": "^8.0.0",
         "typescript": "^4.3.5",
         "vinyl-ftp": "^0.6.1",
-        "webpack": "^5.49.0",
-        "webpack-stream": "^6.1.2"
+        "webpack": "^5.49.0"
     },
     "engines": {
         "node": ">=10"
