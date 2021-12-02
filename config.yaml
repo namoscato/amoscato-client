@@ -13,4 +13,7 @@ disableKinds:
   - term
 markup:
   highlight:
-    style: solarized-dark
+    style: monokai
+  goldmark:
+    renderer:
+      unsafe: true

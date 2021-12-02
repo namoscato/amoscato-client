@@ -5,6 +5,7 @@
 # Generated Hugo files
 /public/
 /resources/_gen/
+.hugo_build.lock
 
 # Compiled assets
 /static/**/*.css
