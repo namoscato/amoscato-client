@@ -203,3 +203,5 @@ const errorLink = onError(({ operation, graphQLErrors, networkError }) => {
 {{% /details %}}
 
 Capturing transactions and errors associated with GraphQL operations has enabled us to better understand the behavior of our applications. However, this value is only unlocked by surfacing the actionable subset of telemetry data in a way that is most effective for the team and process. As features change and software abstractions evolve, instrumentation must be tuned with it. Continuous attention to observability will empower the team to proactively identify issues, creating a robust feedback loop that informs future development.
+
+_Are you passionate about observable product development? [We're hiring](https://www.fieldguide.io/careers) across engineering, product, and design!_
