@@ -1,13 +1,14 @@
 ---
 title: "GraphQL Observability with Sentry"
-date: 2021-12-01T20:13:46-05:00
+date: 2021-12-03T07:45:46-05:00
+summary: "Fieldguide's Node.js GraphQL server and React GraphQL client integrate with Sentry, enabling the team to better understand application behavior."
 ---
 
-At Fieldguide, [Hasura](https://hasura.io/) exposes a [GraphQL](https://graphql.org/) API on Postgres, extended with custom types implemented in a Node.js application's [Apollo Server](https://www.apollographql.com/docs/apollo-server/). Our front-end React application interacts with Hasura via [Apollo Client](https://www.apollographql.com/docs/react/), and our applications are managed on [Heroku](https://www.heroku.com/). GraphQL's inherit self-documentation has fueled an ecosystem of developer tooling, and its use with TypeScript results in highly efficient internal API development.
+At Fieldguide, [Hasura](https://hasura.io/) exposes a [GraphQL](https://graphql.org/) API on Postgres, extended with custom types implemented in a Node.js application's [Apollo Server](https://www.apollographql.com/docs/apollo-server/). Our front-end React application interacts with Hasura via [Apollo Client](https://www.apollographql.com/docs/react/), and our applications are managed on [Heroku](https://www.heroku.com/). GraphQL's inherent self-documentation has fueled an ecosystem of developer tooling, and its use with TypeScript results in highly efficient internal API development.
 
 While iteration speed is certainly a key product development metric, understanding the _behavior_ of features is equally important. This complementary information confirms development assumptions and surfaces inevitable bugs, providing a feedback loop that informs future iteration. Application behavior can be observed by generating proper telemetry data such as metrics, logs, and traces.
 
-We adopted [Sentry](https://sentry.io/welcome/), an error tracking and performance monitoring platform, in the beginning weeks of our product's inception. We have iterated on the integration over the past year, improving our ability to diagnose performance (traces) and triage errors (an actionable subset of logs). This Sentry integration overview is derived from our specific Node.js GraphQL server and React GraphQL client, but the takeaways can be applied to any system with GraphQL interactions.
+We adopted [Sentry](https://sentry.io/welcome/), an error tracking and performance monitoring platform, in the beginning weeks of our product's inception. We have iterated on the integration over the past year, improving our ability to diagnose performance (traces) and triage errors (a subset of logs). This Sentry integration overview is derived from our specific Node.js GraphQL server and React GraphQL client, but the takeaways can be applied to any system with GraphQL interactions.
 
 ## GraphQL Server
 
@@ -31,7 +32,7 @@ export const sentryPlugin: ApolloServerPlugin = {
 
             if (transaction) {
                 // qualify transaction name
-                // i.e. "POST /graphql" -> "POST /graphql: MyOp"
+                // i.e. "POST /graphql" -> "POST /graphql: MyOperation"
                 scope?.setTransactionName(
                     `${transaction.name}: ${request.operationName}`
                 );
@@ -135,7 +136,7 @@ process.on("SIGTERM", async function shutdown(signal: string) {
 
 Our React application configuration follows Sentry's [React Guide](https://docs.sentry.io/platforms/javascript/guides/react/) with their sampled browser tracing integration configured with [React Router instrumentation](https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/). Additionally, we bind a git commit hash to the [release version](https://docs.sentry.io/platforms/javascript/guides/react/configuration/releases/#bind-the-version), analogous to our Express application.
 
-Apollo Client v3 telemetry is partially instrumented by [Apollo Link Sentry](https://github.com/DiederikvandenB/apollo-link-sentry), an [Apollo Link](https://www.apollographql.com/docs/react/api/link/introduction/) middleware that records GraphQL operations as useful [breadcrumbs](https://docs.sentry.io/platforms/javascript/guides/react/enriching-events/breadcrumbs/) amongst other features. We intentionally disable their transaction and fingerprint setting as we found the lack of scoping confusing in non-GraphQL operation contexts.
+Apollo Client v3 telemetry is partially instrumented by [Apollo Link Sentry](https://github.com/DiederikvandenB/apollo-link-sentry), an [Apollo Link](https://www.apollographql.com/docs/react/api/link/introduction/) middleware that records GraphQL operations as useful [breadcrumbs](https://docs.sentry.io/platforms/javascript/guides/react/enriching-events/breadcrumbs/) amongst other features. We intentionally disable their transaction and fingerprint setting as we found the global scope confusing in non-GraphQL operation contexts.
 
 {{% details summary="Apollo Link Sentry configuration" %}}
 
@@ -153,7 +154,7 @@ const sentryLink = new SentryLink({
 
 {{% /details %}}
 
-Complementing this library, an [`onError` link](https://www.apollographql.com/docs/react/api/link/apollo-link-error/) actually reports GraphQL and network errors to Sentry with an explicit transaction name and context. The error handler arguments are not JavaScript `Error` objects in practice; therefore, [`Sentry.captureMessage`](https://docs.sentry.io/platforms/javascript/guides/react/usage/#capturing-messages) is invoked to improve readability within Sentry Issues. GraphQL errors are captured with a more granular [fingerprint](https://docs.sentry.io/platforms/javascript/guides/react/usage/sdk-fingerprinting/), splitting Sentry events into groups by GraphQL operation name.
+Complementing this library, an [`onError` link](https://www.apollographql.com/docs/react/api/link/apollo-link-error/) actually reports GraphQL and network errors to Sentry with an explicit transaction name and context. The error handler arguments are not actually JavaScript `Error` objects; therefore, [`Sentry.captureMessage`](https://docs.sentry.io/platforms/javascript/guides/react/usage/#capturing-messages) is invoked to improve readability within Sentry Issues. GraphQL errors are captured with a more granular [fingerprint](https://docs.sentry.io/platforms/javascript/guides/react/usage/sdk-fingerprinting/), splitting Sentry events into groups by GraphQL operation name.
 
 {{% details summary="`onError` link implementation" %}}
 
@@ -200,3 +201,5 @@ const errorLink = onError(({ operation, graphQLErrors, networkError }) => {
 ```
 
 {{% /details %}}
+
+Capturing transactions and errors associated with GraphQL operations has enabled us to better understand the behavior of our applications. However, this value is only unlocked by surfacing the actionable subset of telemetry data in a way that is most effective for the team and process. As features change and software abstractions evolve, instrumentation must be tuned with it. Continuous attention to observability will empower the team to proactively identify issues, creating a robust feedback loop that informs future development.
