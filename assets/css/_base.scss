@@ -78,7 +78,8 @@ pre {
     font-family: Hack, monospace;
 }
 
-p > code {
+p code,
+.details > summary > code {
     background-color: $color-gray;
     color: $color-blue-dark;
     padding: 0.2em 0.3em;
