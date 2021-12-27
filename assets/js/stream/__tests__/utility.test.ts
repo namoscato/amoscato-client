@@ -1,4 +1,4 @@
-import { StreamUtility } from "./utility";
+import { StreamUtility } from "../utility";
 
 describe("StreamUtility", () => {
     let result: any;
@@ -10,21 +10,20 @@ describe("StreamUtility", () => {
     beforeEach(() => {
         target = StreamUtility;
 
-        spyOn(target as any, "getRandomFloat");
-        (target as any).getRandomFloat.and.returnValue(1);
+        jest.spyOn(target as any, "getRandomFloat").mockImplementation();
+        (target as any).getRandomFloat.mockReturnValue(1);
 
-        spyOn(target as any, "getColor");
-        getColorSpy = jasmine.createSpyObj("streamUtility.getColor", [
-            "lightness",
-        ]);
-        (target as any).getColor.and.returnValue(getColorSpy);
+        jest.spyOn(target as any, "getColor").mockImplementation();
+        getColorSpy = {
+            lightness: jest.fn(),
+        };
+        (target as any).getColor.mockReturnValue(getColorSpy);
 
-        getColorLightnessSpy = jasmine.createSpyObj(
-            "streamUtility.getColor.lightness",
-            ["hex"]
-        );
-        getColorLightnessSpy.hex.and.returnValue("color hex");
-        getColorSpy.lightness.and.returnValue(getColorLightnessSpy);
+        getColorLightnessSpy = {
+            hex: jest.fn(),
+        };
+        getColorLightnessSpy.hex.mockReturnValue("color hex");
+        getColorSpy.lightness.mockReturnValue(getColorLightnessSpy);
     });
 
     /**

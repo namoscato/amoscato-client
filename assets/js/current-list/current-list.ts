@@ -17,8 +17,8 @@ export default class CurrentList {
     private html = "";
 
     constructor(
-        private sources: string[],
-        private data: any // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+        sources: string[],
+        data: any // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
     ) {
         sources.forEach((source) => {
             const item = data[source];
