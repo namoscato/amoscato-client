@@ -1,3 +1,4 @@
+import * as params from "@params";
 import $ from "jquery";
 import CurrentList from "./current-list/current-list";
 import { IStreamConfiguration } from "./stream/interface";
@@ -55,7 +56,7 @@ const streamConfig: IStreamConfiguration = {
 };
 
 if (currentListElement.length) {
-    $.get("/data/current.json", (data) => {
+    $.get(`${params.cacheBaseUri}/www/data/current.json`, (data) => {
         data.journal = {
             date: currentListElement.data("journal-date"),
             title: currentListElement.data("journal-title"),
@@ -69,7 +70,7 @@ if (currentListElement.length) {
 }
 
 if (streamElement.length) {
-    $.get("/data/stream.json", (data) => {
+    $.get(`${params.cacheBaseUri}/www/data/stream.json`, (data) => {
         let resizeTimeout: number;
         const stream = new Stream(data, streamConfig);
 

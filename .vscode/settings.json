@@ -3,5 +3,6 @@
         "Fieldguide",
         "Hasura",
         "Postgres"
-    ]
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
