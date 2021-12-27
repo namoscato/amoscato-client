@@ -52,7 +52,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/onecolor/3.1.0/one-color.js"></script>
     {{ $shims := dict "jquery" "js/shims/jquery.ts" "moment" "js/shims/moment.ts" }}
-    {{ $js := resources.Get "js/app.ts" | js.Build (dict "shims" $shims "minify" true "target" "es2018")}}
+    {{ $params := dict "cacheBaseUri" "https://storage.amoscato.com" }}
+    {{ $js := resources.Get "js/app.ts" | js.Build (dict "shims" $shims "minify" true "target" "es2018" "params" $params)}}
     <script src="{{ $js.RelPermalink }}"></script>
 </body>
 </html>
