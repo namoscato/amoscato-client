@@ -1,6 +1,6 @@
-import { IStreamConfiguration, IStreamItem } from "./interface";
-import { StreamSquare } from "./square";
-import { StreamUtility } from "./utility";
+import { IStreamItem } from "../interface";
+import { StreamSquare } from "../square";
+import { StreamUtility } from "../utility";
 
 describe("StreamSquare", () => {
     let result: any;
@@ -11,14 +11,17 @@ describe("StreamSquare", () => {
     beforeEach(() => {
         streamUtilitySpy = StreamUtility;
 
-        spyOn(streamUtilitySpy, "createStyleAttribute");
-        streamUtilitySpy.createStyleAttribute.and.returnValue("STYLE");
+        jest.spyOn(
+            streamUtilitySpy,
+            "createStyleAttribute"
+        ).mockImplementation();
+        streamUtilitySpy.createStyleAttribute.mockReturnValue("STYLE");
 
-        spyOn(streamUtilitySpy, "createTag");
-        streamUtilitySpy.createTag.and.returnValue("<a>");
+        jest.spyOn(streamUtilitySpy, "createTag").mockImplementation();
+        streamUtilitySpy.createTag.mockReturnValue("<a>");
 
-        spyOn(streamUtilitySpy, "getRandomColor");
-        streamUtilitySpy.getRandomColor.and.returnValue("color hex");
+        jest.spyOn(streamUtilitySpy, "getRandomColor").mockImplementation();
+        streamUtilitySpy.getRandomColor.mockReturnValue("color hex");
 
         target = new StreamSquare(
             5,
@@ -33,7 +36,7 @@ describe("StreamSquare", () => {
                 typeColorMap: {
                     TYPE: "#color",
                 },
-            } as IStreamConfiguration
+            } as any
         );
     });
 
@@ -95,7 +98,7 @@ describe("StreamSquare", () => {
             it("should create hyperlink tag", () => {
                 expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     "a",
-                    jasmine.objectContaining({ title: null })
+                    expect.objectContaining({ title: null })
                 );
             });
         });

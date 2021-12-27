@@ -1,4 +1,4 @@
-import CurrentList from "./current-list";
+import CurrentList from "../current-list";
 
 describe("CurrentList", () => {
     let target: CurrentList;
@@ -9,9 +9,12 @@ describe("CurrentList", () => {
     beforeEach(() => {
         formatDate = (CurrentList as any).prototype.formatDate;
 
-        spyOn((CurrentList as any).prototype, "formatDate");
+        jest.spyOn(
+            (CurrentList as any).prototype,
+            "formatDate"
+        ).mockImplementation();
         formatDateSpy = (CurrentList as any).prototype.formatDate;
-        formatDateSpy.and.callFake((date: string) => {
+        formatDateSpy.mockImplementation((date: string) => {
             return `formatted ${date}`;
         });
     });
