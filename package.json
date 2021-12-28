@@ -6,6 +6,7 @@
     "private": true,
     "scripts": {
         "start": "hugo serve",
+        "build": "hugo --gc --minify",
         "test": "jest",
         "posttest": "npm run lint-js && npm run prettier && npm run lint-sass",
         "lint-js": "tsc --noEmit && eslint . --ext .js,.ts",
