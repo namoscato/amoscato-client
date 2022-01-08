@@ -36,7 +36,7 @@
         "babel-loader": "^8.2.3",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
-        "jest": "^27.4.5",
+        "jest": "^27.4.7",
         "prettier": "2.5.1",
         "stylelint": "^13.13.1",
         "stylelint-config-prettier": "^9.0.3",
