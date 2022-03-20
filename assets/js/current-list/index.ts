@@ -48,8 +48,11 @@ export default class CurrentList {
      */
     private getSourceHtml(source: string, item: any): string {
         switch (source) {
-            case "athleticActivity":
-                if ("undefined" === typeof STRAVA_TYPE_VERB_MAP[item.type]) {
+            case "athleticActivity": {
+                const stravaType =
+                    item.type as keyof typeof STRAVA_TYPE_VERB_MAP;
+
+                if ("undefined" === typeof STRAVA_TYPE_VERB_MAP[stravaType]) {
                     return "";
                 }
 
@@ -59,8 +62,9 @@ export default class CurrentList {
                         item.minutes
                     )} minutes, ${this.formatDate(item.date)}`,
                     url: item.url,
-                    verb: STRAVA_TYPE_VERB_MAP[item.type],
+                    verb: STRAVA_TYPE_VERB_MAP[stravaType],
                 });
+            }
             case "book":
                 return this.getListItemHtml({
                     title: this.quoteText(item.title),
