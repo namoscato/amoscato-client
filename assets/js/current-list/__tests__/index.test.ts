@@ -1,4 +1,4 @@
-import CurrentList from "../current-list";
+import CurrentList from "..";
 
 describe("CurrentList", () => {
     let target: CurrentList;
