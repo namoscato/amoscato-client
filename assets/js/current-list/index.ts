@@ -1,17 +1,6 @@
 import moment from "moment";
-
-interface IListItem {
-    target?: string;
-    title: string;
-    tooltip: string;
-    url: string;
-    verb: string;
-}
-
-const stravaTypeVerbMap: any = {
-    Ride: "biking",
-    Run: "running",
-};
+import { STRAVA_TYPE_VERB_MAP } from "./consts";
+import { ListItem } from "./types";
 
 export default class CurrentList {
     private html = "";
@@ -30,28 +19,23 @@ export default class CurrentList {
     }
 
     /**
-     * @description Returns the current list HTML
-     * @returns {string}
+     * Returns the current list HTML
      */
     public getHtml(): string {
         return this.html;
     }
 
     /**
-     * @description Formats the specified date
-     * @param {string} date
-     * @returns {string}
+     * Formats the specified date
      */
     private formatDate(date: string): string {
         return moment.utc(date).fromNow();
     }
 
     /**
-     * @description Returns the HTML for the specified list item
-     * @param {IListItem} item
-     * @returns {string}
+     * Returns the HTML for the specified list item
      */
-    private getListItemHtml(item: IListItem): string {
+    private getListItemHtml(item: ListItem): string {
         if (typeof item.target === "undefined") {
             item.target = "_blank";
         }
@@ -60,15 +44,12 @@ export default class CurrentList {
     }
 
     /**
-     * @description Returns the HTML for the specified source item
-     * @param {string} source
-     * @param {Object} item
-     * @return {string}
+     * Returns the HTML for the specified source item
      */
     private getSourceHtml(source: string, item: any): string {
         switch (source) {
             case "athleticActivity":
-                if ("undefined" === typeof stravaTypeVerbMap[item.type]) {
+                if ("undefined" === typeof STRAVA_TYPE_VERB_MAP[item.type]) {
                     return "";
                 }
 
@@ -78,7 +59,7 @@ export default class CurrentList {
                         item.minutes
                     )} minutes, ${this.formatDate(item.date)}`,
                     url: item.url,
-                    verb: stravaTypeVerbMap[item.type],
+                    verb: STRAVA_TYPE_VERB_MAP[item.type],
                 });
             case "book":
                 return this.getListItemHtml({
@@ -128,9 +109,7 @@ export default class CurrentList {
     }
 
     /**
-     * @description Quotes the specified text with quotes
-     * @param {string} text
-     * @return {string}
+     * Quotes the specified text with quotes
      */
     private quoteText(text: string): string {
         return `&ldquo;${text}&rdquo;`;

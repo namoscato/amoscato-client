@@ -1,6 +1,6 @@
 import * as params from "@params";
 import $ from "jquery";
-import CurrentList from "./current-list/current-list";
+import CurrentList from "./current-list";
 import { IStreamConfiguration } from "./stream/interface";
 import { Stream } from "./stream/stream";
 
