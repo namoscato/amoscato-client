@@ -27,7 +27,7 @@
     {{ $css := resources.Get "css/app.scss" | resources.ToCSS (dict "targetPath" "css/all.css" "outputStyle" "compressed") }}
     <link href="{{ $css.Permalink }}" rel="stylesheet">
 
-    {{ template "_internal/google_analytics_async.html" . }}
+    {{ template "_internal/google_analytics.html" . }}
 
     {{- block "head" . }}{{ end }}
 </head>
