@@ -7,7 +7,7 @@ params:
   description: Nick is a software engineer, designer, and musician with a passion for maintainable architecture, usable experiences, and jazz.
   images:
     - /img/feature-image.jpg
-googleAnalytics: UA-17188743-1
+googleAnalytics: G-JRTT983WST
 disableKinds:
   - taxonomy
   - term
