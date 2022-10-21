@@ -108,3 +108,32 @@ blockquote {
 .details > summary {
     cursor: pointer;
 }
+
+// ------------
+// Figure
+// ------------
+
+figure {
+    margin: 1.5rem 0;
+
+    &,
+    > img {
+        max-width: 100%;
+    }
+}
+
+figcaption {
+    color: $color-gray-dark;
+    font-style: italic;
+
+    > p {
+        margin-top: 1em;
+    }
+}
+
+@media (min-width: $breakpoint-sm) {
+    figure {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+}
