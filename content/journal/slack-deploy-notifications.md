@@ -4,7 +4,7 @@ date: 2022-10-16T12:00:00-04:00
 summary: "Fieldguide optimizes Slack signal-to-noise with an open-source GitHub Action that posts continuous deployment workflow progress notifications to Slack."
 ---
 
-We have continuously deployed code since the early days of Fieldguide. The development practice plays a key part in our culture, enabling engineers to ship changes at any time without manual [toil](https://sre.google/sre-book/eliminating-toil/). More frequent deploys yield smaller changes which are inherently lower risk and easier to recover from. Additionally, this process promotes other healthy practices including zero downtime deployments, backwards compatibility, and feature flagging.
+We have continuously deployed code since the early days of [Fieldguide](https://www.fieldguide.io/). The development practice plays a key part in our culture, enabling engineers to ship changes at any time without manual [toil](https://sre.google/sre-book/eliminating-toil/). More frequent deploys yield smaller changes which are inherently lower risk and easier to recover from. Additionally, this process promotes other healthy practices including zero downtime deployments, backwards compatibility, and feature flagging.
 
 Our conventional repository workflow executes a set of required pull request status checks via [GitHub Actions](https://github.com/features/actions), verifying code style and running unit tests. After at least one [approved review](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews), the pull request author initiates the deploy pipeline by simply merging their change to the mainline branch. In its current state, code is optimistically deployed to both our staging and production environments before running an end-to-end [Cypress](https://www.cypress.io/) test suite in staging.
 
@@ -23,3 +23,5 @@ With this in mind, we built [Slack Deploy Pipeline Notifications](https://github
 When used at the beginning of a GitHub Action workflow, a single summary message surfaces the commit message and author. Intermediate stage completions are posted as threaded replies, only sending unexpected failures back to the main channel. At the conclusion of the workflow, the summary message is updated with its computed duration. In effect, most conventional deploys result in exactly one Slack channel notification with more useful context.
 
 We embrace a remote-first culture at Fieldguide, and _effective_ asynchronous communication is a key component. We are always looking for opportunities to optimize Slack signal-to-noise and improve developer experience.
+
+_If this piqued your interest, [we’re hiring](https://www.fieldguide.io/careers) across engineering, product, and design!_
