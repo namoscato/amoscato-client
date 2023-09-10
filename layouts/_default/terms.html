@@ -1,0 +1,18 @@
+{{ define "content" }}
+<div id="content">
+    <h2 class="subtitle">
+        <a href="/journal/">Journal</a>
+    </h2>
+    <h1>{{ .Title }}</h1>
+    <ul class="journal-list">
+        {{- range .Pages.ByTitle -}}
+        <li class="journal-list-item">
+            <h2 class="journal-list-item-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            <p class="journal-list-item-description">{{ .Params.description }}</p>
+        </li>
+        {{- end -}}
+    </ul>
+</div>
+{{ end }}

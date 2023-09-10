@@ -1,11 +1,30 @@
 {{ define "content" }}
 <div id="content">
-    <h1>Journal</h1>
+    {{ $isTerm := eq .Kind "term" }}
+    {{ if $isTerm }}
+        <h2 class="subtitle">
+            <a href="/journal/">Journal</a>
+        </h2>
+        <h1>{{ .Title }}</h1>
+        <p class="title-description">{{ .Params.description }}</p>
+    {{ else }}
+        <h1>Journal</h1>
+    {{ end }}
     {{ $paginator := .Paginate .Pages }}
     <ul class="journal-list">
         {{ range $paginator.Pages  }}
         <li class="journal-list-item">
-            <h2 class="subtitle">{{ .Date.Format "2006-01-02" }}</h2>
+            <h2 class="subtitle">
+                {{ if not $isTerm }}
+                {{ with .GetTerms "categories" }}
+                    {{ range . }}
+                        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                    {{ end }}
+                    /
+                {{ end }}
+                {{ end }}
+                {{ .Date.Format "2006-01-02" }}
+            </h2>
             <h2 class="journal-list-item-title">
                 <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h2>
