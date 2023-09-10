@@ -8,9 +8,8 @@ params:
   images:
     - /img/feature-image.jpg
 googleAnalytics: G-JRTT983WST
-disableKinds:
-  - taxonomy
-  - term
+taxonomies:
+  category: categories
 markup:
   highlight:
     style: monokai

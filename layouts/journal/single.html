@@ -27,7 +27,14 @@
 {{ define "content" }}
 <article id="content">
     <h2 class="subtitle">
-        <a href="/journal/">Journal</a> / {{ .Date.Format "2006-01-02" }}
+        <a href="/journal/">Journal</a> /
+        {{ with .GetTerms "categories" }}
+            {{ range . }}
+                <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            /
+        {{ end }}
+        {{ .Date.Format "2006-01-02" }}
     </h2>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
