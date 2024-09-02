@@ -4,6 +4,22 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
+    groups:
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
+          - "eslint*"
+          - typescript
+      jest:
+        patterns:
+          - "@babel/*"
+          - "@types/jest"
+          - "babel-*"
+          - "jest"
+      stylelint:
+        patterns:
+          - "stylelint*"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
