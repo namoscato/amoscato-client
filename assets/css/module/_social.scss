@@ -20,7 +20,7 @@
     }
 
     > a:hover {
-        color: lighten($color-gray-dark, 20%);
+        color: adjust-color($color-gray-dark, $lightness: 20%);
     }
 }
 

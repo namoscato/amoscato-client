@@ -1,14 +1,14 @@
-@import "variables";
-@import "base";
+@import 'variables';
+@import 'base';
 
 // Layouts
-@import "layout/frame";
-@import "layout/homepage";
-@import "layout/layout";
+@import 'layout/frame';
+@import 'layout/homepage';
+@import 'layout/layout';
 
 // Modules
-@import "module/homepage";
-@import "module/journal";
-@import "module/pagination";
-@import "module/social";
-@import "module/stream";
+@import 'module/homepage';
+@import 'module/journal';
+@import 'module/pagination';
+@import 'module/social';
+@import 'module/stream';
