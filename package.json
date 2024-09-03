@@ -21,7 +21,7 @@
         "url": "git://github.com/namoscato/amoscato-client.git"
     },
     "dependencies": {
-        "jquery": "^3.6.1",
+        "jquery": "^3.7.1",
         "moment": "^2.29.4",
         "onecolor": "^4.1.0"
     },
@@ -30,7 +30,7 @@
         "@babel/preset-env": "^7.25.4",
         "@babel/preset-typescript": "^7.24.7",
         "@types/jest": "^29.5.12",
-        "@types/jquery": "^3.5.14",
+        "@types/jquery": "^3.5.30",
         "@typescript-eslint/eslint-plugin": "^8.4.0",
         "@typescript-eslint/parser": "^8.4.0",
         "babel-jest": "^29.7.0",
