@@ -13,7 +13,8 @@
         "posttest": "npm run lint-js && npm run prettier && npm run lint-sass",
         "lint-js": "tsc --noEmit && eslint . --ext .js,.ts",
         "lint-sass": "stylelint \"assets/**/*.scss\"",
-        "prettier": "prettier --check ."
+        "prettier": "prettier --check .",
+        "prettier:fix": "prettier --write ."
     },
     "repository": {
         "type": "git",

@@ -2,6 +2,7 @@
     "extends": ["stylelint-config-sass-guidelines"],
     "rules": {
         "@stylistic/indentation": 4,
+        "@stylistic/string-quotes": "double",
         "selector-max-id": 1,
         "scss/no-global-function-names": null
     }
