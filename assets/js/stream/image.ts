@@ -14,7 +14,7 @@ export default class StreamImage {
     constructor(
         private item: IStreamItem,
         private imageConfig: IImageConfiguration,
-        config: IStreamConfiguration
+        config: IStreamConfiguration,
     ) {
         const height = item.photo_url ? item.photo_height : imageConfig.width;
         const width = item.photo_url ? item.photo_width : imageConfig.width;
@@ -22,7 +22,7 @@ export default class StreamImage {
         this.color = StreamUtility.getRandomColor(
             (config.typeColorMap as any)[item.type],
             config.colorBrightnessMin,
-            config.colorBrightnessMax
+            config.colorBrightnessMax,
         );
         this.height = (Number(height) / Number(width)) * imageConfig.width;
     }

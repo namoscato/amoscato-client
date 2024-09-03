@@ -12,7 +12,7 @@ const alignmentOptions = [
 export class Stream {
     constructor(
         private items: IStreamItem[],
-        private config: IStreamConfiguration
+        private config: IStreamConfiguration,
     ) {
         config.secondarySourceTypes.forEach((type) => {
             config.secondarySourceTypeMap[type] = true;
@@ -36,7 +36,7 @@ export class Stream {
             }
 
             html += column.generateHtml(
-                (alignmentOptions as any)[StreamUtility.getRandomInteger(0, 3)]
+                (alignmentOptions as any)[StreamUtility.getRandomInteger(0, 3)],
             );
             left += column.getWidth();
 

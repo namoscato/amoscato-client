@@ -7,7 +7,7 @@ export default class CurrentList {
 
     constructor(
         sources: string[],
-        data: any // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+        data: any, // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
     ) {
         sources.forEach((source) => {
             const item = data[source];
@@ -59,7 +59,7 @@ export default class CurrentList {
                 return this.getListItemHtml({
                     title: `${Math.floor(100 * item.miles) / 100} miles`,
                     tooltip: `in ${Math.ceil(
-                        item.minutes
+                        item.minutes,
                     )} minutes, ${this.formatDate(item.date)}`,
                     url: item.url,
                     verb: STRAVA_TYPE_VERB_MAP[stravaType],
@@ -69,7 +69,7 @@ export default class CurrentList {
                 return this.getListItemHtml({
                     title: this.quoteText(item.title),
                     tooltip: `by ${item.author}, started ${this.formatDate(
-                        item.date
+                        item.date,
                     )}`,
                     url: item.url,
                     verb: "reading",
@@ -78,7 +78,7 @@ export default class CurrentList {
                 return this.getListItemHtml({
                     title: item.name,
                     tooltip: `by ${item.brewery}, ${this.formatDate(
-                        item.date
+                        item.date,
                     )}`,
                     url: item.url,
                     verb: "drinking",

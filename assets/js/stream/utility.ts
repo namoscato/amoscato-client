@@ -5,7 +5,7 @@ export class StreamUtility {
      * @returns {string}
      */
     public static createStyleAttribute(
-        properties: Record<string, string>
+        properties: Record<string, string>,
     ): string {
         let result = "";
 
@@ -24,7 +24,7 @@ export class StreamUtility {
      */
     public static createTag(
         tag: string,
-        attributes: Record<string, string | null>
+        attributes: Record<string, string | null>,
     ): string {
         tag = `<${tag}`;
 
@@ -61,12 +61,12 @@ export class StreamUtility {
     public static getRandomColor(
         color: string,
         colorBrightnessMin: number,
-        colorBrightnessMax: number
+        colorBrightnessMax: number,
     ): string {
         return this.getColor(color)
             .lightness(
                 this.getRandomFloat(colorBrightnessMin, colorBrightnessMax),
-                true
+                true,
             )
             .hex();
     }

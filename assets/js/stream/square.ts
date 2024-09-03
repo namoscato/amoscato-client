@@ -7,12 +7,12 @@ export class StreamSquare {
     constructor(
         public size: number,
         private item: IStreamItem,
-        streamConfig: IStreamConfiguration
+        streamConfig: IStreamConfiguration,
     ) {
         this.color = StreamUtility.getRandomColor(
             (streamConfig.typeColorMap as any)[item.type],
             streamConfig.colorBrightnessMin,
-            streamConfig.colorBrightnessMax
+            streamConfig.colorBrightnessMax,
         );
     }
 
