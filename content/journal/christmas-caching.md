@@ -34,7 +34,7 @@ function cache(url) {
     // Send the proper header information along with the request
     xmlhttp.setRequestHeader(
         "Content-type",
-        "application/x-www-form-urlencoded"
+        "application/x-www-form-urlencoded",
     );
     xmlhttp.setRequestHeader("Connection", "close");
     xmlhttp.send();

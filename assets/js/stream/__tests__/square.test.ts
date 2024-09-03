@@ -13,7 +13,7 @@ describe("StreamSquare", () => {
 
         jest.spyOn(
             streamUtilitySpy,
-            "createStyleAttribute"
+            "createStyleAttribute",
         ).mockImplementation();
         streamUtilitySpy.createStyleAttribute.mockReturnValue("STYLE");
 
@@ -36,7 +36,7 @@ describe("StreamSquare", () => {
                 typeColorMap: {
                     TYPE: "#color",
                 },
-            } as any
+            } as any,
         );
     });
 
@@ -45,7 +45,7 @@ describe("StreamSquare", () => {
             expect(streamUtilitySpy.getRandomColor).toHaveBeenCalledWith(
                 "#color",
                 1,
-                2
+                2,
             );
             expect((target as any).color).toEqual("color hex");
         });
@@ -63,7 +63,7 @@ describe("StreamSquare", () => {
 
             it("should create style attribute", () => {
                 expect(
-                    streamUtilitySpy.createStyleAttribute
+                    streamUtilitySpy.createStyleAttribute,
                 ).toHaveBeenCalledWith({
                     "background-color": "color hex",
                     height: "5px",
@@ -98,7 +98,7 @@ describe("StreamSquare", () => {
             it("should create hyperlink tag", () => {
                 expect(streamUtilitySpy.createTag).toHaveBeenCalledWith(
                     "a",
-                    expect.objectContaining({ title: null })
+                    expect.objectContaining({ title: null }),
                 );
             });
         });

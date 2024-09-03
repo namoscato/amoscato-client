@@ -11,7 +11,7 @@ describe("CurrentList", () => {
 
         jest.spyOn(
             (CurrentList as any).prototype,
-            "formatDate"
+            "formatDate",
         ).mockImplementation();
         formatDateSpy = (CurrentList as any).prototype.formatDate;
         formatDateSpy.mockImplementation((date: string) => {
@@ -38,7 +38,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="by book author, started formatted book date">reading <a href="book url" target="_blank">&ldquo;book title&rdquo;</a></li>'
+                    '<li class="homepage-current-list-item" title="by book author, started formatted book date">reading <a href="book url" target="_blank">&ldquo;book title&rdquo;</a></li>',
                 );
             });
         });
@@ -58,7 +58,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="in 31 minutes, formatted activity date">biking <a href="strava url" target="_blank">1.23 miles</a></li>'
+                    '<li class="homepage-current-list-item" title="in 31 minutes, formatted activity date">biking <a href="strava url" target="_blank">1.23 miles</a></li>',
                 );
             });
         });
@@ -113,7 +113,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="by drink brewery, formatted drink date">drinking <a href="drink url" target="_blank">drink name</a></li>'
+                    '<li class="homepage-current-list-item" title="by drink brewery, formatted drink date">drinking <a href="drink url" target="_blank">drink name</a></li>',
                 );
             });
         });
@@ -131,7 +131,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="formatted journal date">writing <a href="journal url" target="_self">&ldquo;journal title&rdquo;</a></li>'
+                    '<li class="homepage-current-list-item" title="formatted journal date">writing <a href="journal url" target="_self">&ldquo;journal title&rdquo;</a></li>',
                 );
             });
         });
@@ -151,7 +151,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="&ldquo;music name&rdquo; on music album, formatted music date">listening to <a href="music url" target="_blank">music artist</a></li>'
+                    '<li class="homepage-current-list-item" title="&ldquo;music name&rdquo; on music album, formatted music date">listening to <a href="music url" target="_blank">music artist</a></li>',
                 );
             });
         });
@@ -169,7 +169,7 @@ describe("CurrentList", () => {
 
             it("should generate HTML", () => {
                 expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="formatted video date">watching <a href="video url" target="_blank">&ldquo;video title&rdquo;</a></li>'
+                    '<li class="homepage-current-list-item" title="formatted video date">watching <a href="video url" target="_blank">&ldquo;video title&rdquo;</a></li>',
                 );
             });
         });

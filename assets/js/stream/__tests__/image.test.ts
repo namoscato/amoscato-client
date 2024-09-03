@@ -13,7 +13,7 @@ describe("StreamImage", () => {
 
         jest.spyOn(
             streamUtilitySpy as any,
-            "getRandomColor"
+            "getRandomColor",
         ).mockImplementation();
         (streamUtilitySpy as any).getRandomColor.mockReturnValue("color hex");
 
@@ -36,7 +36,7 @@ describe("StreamImage", () => {
                 typeColorMap: {
                     TYPE: "#color",
                 },
-            } as any
+            } as any,
         );
     };
 
@@ -50,7 +50,7 @@ describe("StreamImage", () => {
 
             it("should generate random color", () => {
                 expect(
-                    (streamUtilitySpy as any).getRandomColor
+                    (streamUtilitySpy as any).getRandomColor,
                 ).toHaveBeenCalledWith("#color", 1, 2);
                 expect((target as any).color).toEqual("color hex");
             });

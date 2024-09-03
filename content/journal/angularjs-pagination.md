@@ -73,7 +73,7 @@ function FeatureApiService($http, paginationUtilityService) {
             .then(function (result) {
                 _pagination = paginationUtilityService.store(
                     result,
-                    queryString
+                    queryString,
                 );
 
                 return result.data;
@@ -197,7 +197,7 @@ After deleting the specified item, the controller should call a utility method w
 function deleteFeature(featureId) {
     return featureApiService.remove(featureId).then(function () {
         return paginationUtilityService.reloadAfterDeletion(
-            self.featurePagination
+            self.featurePagination,
         );
     });
 }

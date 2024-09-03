@@ -15,30 +15,30 @@ export default class StreamColumn {
     constructor(
         private left: number,
         private streamConfig: IStreamConfiguration,
-        item?: IStreamItem
+        item?: IStreamItem,
     ) {
         const xCoordinate = left - streamConfig.windowWidth / 2;
         const heightMax = streamConfig.getColumnHeightMax(xCoordinate);
 
         this.width = StreamUtility.getRandomInteger(
             streamConfig.photoWidthMin,
-            streamConfig.photoWidthMax
+            streamConfig.photoWidthMax,
         );
         this.height = StreamUtility.getRandomInteger(
             streamConfig.getColumnHeightMin(xCoordinate),
-            heightMax
+            heightMax,
         );
 
         this.offset = streamConfig.getOffset(xCoordinate);
         this.top = StreamUtility.getRandomInteger(
             this.offset,
-            heightMax - this.height + this.offset
+            heightMax - this.height + this.offset,
         );
         this.bottom = this.top;
 
         this.squareCluster = new StreamSquareCluster(
             this.getWidth(),
-            this.streamConfig
+            this.streamConfig,
         );
 
         if (item) {
@@ -66,7 +66,7 @@ export default class StreamColumn {
                 top: this.bottom,
                 width: this.width,
             },
-            this.streamConfig
+            this.streamConfig,
         );
 
         if (this.bottom + image.getHeight() > this.height + this.offset) {
@@ -89,7 +89,7 @@ export default class StreamColumn {
             | "top-left"
             | "top-right"
             | "bottom-left"
-            | "bottom-right"
+            | "bottom-right",
     ): string {
         return (
             this.html +

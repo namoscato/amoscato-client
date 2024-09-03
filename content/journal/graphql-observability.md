@@ -34,7 +34,7 @@ export const sentryPlugin: ApolloServerPlugin = {
                 // qualify transaction name
                 // i.e. "POST /graphql" -> "POST /graphql: MyOperation"
                 scope?.setTransactionName(
-                    `${transaction.name}: ${request.operationName}`
+                    `${transaction.name}: ${request.operationName}`,
                 );
             }
         }
@@ -90,7 +90,7 @@ export const sentryPlugin: ApolloServerPlugin = {
                                     variables: JSON.stringify(
                                         ctx.request.variables,
                                         null,
-                                        2
+                                        2,
                                     ),
                                     errorPath: error.path,
                                 },
