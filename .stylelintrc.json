@@ -1,10 +1,9 @@
 {
-    "extends": [
-        "stylelint-config-sass-guidelines",
-        "stylelint-config-prettier"
-    ],
+    "extends": ["stylelint-config-sass-guidelines"],
     "rules": {
-        "indentation": 4,
-        "selector-max-id": 1
+        "@stylistic/indentation": 4,
+        "@stylistic/string-quotes": "double",
+        "selector-max-id": 1,
+        "scss/no-global-function-names": null
     }
 }
