@@ -4,7 +4,7 @@ date: 2021-06-13T16:45:00-04:00
 summary: A summary of Fieldguide's core technology stack surfaces code generation as a driver of product iteration speed.
 ---
 
-It’s hard to believe it has already been nine months since I started at [Fieldguide](https://www.fieldguide.io/). Time really flies by, yet the weird state of our world casts a stagnant shadow on things. With many people fully vaccinated, I’m already enjoying more time outside of the apartment and and am slowly relearning how to socialize.
+It’s hard to believe it has already been nine months since I started at [Fieldguide](https://www.fieldguide.io/). Time really flies by, yet the weird state of our world casts a stagnant shadow on things. With many people fully vaccinated, I’m already enjoying more time outside of the apartment and am slowly relearning how to socialize.
 
 It has been a refreshing transition, one that has enabled me to reflect on many aspects of the product development process. Ideally, one is always trying to continuously improve, but a career switch is a sure way to challenge the status quo. Hopefully many of my scattered thoughts will make their way into future journals, but this post is focused on our technology stack, and more specifically, how code generation affects our iteration speed.
 
