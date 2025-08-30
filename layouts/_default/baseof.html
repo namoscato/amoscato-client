@@ -24,7 +24,7 @@
     <link href="//fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Inconsolata|Lora:400,400i,700" rel="stylesheet" type="text/css">
     <link href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css" rel="stylesheet" type="text/css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
-    {{ $css := resources.Get "css/app.scss" | resources.ToCSS (dict "targetPath" "css/all.css" "outputStyle" "compressed") }}
+    {{ $css := resources.Get "css/app.scss" | css.Sass (dict "targetPath" "css/all.css" "outputStyle" "compressed") }}
     <link href="{{ $css.RelPermalink }}" rel="stylesheet">
 
     {{ template "_internal/google_analytics.html" . }}
