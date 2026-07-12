@@ -1,5 +1,4 @@
 import moment from "moment";
-import { STRAVA_TYPE_VERB_MAP } from "./consts";
 import { ListItem } from "./types";
 
 export default class CurrentList {
@@ -12,7 +11,7 @@ export default class CurrentList {
         sources.forEach((source) => {
             const item = data[source];
 
-            if (item !== null) {
+            if (item != null) {
                 this.html += this.getSourceHtml(source, item);
             }
         });
@@ -48,23 +47,6 @@ export default class CurrentList {
      */
     private getSourceHtml(source: string, item: any): string {
         switch (source) {
-            case "athleticActivity": {
-                const stravaType =
-                    item.type as keyof typeof STRAVA_TYPE_VERB_MAP;
-
-                if ("undefined" === typeof STRAVA_TYPE_VERB_MAP[stravaType]) {
-                    return "";
-                }
-
-                return this.getListItemHtml({
-                    title: `${Math.floor(100 * item.miles) / 100} miles`,
-                    tooltip: `in ${Math.ceil(
-                        item.minutes,
-                    )} minutes, ${this.formatDate(item.date)}`,
-                    url: item.url,
-                    verb: STRAVA_TYPE_VERB_MAP[stravaType],
-                });
-            }
             case "book":
                 return this.getListItemHtml({
                     title: this.quoteText(item.title),

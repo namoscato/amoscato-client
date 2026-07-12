@@ -11,7 +11,6 @@ const windowElement = $(window);
 const currentListSources: string[] = [
     "journal",
     "music",
-    "athleticActivity",
     "book",
     "video",
     "drink",

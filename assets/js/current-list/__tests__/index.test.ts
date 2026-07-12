@@ -43,58 +43,12 @@ describe("CurrentList", () => {
             });
         });
 
-        describe("bike ride", () => {
+        describe("missing source", () => {
             beforeEach(() => {
-                target = new CurrentList(["athleticActivity"], {
-                    athleticActivity: {
-                        date: "activity date",
-                        miles: 1.235,
-                        minutes: 30.1,
-                        type: "Ride",
-                        url: "strava url",
-                    },
-                });
+                target = new CurrentList(["book"], {});
             });
 
-            it("should generate HTML", () => {
-                expect(target.getHtml()).toEqual(
-                    '<li class="homepage-current-list-item" title="in 31 minutes, formatted activity date">biking <a href="strava url" target="_blank">1.23 miles</a></li>',
-                );
-            });
-        });
-
-        describe("run", () => {
-            beforeEach(() => {
-                target = new CurrentList(["athleticActivity"], {
-                    athleticActivity: {
-                        date: "activity date",
-                        miles: 1.235,
-                        minutes: 30.1,
-                        type: "Run",
-                        url: "strava url",
-                    },
-                });
-            });
-
-            it("should generate HTML", () => {
-                expect(target.getHtml()).toContain(">running <");
-            });
-        });
-
-        describe("unexpected athletic activity", () => {
-            beforeEach(() => {
-                target = new CurrentList(["athleticActivity"], {
-                    athleticActivity: {
-                        date: "activity date",
-                        miles: 1.235,
-                        minutes: 30.1,
-                        type: "Swim",
-                        url: "strava url",
-                    },
-                });
-            });
-
-            it("should generate HTML", () => {
+            it("should generate empty HTML", () => {
                 expect(target.getHtml()).toEqual("");
             });
         });
