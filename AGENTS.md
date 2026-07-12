@@ -4,7 +4,7 @@ This file provides guidance to coding agents when working with code in this repo
 
 ## Overview
 
-Front end for [amoscato.com](https://amoscato.com/), a personal site built with [Hugo](https://gohugo.io/) and TypeScript. Requires Node 22 (`.nvmrc`) and the Hugo CLI.
+Front end for [amoscato.com](https://amoscato.com/), a personal site built with [Hugo](https://gohugo.io/) and TypeScript. Requires Node 24 (`.nvmrc`) and the Hugo CLI.
 
 ## Commands
 
