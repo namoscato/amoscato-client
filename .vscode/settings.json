@@ -1,11 +1,9 @@
 {
     "cSpell.words": [
         "amoscato",
-        "consts",
         "Fieldguide",
         "Hasura",
         "Postgres",
-        "strava",
         "stylelint"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",
